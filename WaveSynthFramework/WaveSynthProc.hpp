@@ -9,6 +9,35 @@
 #ifndef WaveSynthProc_hpp
 #define WaveSynthProc_hpp
 
-#include <stdio.h>
+#import "DSPKernel.hpp"
+#import "Oscillator.h"
+
+class WaveSynthProc : public DSPKernel
+{
+public:
+    WaveSynthProc();
+    
+    void init(int channelCount, double inSampleRate);
+    void reset();
+    void setBuffers(AudioBufferList* outBufferList);
+    
+    void startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration)  override;
+    void handleMIDIEvent(AUMIDIEvent const& midiEvent)  override;
+    void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) override;
+
+private:
+    static inline double noteToHz(int noteNumber)
+    {
+        return 440. * exp2((noteNumber - 69)/12.);
+    }
+
+    float sampleRate;
+    double frequencyScale;
+    
+    AudioBufferList* outBufferListPtr;
+    
+    Oscillator *osc;
+    BOOL noteOn;
+};
 
 #endif /* WaveSynthProc_hpp */

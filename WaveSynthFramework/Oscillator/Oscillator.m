@@ -56,7 +56,7 @@ static const double PI = 3.14159265358979;
     _phaseIncrement = _frequency * 2 * PI / _sampleRate;
 }
 
-- (void) generate:(double*)buffer withFrames:(int)frames
+- (void) generate:(float*)buffer withFrames:(int)frames
 {
     const double twoPI = 2 * PI;
     

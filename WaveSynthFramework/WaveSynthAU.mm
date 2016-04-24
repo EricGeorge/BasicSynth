@@ -9,7 +9,7 @@
 #import "WaveSynthAU.h"
 #import <AVFoundation/AVFoundation.h>
 
-#import "WaveSynthDSPKernel.hpp"
+#import "WaveSynthProc.hpp"
 #import "BufferedAudioBus.hpp"
 #import "Utility.h"
 
@@ -24,7 +24,7 @@
 @implementation WaveSynthAU
 {
     // C++ members need to be ivars; they would be copied on access if they were properties.
-    InstrumentDSPKernel _kernel;
+    WaveSynthProc _kernel;
     BufferedOutputBus _outputBusBuffer;
 }
 
@@ -92,7 +92,7 @@
      Capture in locals to avoid ObjC member lookups. If "self" is captured in
      render, we're doing it wrong.
      */
-    __block InstrumentDSPKernel *state = &_kernel;
+    __block WaveSynthProc *state = &_kernel;
     
     return ^AUAudioUnitStatus(
                               AudioUnitRenderActionFlags *actionFlags,

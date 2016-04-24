@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, OscillatorMode)
 @property (nonatomic, assign) double frequency;
 @property (nonatomic, assign) double sampleRate;
 
-- (void) generate:(double*)buffer withFrames:(int)frames;
+- (void) generate:(float*)buffer withFrames:(int)frames;
 
 @end
 
