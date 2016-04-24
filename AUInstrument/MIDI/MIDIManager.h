@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @protocol MIDIManagerDelegate
 

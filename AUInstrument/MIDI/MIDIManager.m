@@ -8,7 +8,6 @@
 
 #import "MIDIManager.h"
 
-//#import <CoreMIDI/MIDIServices.h>
 @import CoreMIDI;
 
 #import "MIDILogs.h"

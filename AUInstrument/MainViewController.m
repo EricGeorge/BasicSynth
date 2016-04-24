@@ -7,10 +7,12 @@
 //
 
 #import "MainViewController.h"
-#import "MIDIManager.h"
-#import "MIDILogs.h"
+
+@import AudioUnit;
+
 #import "AudioEngine.h"
-#import <AudioUnit/MusicDevice.h>
+#import "MIDILogs.h"
+#import "MIDIManager.h"
 
 @interface MainViewController ()
 {

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import <CoreAudioKit/CoreAudioKit.h>
+@import CoreAudioKit;
 
 @interface WaveSynthAUViewController : AUViewController <AUAudioUnitFactory>
 

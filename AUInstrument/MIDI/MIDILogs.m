@@ -6,14 +6,11 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
 @import Foundation;
-
-//#import <CoreMIDI/MIDIServices.h>
 @import CoreMIDI;
 
-#import "MIDILogs.h"
 #import "MIDIConstants.h"
+#import "MIDILogs.h"
 #import "Utility.h"
 
 void printProperties(MIDIObjectRef ref, ItemCount iter)

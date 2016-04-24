@@ -6,8 +6,8 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <Foundation/Foundation.h>
 
 #import "MIDIConstants.h"
 

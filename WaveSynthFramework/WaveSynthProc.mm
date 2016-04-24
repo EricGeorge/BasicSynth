@@ -7,6 +7,7 @@
 //
 
 #import "WaveSynthProc.hpp"
+
 #import "MIDIEvent.h"
 
 WaveSynthProc::WaveSynthProc()

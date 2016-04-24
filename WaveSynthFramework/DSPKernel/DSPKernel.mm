@@ -6,7 +6,6 @@
 	Utility code to manage scheduled parameters in an audio unit implementation.
 */
 #import "DSPKernel.hpp"
-#import "Utility.h"
 
 void DSPKernel::handleOneEvent(AURenderEvent const *event)
 {
