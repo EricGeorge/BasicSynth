@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, OscillatorMode)
+typedef NS_ENUM(NSInteger, OscillatorWave)
 {
-    OSCILLATOR_MODE_SINE,
-    OSCILLATOR_MODE_SAW,
-    OSCILLATOR_MODE_SQUARE,
-    OSCILLATOR_MODE_TRIANGLE
+    OSCILLATOR_WAVE_SINE,
+    OSCILLATOR_WAVE_SAW,
+    OSCILLATOR_WAVE_SQUARE,
+    OSCILLATOR_WAVE_TRIANGLE
 };
 
 @interface Oscillator : NSObject
 
-@property (nonatomic, assign) OscillatorMode mode;
+@property (nonatomic, assign) OscillatorWave wave;
 @property (nonatomic, assign) double frequency;
 @property (nonatomic, assign) double sampleRate;
 
-- (void) generate:(float*)buffer withFrames:(int)frames;
+- (double) nextSample;
 
 @end
 

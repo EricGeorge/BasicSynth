@@ -8,6 +8,7 @@
 
 #import "Oscillator.h"
 
+const double twoPI = 2 * M_PI;
 
 @interface Oscillator ()
 {
@@ -26,7 +27,7 @@
 {
     if (self = [super init])
     {
-        self.mode = OSCILLATOR_MODE_SINE;
+        self.wave = OSCILLATOR_WAVE_SINE;
         self.frequency = 440.0;
         self.sampleRate = 44100;
         _phase = 0.0;
@@ -51,70 +52,45 @@
 
 - (void) updateIncrement
 {
-    _phaseIncrement = _frequency * 2 * M_PI / _sampleRate;
+    _phaseIncrement = _frequency * twoPI / _sampleRate;
 }
 
-- (void) generate:(float*)buffer withFrames:(int)frames
+- (double) nextSample
 {
-    const double twoPI = 2 * M_PI;
+    double sample = 0.0;
     
-    switch (self.mode)
+    switch (self.wave)
     {
-        case OSCILLATOR_MODE_SINE:
-            for (int i = 0; i < frames; i++)
+        case OSCILLATOR_WAVE_SINE:
+            sample = sin(_phase);
+            break;
+        case OSCILLATOR_WAVE_SAW:
+            sample = 1.0 - (2.0 * _phase / twoPI);
+            break;
+        case OSCILLATOR_WAVE_SQUARE:
+            if (_phase <= M_PI)
             {
-                buffer[i] = sin(_phase);
-                _phase += _phaseIncrement;
-                while (_phase >= twoPI)
-                {
-                    _phase -= twoPI;
-                }
+                sample = 1.0;
+            }
+            else
+            {
+                sample = -1.0;
             }
             break;
-        case OSCILLATOR_MODE_SAW:
-            for (int i = 0; i < frames; i++)
-            {
-                buffer[i] = 1.0 - (2.0 * _phase / twoPI);
-                _phase += _phaseIncrement;
-                while (_phase >= twoPI)
-                {
-                    _phase -= twoPI;
-                }
-            }
-            break;
-        case OSCILLATOR_MODE_SQUARE:
-            for (int i = 0; i < frames; i++)
-            {
-                if (_phase <= M_PI)
-                {
-                    buffer[i] = 1.0;
-                }
-                else
-                {
-                    buffer[i] = -1.0;
-                }
-                _phase += _phaseIncrement;
-                while (_phase >= twoPI)
-                {
-                    _phase -= twoPI;
-                }
-            }
-            break;
-        case OSCILLATOR_MODE_TRIANGLE:
-            for (int i = 0; i < frames; i++)
-            {
-                double value = -1.0 + (2.0 * _phase / twoPI);
-                buffer[i] = 2.0 * (fabs(value) - 0.5);
-                _phase += _phaseIncrement;
-                while (_phase >= twoPI)
-                {
-                    _phase -= twoPI;
-                }
-            }
-            break;
-        default:
-            NSLog(@"Unknown Oscillator Mode passed to Oscillator::generate");
+        case OSCILLATOR_WAVE_TRIANGLE:
+            sample = -1.0 + (2.0 * _phase / twoPI);
+            sample = 2.0 * (fabs(sample) - 0.5);
             break;
     }
+    
+    _phase += _phaseIncrement;
+    
+    while (_phase >= twoPI)
+    {
+        _phase -= twoPI;
+    }
+    
+    return sample;
 }
+
 @end

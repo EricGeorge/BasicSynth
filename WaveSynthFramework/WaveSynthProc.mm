@@ -17,7 +17,7 @@ WaveSynthProc::WaveSynthProc()
     outBufferListPtr = nullptr;
     
     osc = [[Oscillator alloc] init];
-    osc.mode = OSCILLATOR_MODE_SAW;
+    osc.wave = OSCILLATOR_WAVE_SAW;
     noteOn = NO;
     velocity = 0;
 }
@@ -70,15 +70,10 @@ void WaveSynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount buff
     
     if (noteOn)
     {
-        [osc generate:outL withFrames:frameCount];
-        
         for (AUAudioFrameCount i = 0; i < frameCount; ++i)
         {
             // normalize volume on velocity
-            outL[i] *= (double)velocity / 127.0;
-            
-            // and copy to right buffer (since the synth is generating mono waveform)
-            outR[i] = outL[i];
+            outL[i] = outR[i] = [osc nextSample] * (double)velocity / 127.0;
         }
     }
 }
