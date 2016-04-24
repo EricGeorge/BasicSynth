@@ -7,7 +7,7 @@
 //
 
 #import "WaveSynthProc.hpp"
-#import "MIDIConstants.h"
+#import "MIDIEvent.h"
 
 WaveSynthProc::WaveSynthProc()
 {
@@ -43,10 +43,13 @@ void WaveSynthProc::setBuffers(AudioBufferList* outBufferList)
 
 void WaveSynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 {
-    uint8_t status = midiEvent.data[0] & 0xF0;
-
-    switch (status)
+    MIDIEvent *event = [[MIDIEvent alloc] initWithAUMidiEvent:&midiEvent];
+    
+    switch (event.message)
     {
+        default:
+            NSLog(@"Instrument received unhandled MIDI event");
+            break;
         case MIDIMessageType_NoteOff:
             noteOn = NO;
             break;

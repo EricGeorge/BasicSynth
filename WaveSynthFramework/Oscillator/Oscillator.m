@@ -9,8 +9,6 @@
 #import "Oscillator.h"
 
 
-static const double PI = 3.14159265358979;
-
 @interface Oscillator ()
 {
     double _phase;
@@ -53,12 +51,12 @@ static const double PI = 3.14159265358979;
 
 - (void) updateIncrement
 {
-    _phaseIncrement = _frequency * 2 * PI / _sampleRate;
+    _phaseIncrement = _frequency * 2 * M_PI / _sampleRate;
 }
 
 - (void) generate:(float*)buffer withFrames:(int)frames
 {
-    const double twoPI = 2 * PI;
+    const double twoPI = 2 * M_PI;
     
     switch (self.mode)
     {
@@ -87,7 +85,7 @@ static const double PI = 3.14159265358979;
         case OSCILLATOR_MODE_SQUARE:
             for (int i = 0; i < frames; i++)
             {
-                if (_phase <= PI)
+                if (_phase <= M_PI)
                 {
                     buffer[i] = 1.0;
                 }
