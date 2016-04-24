@@ -19,6 +19,7 @@ WaveSynthProc::WaveSynthProc()
     osc = [[Oscillator alloc] init];
     osc.mode = OSCILLATOR_MODE_SAW;
     noteOn = NO;
+    velocity = 0;
 }
 
 void WaveSynthProc::init(int channelCount, double inSampleRate)
@@ -52,9 +53,11 @@ void WaveSynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             break;
         case MIDIMessageType_NoteOff:
             noteOn = NO;
+            velocity = 0;
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
+            velocity = event.data2;
             noteOn = YES;
             break;
     }
@@ -71,8 +74,8 @@ void WaveSynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount buff
         
         for (AUAudioFrameCount i = 0; i < frameCount; ++i)
         {
-            // normalize volume
-            outL[i] *= .01f;
+            // normalize volume on velocity
+            outL[i] *= (double)velocity / 127.0;
             
             // and copy to right buffer (since the synth is generating mono waveform)
             outR[i] = outL[i];

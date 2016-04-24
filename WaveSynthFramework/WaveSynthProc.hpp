@@ -38,6 +38,7 @@ private:
     
     Oscillator *osc;
     BOOL noteOn;
+    uint8_t velocity;
 };
 
 #endif /* WaveSynthProc_hpp */
