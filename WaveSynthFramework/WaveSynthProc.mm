@@ -68,8 +68,10 @@ void WaveSynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount buff
         
         for (AUAudioFrameCount i = 0; i < frameCount; ++i)
         {
+            // normalize volume
             outL[i] *= .01f;
             
+            // and copy to right buffer (since the synth is generating mono waveform)
             outR[i] = outL[i];
         }
     }
