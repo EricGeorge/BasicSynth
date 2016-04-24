@@ -54,7 +54,7 @@ void WaveSynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             noteOn = NO;
             break;
         case MIDIMessageType_NoteOn:
-            osc.frequency = noteToHz(midiEvent.data[1]);
+            osc.frequency = noteToHz(event.data1);
             noteOn = YES;
             break;
     }
