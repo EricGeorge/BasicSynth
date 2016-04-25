@@ -6,21 +6,24 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import "AudioUnitViewController.h"
+#import "WaveSynthAUViewController.h"
 #import "WaveSynthAU.h"
 
-@interface AudioUnitViewController ()
+@interface WaveSynthAUViewController ()
 
 @end
 
-@implementation AudioUnitViewController {
+@implementation WaveSynthAUViewController
+{
     AUAudioUnit *audioUnit;
 }
 
-- (void) viewDidLoad {
+- (void) viewDidLoad
+{
     [super viewDidLoad];
     
-    if (!audioUnit) {
+    if (!audioUnit)
+    {
         return;
     }
     

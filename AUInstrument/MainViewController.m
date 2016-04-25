@@ -13,16 +13,20 @@
 #import "AudioEngine.h"
 #import "MIDILogs.h"
 #import "MIDIManager.h"
+#import "WaveSynthAUViewController.h"
 
 @interface MainViewController ()
 {
     AudioEngine *_engine;
 }
+
+@property (strong, nonatomic) IBOutlet UIView *auContainerView;
 @end
 
 @implementation MainViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -31,9 +35,32 @@
     midiManager.delegate = self;
     
     _engine = [[AudioEngine alloc] init];
+    
+    [self embedPlugInView];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void) embedPlugInView
+{
+    NSURL *builtInPlugInsURL = [[NSBundle mainBundle] builtInPlugInsURL];
+    NSURL *pluginURL = [builtInPlugInsURL URLByAppendingPathComponent:(@"WaveSynthExtension.appex")];
+    NSBundle *appExtensionBundle = [[NSBundle alloc] initWithURL:pluginURL];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainInterface" bundle:appExtensionBundle];
+    WaveSynthAUViewController *waveSynthViewController = [storyboard instantiateInitialViewController];
+    
+    UIView *view = waveSynthViewController.view;
+    if (view)
+    {
+        [self addChildViewController:waveSynthViewController];
+        view.frame = self.auContainerView.bounds;
+        
+        [self.auContainerView addSubview:view];
+        [waveSynthViewController didMoveToParentViewController:self];
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -45,19 +72,11 @@
           withStartFrame:(uint64_t)startFrame
 {
     // Call MusicDeviceMIDIEvent on the AU from here
-    // for now - just send to console
-//    LogMidiEventToConsole(status,
-//                          channel,
-//                          data1,
-//                          data2,
-//                          startFrame);
-    
     MusicDeviceMIDIEvent(_engine.synth.audioUnit,
                          status,
                          data1,
                          data2,
                          0);
-
 }
 
 @end
