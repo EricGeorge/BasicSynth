@@ -16,9 +16,9 @@
 
 @interface WaveSynthAU ()
 
-@property AUAudioUnitBus *outputBus;
-@property AUAudioUnitBusArray *outputBusArray;
-
+@property (nonatomic, strong) AUAudioUnitBus *outputBus;
+@property (nonatomic, strong) AUAudioUnitBusArray *outputBusArray;
+@property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @end
 
 
@@ -48,6 +48,21 @@
     // Create a DSP kernel to handle the signal processing.
     _kernel.init(defaultFormat.channelCount, defaultFormat.sampleRate);
     
+    // Create a parameter object for the volume.
+    AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable | kAudioUnitParameterFlag_DisplayLogarithmic;
+    AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:@"volume" name:@"Volume"
+                                                                      address:WaveSynthProc::InstrumentParamVolume
+                                                                          min:0.001 max:1.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
+    // Initialize the parameter values.
+    volumeParam.value = 0.1;
+    _kernel.setParameter(WaveSynthProc::InstrumentParamVolume, volumeParam.value);
+    
+    // Create the parameter tree.
+    _parameterTree = [AUParameterTree createTreeWithChildren:@[
+                                                               volumeParam
+                                                               ]];
+
     // Create the output bus.
     _outputBusBuffer.init(defaultFormat, 2);
     _outputBus = _outputBusBuffer.bus;
@@ -55,6 +70,32 @@
     // Create the input and output bus arrays.
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
     
+    // Make a local pointer to the kernel to avoid capturing self.
+    __block WaveSynthProc *instrumentKernel = &_kernel;
+    
+    // implementorValueObserver is called when a parameter changes value.
+    _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
+        instrumentKernel->setParameter(param.address, value);
+    };
+    
+    // implementorValueProvider is called when the value needs to be refreshed.
+    _parameterTree.implementorValueProvider = ^(AUParameter *param) {
+        return instrumentKernel->getParameter(param.address);
+    };
+    
+    // A function to provide string representations of parameter values.
+    _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
+        AUValue value = valuePtr == nil ? param.value : *valuePtr;
+        
+        switch (param.address) {
+            case WaveSynthProc::InstrumentParamVolume:
+                return [NSString stringWithFormat:@"%.3f", value];
+                
+            default:
+                return @"?";
+        }
+    };
+
     self.maximumFramesToRender = 512;
     
     return self;

@@ -15,6 +15,10 @@
 class WaveSynthProc : public DSPKernel
 {
 public:
+    enum {
+        InstrumentParamVolume = 0
+    };
+    
     WaveSynthProc();
     
     void init(int channelCount, double inSampleRate);
@@ -25,6 +29,9 @@ public:
     void handleMIDIEvent(AUMIDIEvent const& midiEvent)  override;
     void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) override;
 
+    void setParameter(AUParameterAddress address, AUValue value);
+    AUValue getParameter(AUParameterAddress address);
+    
 private:
     static inline double noteToHz(int noteNumber)
     {
@@ -39,6 +46,7 @@ private:
     Oscillator *osc;
     BOOL noteOn;
     uint8_t velocity;
+    float volume;
 };
 
 #endif /* WaveSynthProc_hpp */

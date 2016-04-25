@@ -21,6 +21,7 @@ WaveSynthProc::WaveSynthProc()
     osc.wave = OSCILLATOR_WAVE_SAW;
     noteOn = NO;
     velocity = 0;
+    volume = 0.1;
 }
 
 void WaveSynthProc::init(int channelCount, double inSampleRate)
@@ -34,8 +35,34 @@ void WaveSynthProc::reset()
 {
 }
 
+void WaveSynthProc::setParameter(AUParameterAddress address, AUValue value)
+{
+    switch (address)
+    {
+        case WaveSynthProc::InstrumentParamVolume:
+            volume = clamp(value, 0.001f, 1.0f);
+            break;
+    }
+}
+
+AUValue WaveSynthProc::getParameter(AUParameterAddress address)
+{
+    AUValue value = 0.0f;
+    
+    switch (address)
+    {
+        case InstrumentParamVolume:
+            value = volume;
+            break;
+    }
+    
+    return value;
+}
+
 void WaveSynthProc::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration)
 {
+    // volume is not ramped
+    setParameter(address, value);
 }
 
 void WaveSynthProc::setBuffers(AudioBufferList* outBufferList)
