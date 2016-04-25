@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		075D4F061CCB232D001D95E4 /* WaveSynthAUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D4F051CCB232D001D95E4 /* WaveSynthAUViewController.m */; };
-		075D4F091CCB232D001D95E4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075D4F071CCB232D001D95E4 /* MainInterface.storyboard */; };
 		075D4F0D1CCB232D001D95E4 /* WaveSynthExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 075D4EFF1CCB232D001D95E4 /* WaveSynthExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		075D4F111CCB234A001D95E4 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
 		075F69C41CCD907C00C7E651 /* MIDIEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 075F69C21CCD907C00C7E651 /* MIDIEvent.h */; };
@@ -18,12 +16,9 @@
 		07DBB1BC1CCB00F900D68648 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
 		07DBB1BD1CCB00F900D68648 /* WaveSynthFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07DBB1D31CCB0A6200D68648 /* AudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1D11CCB0A6200D68648 /* AudioEngine.h */; };
-		07DBB1D41CCB0A6200D68648 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D21CCB0A6200D68648 /* AudioEngine.m */; };
 		07DBB1DA1CCB0A7100D68648 /* MIDIConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1D51CCB0A7100D68648 /* MIDIConstants.h */; };
 		07DBB1DB1CCB0A7100D68648 /* MIDILogs.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1D61CCB0A7100D68648 /* MIDILogs.h */; };
-		07DBB1DC1CCB0A7100D68648 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D71CCB0A7100D68648 /* MIDILogs.m */; };
 		07DBB1DD1CCB0A7100D68648 /* MIDIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1D81CCB0A7100D68648 /* MIDIManager.h */; };
-		07DBB1DE1CCB0A7100D68648 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D91CCB0A7100D68648 /* MIDIManager.m */; };
 		07DBB1E21CCB0A8000D68648 /* BufferedAudioBus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1DF1CCB0A8000D68648 /* BufferedAudioBus.hpp */; };
 		07DBB1E31CCB0A8000D68648 /* DSPKernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E01CCB0A8000D68648 /* DSPKernel.hpp */; };
 		07DBB1E41CCB0A8000D68648 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1E11CCB0A8000D68648 /* DSPKernel.mm */; };
@@ -31,6 +26,12 @@
 		07DBB1E81CCB0A9000D68648 /* Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1E61CCB0A9000D68648 /* Oscillator.m */; };
 		07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */; };
 		07DBB1EE1CCB0AA900D68648 /* WaveSynthAU.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1EA1CCB0AA900D68648 /* WaveSynthAU.mm */; };
+		07F092DA1CCEB48E00794E34 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D21CCB0A6200D68648 /* AudioEngine.m */; };
+		07F092DB1CCEB48E00794E34 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D71CCB0A7100D68648 /* MIDILogs.m */; };
+		07F092DC1CCEB48E00794E34 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D91CCB0A7100D68648 /* MIDIManager.m */; };
+		07F092E11CCEB4EE00794E34 /* WaveSynthAUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075D4F051CCB232D001D95E4 /* WaveSynthAUViewController.m */; };
+		07F092E21CCEB4FA00794E34 /* WaveSynthAUViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 075D4F041CCB232D001D95E4 /* WaveSynthAUViewController.h */; };
+		07F092E41CCEB54200794E34 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075D4F071CCB232D001D95E4 /* MainInterface.storyboard */; };
 		07FC1E8A1CC09D2D00C4AD6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FC1E891CC09D2D00C4AD6B /* main.m */; };
 		07FC1E8D1CC09D2D00C4AD6B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FC1E8C1CC09D2D00C4AD6B /* AppDelegate.m */; };
 		07FC1E931CC09D2D00C4AD6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07FC1E911CC09D2D00C4AD6B /* Main.storyboard */; };
@@ -290,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07FD040D1CCC6EEB00BA14BB /* WaveSynthProc.hpp in Headers */,
+				07F092E21CCEB4FA00794E34 /* WaveSynthAUViewController.h in Headers */,
 				07DBB1E21CCB0A8000D68648 /* BufferedAudioBus.hpp in Headers */,
 				07DBB1DD1CCB0A7100D68648 /* MIDIManager.h in Headers */,
 				07DBB1E31CCB0A8000D68648 /* DSPKernel.hpp in Headers */,
@@ -407,7 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				075D4F091CCB232D001D95E4 /* MainInterface.storyboard in Resources */,
+				07F092E41CCEB54200794E34 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +437,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				075D4F061CCB232D001D95E4 /* WaveSynthAUViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,13 +444,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F092E11CCEB4EE00794E34 /* WaveSynthAUViewController.m in Sources */,
 				07DBB1E41CCB0A8000D68648 /* DSPKernel.mm in Sources */,
 				07DBB1EE1CCB0AA900D68648 /* WaveSynthAU.mm in Sources */,
 				075F69C51CCD907C00C7E651 /* MIDIEvent.m in Sources */,
-				07DBB1DC1CCB0A7100D68648 /* MIDILogs.m in Sources */,
-				07DBB1DE1CCB0A7100D68648 /* MIDIManager.m in Sources */,
 				07FD040E1CCC6EEB00BA14BB /* WaveSynthProc.mm in Sources */,
-				07DBB1D41CCB0A6200D68648 /* AudioEngine.m in Sources */,
 				07DBB1E81CCB0A9000D68648 /* Oscillator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +457,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F092DA1CCEB48E00794E34 /* AudioEngine.m in Sources */,
+				07F092DB1CCEB48E00794E34 /* MIDILogs.m in Sources */,
+				07F092DC1CCEB48E00794E34 /* MIDIManager.m in Sources */,
 				07FC1E8D1CC09D2D00C4AD6B /* AppDelegate.m in Sources */,
 				07DBB0511CC5D87C00D68648 /* MainViewController.m in Sources */,
 				07FC1E8A1CC09D2D00C4AD6B /* main.m in Sources */,

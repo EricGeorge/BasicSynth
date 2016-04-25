@@ -8,8 +8,6 @@
 
 #import "WaveSynthAU.h"
 
-#import <AVFoundation/AVFoundation.h>
-
 #import "BufferedAudioBus.hpp"
 #import "Utility.h"
 #import "WaveSynthProc.hpp"

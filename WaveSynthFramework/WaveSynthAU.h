@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 // Define parameter addresses. (These needn't be static).
 #define myParam1 0

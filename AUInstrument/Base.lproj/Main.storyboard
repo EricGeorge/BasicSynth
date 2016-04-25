@@ -48,6 +48,10 @@
         <scene sceneID="KqA-4w-3xZ">
             <objects>
                 <viewController id="Sa4-wa-nCj" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fgb-hX-POa"/>
+                        <viewControllerLayoutGuide type="bottom" id="QVj-sJ-6zO"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lY4-3b-0vc">
                         <rect key="frame" x="0.0" y="0.0" width="560" height="446"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

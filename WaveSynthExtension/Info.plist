@@ -36,7 +36,7 @@
 					<key>manufacturer</key>
 					<string>EEGE</string>
 					<key>name</key>
-					<string>EEGE: WaveSynthExtension</string>
+					<string>EEGE: WaveSynth</string>
 					<key>sandboxSafe</key>
 					<true/>
 					<key>subtype</key>
