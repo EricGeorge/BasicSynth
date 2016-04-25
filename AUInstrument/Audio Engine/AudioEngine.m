@@ -14,7 +14,6 @@
 
 @interface AudioEngine()
 {
-    // AVAudioEngine and AVAudioNodes
     AVAudioEngine *_engine;
 }
 
@@ -37,11 +36,6 @@
 
 - (void) createSynthAU
 {
-    /*
-     Register the AU in-process for development/debugging.
-     First, build an AudioComponentDescription matching the one in our
-     .appex's Info.plist.
-     */
     AudioComponentDescription componentDescription;
     
     componentDescription.componentType = kAudioUnitType_MusicDevice;
@@ -50,12 +44,6 @@
     componentDescription.componentFlags = 0;
     componentDescription.componentFlagsMask = 0;
     
-    /*
-     Register our `AUAudioUnit` subclass, `AUv3FilterDemo`, to make it able
-     to be instantiated via its component description.
-     
-     Note that this registration is local to this process.
-     */
     [AUAudioUnit registerSubclass:WaveSynthAU.self asComponentDescription:componentDescription name:@"Local WaveSynth" version:1];
     
     [AVAudioUnit instantiateWithComponentDescription:componentDescription
@@ -64,7 +52,15 @@
     {
         _synth = audioUnit;
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        AUAudioUnit *auAudioUnit = (AUAudioUnit *)note.object;
+        NSValue *val = note.userInfo[@"audioUnit"];
+        AudioUnit audioUnit = (AudioUnit)val.pointerValue;
+        NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p (Crash?)", auAudioUnit, audioUnit);
+    }];
 }
+
 
 - (void)createEngineAndAttachNodes
 {
@@ -98,15 +94,12 @@
 
 - (void)initAVAudioSession
 {
-    // Configure the audio session
     AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
     NSError *error;
     
-    // set the session category
     bool success = [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
     if (!success) NSLog(@"Error setting AVAudioSession category! %@\n", [error localizedDescription]);
     
-    // activate the audio session
     success = [sessionInstance setActive:YES error:&error];
     if (!success) NSLog(@"Error setting session active! %@\n", [error localizedDescription]);
 }
