@@ -8,9 +8,7 @@
 
 #import "AudioEngine.h"
 
-@import AVFoundation;
-
-#import "WaveSynthAU.h"
+#import <WaveSynthFramework/WaveSynthFramework.h>
 
 @interface AudioEngine()
 {

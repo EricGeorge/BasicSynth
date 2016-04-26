@@ -9,9 +9,8 @@
 #ifndef WaveSynthAUViewController_AUAudioUnitFactory_h
 #define WaveSynthAUViewController_AUAudioUnitFactory_h
 
-#import <CoreAudioKit/AUViewController.h>
-#import "WaveSynthAUViewController.h"
-#import "WaveSynthAU.h"
+@import CoreAudioKit;
+#import <WaveSynthFramework/WaveSynthFramework.h>
 
 @interface WaveSynthAUViewController (AUAudioUnitFactory) <AUAudioUnitFactory>
 

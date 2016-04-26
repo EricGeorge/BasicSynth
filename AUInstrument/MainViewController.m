@@ -9,11 +9,11 @@
 #import "MainViewController.h"
 
 @import AudioUnit;
+#import <WaveSynthFramework/WaveSynthFramework.h>
 
 #import "AudioEngine.h"
 #import "MIDILogs.h"
 #import "MIDIManager.h"
-#import "WaveSynthAUViewController.h"
 
 @interface MainViewController ()
 {

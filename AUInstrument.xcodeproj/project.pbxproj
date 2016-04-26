@@ -11,7 +11,7 @@
 		075D4F111CCB234A001D95E4 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
 		075F69C41CCD907C00C7E651 /* MIDIEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 075F69C21CCD907C00C7E651 /* MIDIEvent.h */; };
 		075F69C51CCD907C00C7E651 /* MIDIEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F69C31CCD907C00C7E651 /* MIDIEvent.m */; };
-		0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */; };
+		0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0765D8911CCF07B200DE7A19 /* WaveSynthAUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */; };
 		0765D8951CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */; };
 		0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1B71CCB00F900D68648 /* WaveSynthFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,7 +25,7 @@
 		07DBB1E41CCB0A8000D68648 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1E11CCB0A8000D68648 /* DSPKernel.mm */; };
 		07DBB1E71CCB0A9000D68648 /* Oscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E51CCB0A9000D68648 /* Oscillator.h */; };
 		07DBB1E81CCB0A9000D68648 /* Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1E61CCB0A9000D68648 /* Oscillator.m */; };
-		07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */; };
+		07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07DBB1EE1CCB0AA900D68648 /* WaveSynthAU.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1EA1CCB0AA900D68648 /* WaveSynthAU.mm */; };
 		07F092DA1CCEB48E00794E34 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D21CCB0A6200D68648 /* AudioEngine.m */; };
 		07F092DB1CCEB48E00794E34 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1D71CCB0A7100D68648 /* MIDILogs.m */; };
@@ -300,13 +300,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */,
+				0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */,
+				07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */,
 				07FD040D1CCC6EEB00BA14BB /* WaveSynthProc.hpp in Headers */,
 				07DBB1E21CCB0A8000D68648 /* BufferedAudioBus.hpp in Headers */,
 				07DBB1E31CCB0A8000D68648 /* DSPKernel.hpp in Headers */,
 				075F69C41CCD907C00C7E651 /* MIDIEvent.h in Headers */,
 				07DBB1E71CCB0A9000D68648 /* Oscillator.h in Headers */,
-				0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */,
-				07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,4 +15,5 @@ FOUNDATION_EXPORT double WaveSynthFrameworkVersionNumber;
 FOUNDATION_EXPORT const unsigned char WaveSynthFrameworkVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <WaveSynthFramework/PublicHeader.h>
-
+#import <WaveSynthFramework/WaveSynthAUViewController.h>
+#import <WaveSynthFramework/WaveSynthAU.h>

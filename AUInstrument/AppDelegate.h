@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
