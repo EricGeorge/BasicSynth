@@ -32,7 +32,7 @@
 					<key>description</key>
 					<string>WaveSynthExtension</string>
 					<key>factoryFunction</key>
-					<string>AudioUnitViewController</string>
+					<string>WaveSynthAUViewController</string>
 					<key>manufacturer</key>
 					<string>EEGE</string>
 					<key>name</key>

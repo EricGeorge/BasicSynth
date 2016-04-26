@@ -44,8 +44,8 @@
     NSURL *builtInPlugInsURL = [[NSBundle mainBundle] builtInPlugInsURL];
     NSURL *pluginURL = [builtInPlugInsURL URLByAppendingPathComponent:(@"WaveSynthExtension.appex")];
     NSBundle *appExtensionBundle = [[NSBundle alloc] initWithURL:pluginURL];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainInterface" bundle:appExtensionBundle];
+    
     WaveSynthAUViewController *waveSynthViewController = [storyboard instantiateInitialViewController];
     
     UIView *view = waveSynthViewController.view;

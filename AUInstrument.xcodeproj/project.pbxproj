@@ -15,7 +15,8 @@
 		0765D8911CCF07B200DE7A19 /* WaveSynthAUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */; };
 		0765D8951CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */; };
 		0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1B71CCB00F900D68648 /* WaveSynthFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0765D89E1CCF0E9100DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89C1CCF0E9100DE7A19 /* MainInterface.storyboard */; };
+		0765D8A11CCF104700DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */; };
+		0765D8A21CCF12E800DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */; };
 		07DBB0511CC5D87C00D68648 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB0501CC5D87C00D68648 /* MainViewController.m */; };
 		07DBB1BC1CCB00F900D68648 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
 		07DBB1BD1CCB00F900D68648 /* WaveSynthFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -96,7 +97,7 @@
 		0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveSynthAUViewController.m; sourceTree = "<group>"; };
 		0765D8931CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WaveSynthAUViewController+AUAudioUnitFactory.h"; sourceTree = "<group>"; };
 		0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WaveSynthAUViewController+AUAudioUnitFactory.m"; sourceTree = "<group>"; };
-		0765D89D1CCF0E9100DE7A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		0765D8A01CCF104700DE7A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		078674441CC3214800062B61 /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		07DBB04F1CC5D87C00D68648 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		07DBB0501CC5D87C00D68648 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -159,7 +160,6 @@
 		075D4F001CCB232D001D95E4 /* WaveSynthExtension */ = {
 			isa = PBXGroup;
 			children = (
-				0765D89C1CCF0E9100DE7A19 /* MainInterface.storyboard */,
 				0765D8931CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.h */,
 				0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */,
 				075D4F0A1CCB232D001D95E4 /* Info.plist */,
@@ -219,6 +219,7 @@
 				07FD040C1CCC6EEB00BA14BB /* WaveSynthProc.mm */,
 				0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */,
 				0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */,
+				0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */,
 				07FD040F1CCC6EF900BA14BB /* Supporting Files */,
 			);
 			path = WaveSynthFramework;
@@ -414,7 +415,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0765D89E1CCF0E9100DE7A19 /* MainInterface.storyboard in Resources */,
+				0765D8A21CCF12E800DE7A19 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0765D8A11CCF104700DE7A19 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,10 +495,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0765D89C1CCF0E9100DE7A19 /* MainInterface.storyboard */ = {
+		0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0765D89D1CCF0E9100DE7A19 /* Base */,
+				0765D8A01CCF104700DE7A19 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
