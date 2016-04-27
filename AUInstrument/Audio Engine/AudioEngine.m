@@ -13,69 +13,54 @@
 @interface AudioEngine()
 {
     AVAudioEngine *_engine;
+    AVAudioUnit *_synthNode;
 }
 
 @end
 
 @implementation AudioEngine
 
-- (instancetype)init
+- (instancetype) init
 {
     if (self = [super init])
     {
         [self initAVAudioSession];
-        [self createSynthAU];
-        [self createEngineAndAttachNodes];
-        [self makeEngineConnections];
-        [self startEngine];
+ 
+        [[NSNotificationCenter defaultCenter] addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            AUAudioUnit *auAudioUnit = (AUAudioUnit *)note.object;
+            NSValue *val = note.userInfo[@"audioUnit"];
+            AudioUnit audioUnit = (AudioUnit)val.pointerValue;
+            NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p (Crash?)", auAudioUnit, audioUnit);
+        }];
     }
+    
     return self;
 }
 
-- (void) createSynthAU
+- (void) setupAUWithComponentDescription:(AudioComponentDescription)componentDescription andCompletion:(completedAUSetup) completion
 {
-    AudioComponentDescription componentDescription;
-    
-    componentDescription.componentType = kAudioUnitType_MusicDevice;
-    componentDescription.componentSubType = 0x77617665; /*'wave'*/
-    componentDescription.componentManufacturer = 0x45454745; /*'EEGE'*/
-    componentDescription.componentFlags = 0;
-    componentDescription.componentFlagsMask = 0;
-    
-    [AUAudioUnit registerSubclass:WaveSynthAU.self asComponentDescription:componentDescription name:@"Local WaveSynth" version:1];
-    
+    _engine = [[AVAudioEngine alloc] init];
+
+    AVAudioFormat *hardwareFormat = [_engine.outputNode outputFormatForBus:0];
+    [_engine connect:[_engine mainMixerNode] to:[_engine outputNode] format:hardwareFormat];
+
     [AVAudioUnit instantiateWithComponentDescription:componentDescription
                                              options:kAudioComponentInstantiation_LoadOutOfProcess
                                    completionHandler:^ (AVAudioUnit * __nullable audioUnit, NSError * __nullable error)
-    {
-        _synth = audioUnit;
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-        AUAudioUnit *auAudioUnit = (AUAudioUnit *)note.object;
-        NSValue *val = note.userInfo[@"audioUnit"];
-        AudioUnit audioUnit = (AudioUnit)val.pointerValue;
-        NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p (Crash?)", auAudioUnit, audioUnit);
-    }];
-}
+     {
+         _synthNode = audioUnit;
+         self.synth = _synthNode.audioUnit;
+         self.synthAU = _synthNode.AUAudioUnit;
+         
+         [_engine attachNode:_synthNode];
+         
+         AVAudioFormat *stereoFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:hardwareFormat.sampleRate channels:2];
+         [_engine connect:_synthNode to:[_engine mainMixerNode] format:stereoFormat];
 
-
-- (void)createEngineAndAttachNodes
-{
-    _engine = [[AVAudioEngine alloc] init];
-     [_engine attachNode:_synth];
-}
-
-- (void)makeEngineConnections
-{
-    AVAudioFormat *hardwareFormat = [_engine.outputNode outputFormatForBus:0];
-    AVAudioFormat *stereoFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:hardwareFormat.sampleRate channels:2];
-    
-    AVAudioMixerNode *mainMixer = [_engine mainMixerNode];
-    AVAudioOutputNode *output = [_engine outputNode];
-
-    [_engine connect:_synth to:mainMixer format:stereoFormat];
-    [_engine connect:mainMixer to:output format:hardwareFormat];
+         [self startEngine];
+         
+         completion();
+     }];
 }
 
 - (void)startEngine
@@ -88,7 +73,6 @@
         NSAssert(success, @"couldn't start engine, %@", [error localizedDescription]);
     }
 }
-
 
 - (void)initAVAudioSession
 {

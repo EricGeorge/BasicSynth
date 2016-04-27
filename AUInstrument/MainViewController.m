@@ -17,26 +17,40 @@
 
 @interface MainViewController ()
 {
-    AudioEngine *_engine;
+    AudioEngine *_audioEngine;
+    AUParameter *_volumeParameter;
+    AUParameterObserverToken *_parameterObserverToken;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *auContainerView;
+@property (strong, nonatomic) WaveSynthAUViewController *waveSynthViewController;
+@property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
+
 @end
 
 @implementation MainViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     MIDIManager *midiManager = MIDIManager.sharedMIDIManager;
-    
     midiManager.delegate = self;
-    
-    _engine = [[AudioEngine alloc] init];
-    
+
     [self embedPlugInView];
+    
+    AudioComponentDescription desc;
+    desc.componentType = kAudioUnitType_MusicDevice;
+    desc.componentSubType = 0x77617665; /*'wave'*/
+    desc.componentManufacturer = 0x45454745; /*'EEGE'*/
+    desc.componentFlags = 0;
+    desc.componentFlagsMask = 0;
+    
+    [AUAudioUnit registerSubclass:WaveSynthAU.self asComponentDescription:desc name:@"Local WaveSynth" version:1];
+    
+    _audioEngine = [[AudioEngine alloc] init];
+    [_audioEngine setupAUWithComponentDescription:desc andCompletion:^{
+        [self connectParametersToControls];
+    }];
 }
 
 - (void) embedPlugInView
@@ -46,17 +60,46 @@
     NSBundle *appExtensionBundle = [[NSBundle alloc] initWithURL:pluginURL];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainInterface" bundle:appExtensionBundle];
     
-    WaveSynthAUViewController *waveSynthViewController = [storyboard instantiateInitialViewController];
+    self.waveSynthViewController = [storyboard instantiateInitialViewController];
     
-    UIView *view = waveSynthViewController.view;
+    UIView *view = self.waveSynthViewController.view;
     if (view)
     {
-        [self addChildViewController:waveSynthViewController];
+        [self addChildViewController:self.waveSynthViewController];
         view.frame = self.auContainerView.bounds;
         
         [self.auContainerView addSubview:view];
-        [waveSynthViewController didMoveToParentViewController:self];
+        [self.waveSynthViewController didMoveToParentViewController:self];
     }
+}
+
+- (void) connectParametersToControls
+{
+    AUParameterTree *parameterTree = _audioEngine.synthAU.parameterTree;
+    
+    if (parameterTree)
+    {
+        self.waveSynthViewController.audioUnit = (WaveSynthAU *)_audioEngine.synthAU;
+        
+        _volumeParameter = [parameterTree valueForKey:@"volume"];
+        
+        _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (address == _volumeParameter.address)
+                {
+                    [self updateVolume];
+                }
+
+            });
+        }];
+        
+        [self updateVolume];
+    }
+}
+
+- (void) updateVolume
+{
+    self.volumeLabel.text = [_volumeParameter stringFromValue:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,8 +114,7 @@
                withData2:(uint8_t)data2
           withStartFrame:(uint64_t)startFrame
 {
-    // Call MusicDeviceMIDIEvent on the AU from here
-    MusicDeviceMIDIEvent(_engine.synth.audioUnit,
+    MusicDeviceMIDIEvent(_audioEngine.synth,
                          status,
                          data1,
                          data2,

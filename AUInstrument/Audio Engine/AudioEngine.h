@@ -12,6 +12,10 @@
 
 @interface AudioEngine : NSObject
 
-@property(nonatomic, strong)AVAudioUnit *synth;
+@property(nonatomic, assign)AudioUnit synth;
+@property(nonatomic, strong)AUAudioUnit *synthAU;
+
+typedef void(^completedAUSetup)(void);
+- (void) setupAUWithComponentDescription:(AudioComponentDescription)componentDescription andCompletion:(completedAUSetup) completion;
 
 @end
