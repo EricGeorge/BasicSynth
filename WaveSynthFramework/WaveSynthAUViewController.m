@@ -12,7 +12,9 @@
 
 @interface WaveSynthAUViewController ()
 {
-    IBOutlet UISlider *volumeSlider;
+    IBOutlet UISlider *_volumeSlider;
+    AUParameter *_volumeParameter;
+    AUParameterObserverToken *_parameterObserverToken;
 }
 
 @end
@@ -34,34 +36,28 @@
     return _audioUnit;
 }
 
--(void)connectViewWithAU
+- (void) connectViewWithAU
 {
-//    AUParameterTree *paramTree = _audioUnit.parameterTree;
-//
-//    if (paramTree)
-//    {
-//        attackParameter = [paramTree valueForKey: @"attack"];
-//        releaseParameter = [paramTree valueForKey: @"release"];
-//
-//        __weak InstrumentDemoViewController *weakSelf = self;
-//        __weak AUParameter *weakAttackParameter = attackParameter;
-//        __weak AUParameter *weakReleaseParameter = releaseParameter;
-//        parameterObserverToken = [paramTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
-//            __strong InstrumentDemoViewController *strongSelf = weakSelf;
-//            __strong AUParameter *strongAttackParameter = weakAttackParameter;
-//            __strong AUParameter *strongReleaseParameter = weakReleaseParameter;
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (address == strongAttackParameter.address) {
-//                    [strongSelf updateAttack];
-//                } else if (address == strongReleaseParameter.address) {
-//                    [strongSelf updateRelease];
-//                }
-//            });
-//        }];
-//        
-//        [self updateAttack];
-//        [self updateRelease];
-//    }
+    AUParameterTree *parameterTree = self.audioUnit.parameterTree;
+    
+    if (parameterTree)
+    {
+        _volumeParameter = [parameterTree valueForKey:@"volume"];
+        
+        _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (address == _volumeParameter.address)
+                {
+                    [self updateVolume];
+                }
+                
+            });
+        }];
+        
+        [self updateVolume];
+    }
+
+    [self updateVolume];
 }
 
 - (void)viewDidLoad
@@ -74,8 +70,15 @@
     }
 }
 
+- (void) updateVolume
+{
+    NSLog(@"updateVolume: %@", [_volumeParameter stringFromValue:nil]);
+    _volumeSlider.value = _volumeParameter.value;
+}
+
 - (IBAction)volumeChanged:(UISlider *)sender
 {
-    NSLog(@"Volume changed: %f", sender.value);
+    NSLog(@"volumeChanged: %f", sender.value);
+    _volumeParameter.value =  sender.value;
 }
 @end
