@@ -101,7 +101,7 @@ void WaveSynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount buff
         for (AUAudioFrameCount i = 0; i < frameCount; ++i)
         {
             // normalize volume on velocity
-            outL[i] = outR[i] = [osc nextSample] * (double)velocity / 127.0;
+            outL[i] = outR[i] = [osc nextSample] * (double)velocity / 127.0 * volume;
         }
     }
 }
