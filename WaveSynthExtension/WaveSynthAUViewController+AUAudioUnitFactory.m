@@ -1,10 +1,10 @@
-/*
-	Copyright (C) 2016 Apple Inc. All Rights Reserved.
-	See LICENSE.txt for this sample’s licensing information
-	
-	Abstract:
-	`InstrumentDemoViewController` is the app extension's principal class, responsible for creating both the audio unit and its view.
- */
+//
+//  WaveSynthAUViewController_AUAudioUnitFactory.m
+//  AUInstrument
+//
+//  Created by Eric on 4/23/16.
+//  Copyright © 2016 Eric George. All rights reserved.
+//
 
 #import "WaveSynthAUViewController+AUAudioUnitFactory.h"
 

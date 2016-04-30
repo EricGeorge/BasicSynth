@@ -9,6 +9,7 @@
 #import "WaveSynthProc.hpp"
 
 #import "MIDIEvent.h"
+#import "Utility.hpp"
 
 WaveSynthProc::WaveSynthProc()
 {
@@ -33,6 +34,7 @@ void WaveSynthProc::init(int channelCount, double inSampleRate)
 
 void WaveSynthProc::reset()
 {
+    // this currently does nothing
 }
 
 void WaveSynthProc::setParameter(AUParameterAddress address, AUValue value)
@@ -67,7 +69,6 @@ AUValue WaveSynthProc::getParameter(AUParameterAddress address)
 
 void WaveSynthProc::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration)
 {
-    // volume is not ramped
     setParameter(address, value);
 }
 
@@ -83,7 +84,7 @@ void WaveSynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
     switch (event.message)
     {
         default:
-            NSLog(@"Instrument received unhandled MIDI event");
+//            NSLog(@"Instrument received unhandled MIDI event");
             break;
         case MIDIMessageType_NoteOff:
             noteOn = NO;
@@ -106,7 +107,6 @@ void WaveSynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount buff
     {
         for (AUAudioFrameCount i = 0; i < frameCount; ++i)
         {
-            // normalize volume on velocity
             outL[i] = outR[i] = [osc nextSample] * (double)velocity / 127.0 * volume;
         }
     }

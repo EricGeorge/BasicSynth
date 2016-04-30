@@ -1,13 +1,10 @@
-/*
-	Copyright (C) 2016 Apple Inc. All Rights Reserved.
-	See LICENSE.txt for this sample’s licensing information
-	
-	Abstract:
-	View controller for the InstrumentDemo audio unit. Manages the interactions between a InstrumentView and the audio unit's parameters.
- */
-
-#ifndef WaveSynthAUViewController_h
-#define WaveSynthAUViewController_h
+//
+//  WaveSynthAUViewController.h
+//  AUInstrument
+//
+//  Created by Eric on 4/23/16.
+//  Copyright © 2016 Eric George. All rights reserved.
+//
 
 #import <CoreAudioKit/AUViewController.h>
 
@@ -18,5 +15,3 @@
 @property (nonatomic)WaveSynthAU *audioUnit;
 
 @end
-
-#endif /* WaveSynthAUViewController_h */

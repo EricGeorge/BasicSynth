@@ -17,6 +17,7 @@
 @property (nonatomic, strong) AUAudioUnitBus *outputBus;
 @property (nonatomic, strong) AUAudioUnitBusArray *outputBusArray;
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
+
 @end
 
 
@@ -86,9 +87,16 @@
     _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
         AUValue value = valuePtr == nil ? param.value : *valuePtr;
         
-        switch (param.address) {
+        switch (param.address)
+        {
             case WaveSynthProc::InstrumentParamVolume:
+            {
                 return [NSString stringWithFormat:@"%.3f", value];
+            }
+            case WaveSynthProc::InstrumentParamWaveform:
+            {
+                return [NSString stringWithFormat:@"%d", (uint8_t)value];
+            }
                 
             default:
                 return @"?";
