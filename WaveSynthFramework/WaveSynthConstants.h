@@ -19,5 +19,4 @@ typedef NS_ENUM(NSInteger, OscillatorWave)
     OSCILLATOR_WAVE_LAST = OSCILLATOR_WAVE_TRIANGLE
 };
 
-
 #endif /* WaveSynthConstants_h */

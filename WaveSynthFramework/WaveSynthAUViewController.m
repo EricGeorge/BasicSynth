@@ -13,10 +13,13 @@
 #import <WaveSynthFramework/WaveSynthAU.h>
 #import "WaveSynthConstants.h"
 
+static NSArray *_waveformNames;
+
 @interface WaveSynthAUViewController ()
 {
     IBOutlet UISlider *_volumeSlider;
-    IBOutlet UIButton *waveformButton;
+    IBOutlet UIButton *_waveformButton;
+    IBOutlet UILabel *_waveformLabel;
     
     AUParameter *_volumeParameter;
     AUParameter *_waveformParameter;
@@ -74,30 +77,34 @@
 {
     [super viewDidLoad];
 
-    [[waveformButton layer] setBorderWidth:1.0f];
-    [[waveformButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[_waveformButton layer] setBorderWidth:1.0f];
+    [[_waveformButton layer] setBorderColor:[UIColor blackColor].CGColor];
     
     if (_audioUnit)
     {
         [self connectViewWithAU];
     }
+
+    _waveformNames = @[@"Sine", @"Sawtooth", @"Square", @"Triangle"];
+    
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    _waveformLabel.text = _waveformNames[waveform];
 }
 
 - (void) updateVolume
 {
-    NSLog(@"updateVolume: %@", [_volumeParameter stringFromValue:nil]);
     _volumeSlider.value = _volumeParameter.value;
 }
 
 - (IBAction)volumeChanged:(UISlider *)sender
 {
-    NSLog(@"volumeChanged: %f", sender.value);
     _volumeParameter.value =  sender.value;
 }
 
 - (void) updateWaveform
 {
-    
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    _waveformLabel.text = _waveformNames[waveform];
 }
 
 - (IBAction)waveformChanged:(id)sender
@@ -113,6 +120,7 @@
     }
     
     self.audioUnit.selectedWaveform = waveform;
+    _waveformLabel.text = _waveformNames[waveform];
 }
 
 @end

@@ -50,6 +50,7 @@
                     <connections>
                         <outlet property="volumeSlider" destination="exE-ff-bHx" id="SRJ-fq-Oks"/>
                         <outlet property="waveformButton" destination="Z8P-A9-NaM" id="9Na-CT-lcW"/>
+                        <outlet property="waveformLabel" destination="Byu-Uc-NIA" id="WWl-yD-vYB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
