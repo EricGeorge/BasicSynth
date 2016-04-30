@@ -82,7 +82,7 @@
     {
         self.waveSynthViewController.audioUnit = (WaveSynthAU *)_audioEngine.synthAU;
         
-        _volumeParameter = [parameterTree valueForKey:@"volume"];
+        _volumeParameter = [parameterTree valueForKey:volumeParamKey];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{

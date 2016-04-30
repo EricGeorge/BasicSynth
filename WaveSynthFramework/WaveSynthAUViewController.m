@@ -52,6 +52,7 @@ static NSArray *_waveformNames;
     if (parameterTree)
     {
         _volumeParameter = [parameterTree valueForKey:@"volume"];
+        _waveformParameter = [parameterTree valueForKey:@"waveform"];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{

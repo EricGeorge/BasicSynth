@@ -50,17 +50,26 @@
     
     // Create a parameter object for the volume.
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable | kAudioUnitParameterFlag_DisplayLogarithmic;
-    AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:@"volume" name:@"Volume"
+    AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
                                                                       address:WaveSynthProc::InstrumentParamVolume
                                                                           min:0.001 max:1.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
+    AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
+                                                                      address:WaveSynthProc::InstrumentParamWaveform
+                                                                          min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
+
     // Initialize the parameter values.
     volumeParam.value = 0.1;
     _kernel.setParameter(WaveSynthProc::InstrumentParamVolume, volumeParam.value);
     
+    volumeParam.value = 0;
+    _kernel.setParameter(WaveSynthProc::InstrumentParamWaveform, volumeParam.value);
+    
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
-                                                               volumeParam
+                                                               volumeParam,
+                                                               waveformParam
                                                                ]];
 
     // Create the output bus.

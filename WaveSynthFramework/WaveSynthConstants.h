@@ -15,3 +15,6 @@ typedef NS_ENUM(NSInteger, OscillatorWave)
     OSCILLATOR_WAVE_TRIANGLE,
     OSCILLATOR_WAVE_LAST = OSCILLATOR_WAVE_TRIANGLE
 };
+
+static NSString *volumeParamKey = @"volume";
+static NSString *waveformParamKey = @"waveform";
