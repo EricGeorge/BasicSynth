@@ -18,7 +18,7 @@ WaveSynthProc::WaveSynthProc()
     outBufferListPtr = nullptr;
     
     osc = [[Oscillator alloc] init];
-    osc.wave = OSCILLATOR_WAVE_SAW;
+    osc.wave = OSCILLATOR_WAVE_SINE;
     noteOn = NO;
     velocity = 0;
     volume = 0.1;
@@ -42,6 +42,9 @@ void WaveSynthProc::setParameter(AUParameterAddress address, AUValue value)
         case WaveSynthProc::InstrumentParamVolume:
             volume = clamp(value, 0.001f, 1.0f);
             break;
+        case WaveSynthProc::InstrumentParamWaveform:
+            osc.wave = (OscillatorWave)value;
+            break;
     }
 }
 
@@ -53,6 +56,9 @@ AUValue WaveSynthProc::getParameter(AUParameterAddress address)
     {
         case InstrumentParamVolume:
             value = volume;
+            break;
+        case InstrumentParamWaveform:
+            value = osc.wave;
             break;
     }
     

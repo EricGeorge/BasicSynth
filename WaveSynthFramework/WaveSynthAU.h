@@ -7,10 +7,10 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
-
-// Define parameter addresses. (These needn't be static).
-#define myParam1 0
+#import "WaveSynthConstants.h"
 
 @interface WaveSynthAU : AUAudioUnit
+
+@property(nonatomic, assign) OscillatorWave selectedWaveform;
 
 @end

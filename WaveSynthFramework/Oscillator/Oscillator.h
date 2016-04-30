@@ -7,14 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSInteger, OscillatorWave)
-{
-    OSCILLATOR_WAVE_SINE,
-    OSCILLATOR_WAVE_SAW,
-    OSCILLATOR_WAVE_SQUARE,
-    OSCILLATOR_WAVE_TRIANGLE
-};
+#import "WaveSynthConstants.h"
 
 @interface Oscillator : NSObject
 
