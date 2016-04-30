@@ -30,7 +30,8 @@
 
 @implementation MainViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     MIDIManager *midiManager = MIDIManager.sharedMIDIManager;
@@ -105,7 +106,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) handleMidiEvent:(uint8_t)status

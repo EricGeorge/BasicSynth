@@ -15,6 +15,7 @@
                withData1:(uint8_t)data1
                withData2:(uint8_t)data2
           withStartFrame:(uint64_t)startFrame;
+
 @end
 
 @interface MIDIManager : NSObject
