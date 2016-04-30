@@ -1,10 +1,6 @@
 /*
-	<samplecode>
-		<abstract>
-			Utility code to manage scheduled parameters in an audio unit implementation.
-		</abstract>
-	</samplecode>
-*/
+	Taken directly from Audio Unit v3 Sample Code:  https://developer.apple.com/library/ios/samplecode/AudioUnitV3Example/Introduction/Intro.html
+ */
 
 #ifndef DSPKernel_h
 #define DSPKernel_h

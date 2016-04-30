@@ -22,7 +22,6 @@ static MIDIManager *sharedMIDIManager;
 
 @end
 
-// MIDI Callbacks
 void MIDINotificationCallback(const MIDINotification *notification,
                               void                   *context)
 {
@@ -38,7 +37,6 @@ void MIDIReadCallback(const MIDIPacketList *packets,
     [wrapper handleMIDIRead:(MIDIPacketList *)packets];
 }
 
-// helpers
 static inline const uint8_t* GetNextMIDIEvent(const uint8_t *event,
                                               const uint8_t *end)
 {
@@ -84,24 +82,27 @@ static inline const uint8_t* GetNextMIDIEvent(const uint8_t *event,
 
 @implementation MIDIManager
 
-+ (instancetype)sharedMIDIManager;
++ (instancetype)sharedMIDIManager
 {
     static dispatch_once_t onceToken;
+    
     dispatch_once(&onceToken, ^{
         sharedMIDIManager = [(MIDIManager *)[super alloc] init];
     });
+    
     return sharedMIDIManager;
 }
 
 - (id) init
 {
     if (self == sharedMIDIManager)
+    {
         return sharedMIDIManager;
+    }
 
     self = [super init];
     if (self)
     {
-        // setup callbacks
         MIDIClientRef client;
         MIDIClientCreate(CFSTR("AU Instrument"),
                          MIDINotificationCallback,
@@ -115,7 +116,6 @@ static inline const uint8_t* GetNextMIDIEvent(const uint8_t *event,
                             (__bridge void * _Nullable)(self),
                             &inPort);
         
-        // hook up sources
         ItemCount numSources = MIDIGetNumberOfSources();
 
         for (ItemCount i=0; i<numSources; i++)
@@ -224,13 +224,11 @@ static inline const uint8_t* GetNextMIDIEvent(const uint8_t *event,
             uint8_t status = event[0];
             if (status & 0x80)
             {
-                // really a status byte (not sysex continuation)
                 [self handleMidiEvent:status & 0xF0
                           withChannel:status & 0x0f
                             withData1:event[1]
                             withData2:event[2]
                        withStartFrame:startFrame];
-                // note that we're generating a bogus channel number for system messages (0xF0-FF)
             }
             
             event = GetNextMIDIEvent(event, packetEnd);
@@ -246,13 +244,6 @@ static inline const uint8_t* GetNextMIDIEvent(const uint8_t *event,
                withData2:(uint8_t)data2
           withStartFrame:(uint64_t)startFrame
 {
-    // for now - just send to console
-    LogMidiEventToConsole(status,
-                          channel,
-                          data1,
-                          data2,
-                          startFrame);
-    
     [self.delegate handleMidiEvent:status
                        withChannel:channel
                          withData1:data1

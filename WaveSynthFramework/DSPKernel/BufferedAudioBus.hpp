@@ -1,9 +1,5 @@
 /*
-	<samplecode>
-		<abstract>
-			Utility classes to manage audio formats and buffers for an audio unit implementation's input and output audio busses.
-		</abstract>
-	</samplecode>
+	Taken directly from Audio Unit v3 Sample Code:  https://developer.apple.com/library/ios/samplecode/AudioUnitV3Example/Introduction/Intro.html
 */
 
 #import <AudioToolbox/AudioToolbox.h>

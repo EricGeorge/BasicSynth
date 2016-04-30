@@ -1,10 +1,10 @@
-/*
-	Copyright (C) 2016 Apple Inc. All Rights Reserved.
-	See LICENSE.txt for this sample’s licensing information
-	
-	Abstract:
-	View controller for the InstrumentDemo audio unit. Manages the interactions between a InstrumentView and the audio unit's parameters.
- */
+//
+//  WaveSynthAUViewController.m
+//  AUInstrument
+//
+//  Created by Eric on 4/23/16.
+//  Copyright © 2016 Eric George. All rights reserved.
+//
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
@@ -52,6 +52,7 @@ static NSArray *_waveformNames;
     if (parameterTree)
     {
         _volumeParameter = [parameterTree valueForKey:@"volume"];
+        _waveformParameter = [parameterTree valueForKey:@"waveform"];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{

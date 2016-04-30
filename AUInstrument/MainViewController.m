@@ -30,7 +30,8 @@
 
 @implementation MainViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     MIDIManager *midiManager = MIDIManager.sharedMIDIManager;
@@ -81,7 +82,7 @@
     {
         self.waveSynthViewController.audioUnit = (WaveSynthAU *)_audioEngine.synthAU;
         
-        _volumeParameter = [parameterTree valueForKey:@"volume"];
+        _volumeParameter = [parameterTree valueForKey:volumeParamKey];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -105,7 +106,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) handleMidiEvent:(uint8_t)status

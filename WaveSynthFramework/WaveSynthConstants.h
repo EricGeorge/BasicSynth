@@ -6,9 +6,6 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#ifndef WaveSynthConstants_h
-#define WaveSynthConstants_h
-
 typedef NS_ENUM(NSInteger, OscillatorWave)
 {
     OSCILLATOR_WAVE_SINE,
@@ -19,4 +16,5 @@ typedef NS_ENUM(NSInteger, OscillatorWave)
     OSCILLATOR_WAVE_LAST = OSCILLATOR_WAVE_TRIANGLE
 };
 
-#endif /* WaveSynthConstants_h */
+static NSString *volumeParamKey = @"volume";
+static NSString *waveformParamKey = @"waveform";

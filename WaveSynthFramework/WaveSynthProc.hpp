@@ -34,11 +34,6 @@ public:
     AUValue getParameter(AUParameterAddress address);
     
 private:
-    static inline double noteToHz(int noteNumber)
-    {
-        return 440. * exp2((noteNumber - 69)/12.);
-    }
-
     float sampleRate;
     double frequencyScale;
     

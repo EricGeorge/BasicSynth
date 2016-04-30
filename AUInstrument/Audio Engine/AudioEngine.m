@@ -80,10 +80,16 @@
     NSError *error;
     
     bool success = [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
-    if (!success) NSLog(@"Error setting AVAudioSession category! %@\n", [error localizedDescription]);
+    if (!success)
+    {
+        NSLog(@"Error setting AVAudioSession category! %@\n", [error localizedDescription]);
+    }
     
     success = [sessionInstance setActive:YES error:&error];
-    if (!success) NSLog(@"Error setting session active! %@\n", [error localizedDescription]);
+    if (!success)
+    {
+        NSLog(@"Error setting session active! %@\n", [error localizedDescription]);
+    }
 }
 
 @end
