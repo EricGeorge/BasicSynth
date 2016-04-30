@@ -7,13 +7,19 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "WaveSynthAUViewController.h"
 #import <WaveSynthFramework/WaveSynthAU.h>
+#import "WaveSynthConstants.h"
 
 @interface WaveSynthAUViewController ()
 {
     IBOutlet UISlider *_volumeSlider;
+    IBOutlet UIButton *waveformButton;
+    
     AUParameter *_volumeParameter;
+    AUParameter *_waveformParameter;
     AUParameterObserverToken *_parameterObserverToken;
 }
 
@@ -50,6 +56,10 @@
                 {
                     [self updateVolume];
                 }
+                else if (address == _waveformParameter.address)
+                {
+                    [self updateWaveform];
+                }
                 
             });
         }];
@@ -64,6 +74,9 @@
 {
     [super viewDidLoad];
 
+    [[waveformButton layer] setBorderWidth:1.0f];
+    [[waveformButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    
     if (_audioUnit)
     {
         [self connectViewWithAU];
@@ -81,4 +94,25 @@
     NSLog(@"volumeChanged: %f", sender.value);
     _volumeParameter.value =  sender.value;
 }
+
+- (void) updateWaveform
+{
+    
+}
+
+- (IBAction)waveformChanged:(id)sender
+{
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    if (waveform == OSCILLATOR_WAVE_LAST)
+    {
+        waveform = OSCILLATOR_WAVE_FIRST;
+    }
+    else
+    {
+        ++waveform;
+    }
+    
+    self.audioUnit.selectedWaveform = waveform;
+}
+
 @end

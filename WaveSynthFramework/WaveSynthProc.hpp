@@ -16,7 +16,8 @@ class WaveSynthProc : public DSPKernel
 {
 public:
     enum {
-        InstrumentParamVolume = 0
+        InstrumentParamVolume = 0,
+        InstrumentParamWaveform = 1
     };
     
     WaveSynthProc();

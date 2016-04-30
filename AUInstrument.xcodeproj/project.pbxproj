@@ -17,6 +17,7 @@
 		0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1B71CCB00F900D68648 /* WaveSynthFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0765D8A11CCF104700DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */; };
 		0765D8A21CCF12E800DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */; };
+		0765D8A61CD53CCD00DE7A19 /* WaveSynthConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765D8A51CD53C6000DE7A19 /* WaveSynthConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07DBB0511CC5D87C00D68648 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB0501CC5D87C00D68648 /* MainViewController.m */; };
 		07DBB1BC1CCB00F900D68648 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
 		07DBB1BD1CCB00F900D68648 /* WaveSynthFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -98,6 +99,7 @@
 		0765D8931CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WaveSynthAUViewController+AUAudioUnitFactory.h"; sourceTree = "<group>"; };
 		0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WaveSynthAUViewController+AUAudioUnitFactory.m"; sourceTree = "<group>"; };
 		0765D8A01CCF104700DE7A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		0765D8A51CD53C6000DE7A19 /* WaveSynthConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveSynthConstants.h; sourceTree = "<group>"; };
 		078674441CC3214800062B61 /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		07DBB04F1CC5D87C00D68648 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		07DBB0501CC5D87C00D68648 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				07DBB1521CC83B0E00D68648 /* Oscillator */,
 				07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */,
 				07DBB1EA1CCB0AA900D68648 /* WaveSynthAU.mm */,
+				0765D8A51CD53C6000DE7A19 /* WaveSynthConstants.h */,
 				07FD040B1CCC6EEB00BA14BB /* WaveSynthProc.hpp */,
 				07FD040C1CCC6EEB00BA14BB /* WaveSynthProc.mm */,
 				0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */,
@@ -301,6 +304,7 @@
 			files = (
 				0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */,
 				0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */,
+				0765D8A61CD53CCD00DE7A19 /* WaveSynthConstants.h in Headers */,
 				07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */,
 				07FD040D1CCC6EEB00BA14BB /* WaveSynthProc.hpp in Headers */,
 				07DBB1E21CCB0A8000D68648 /* BufferedAudioBus.hpp in Headers */,
@@ -525,6 +529,7 @@
 		075D4F0F1CCB232D001D95E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = WaveSynthExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -537,6 +542,7 @@
 		075D4F101CCB232D001D95E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = WaveSynthExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -550,6 +556,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -571,6 +578,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -678,6 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AUInstrument/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -690,6 +699,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AUInstrument/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

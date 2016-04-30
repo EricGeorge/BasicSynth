@@ -28,6 +28,7 @@
 }
 
 @synthesize parameterTree = _parameterTree;
+@synthesize selectedWaveform = _selectedWaveform;
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription
                                      options:(AudioComponentInstantiationOptions)options
@@ -97,6 +98,16 @@
     self.maximumFramesToRender = 512;
     
     return self;
+}
+
+- (OscillatorWave) selectedWaveform
+{
+    return (OscillatorWave)_kernel.getParameter(WaveSynthProc::InstrumentParamWaveform);
+}
+
+- (void) setSelectedWaveform:(OscillatorWave)selectedWaveform
+{
+    _kernel.setParameter(WaveSynthProc::InstrumentParamWaveform, selectedWaveform);
 }
 
 - (AUAudioUnitBusArray *)outputBusses
