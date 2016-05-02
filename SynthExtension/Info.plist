@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>WaveSynthExtension</string>
+	<string>BasicSynthExtension</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,13 +30,13 @@
 			<array>
 				<dict>
 					<key>description</key>
-					<string>WaveSynthExtension</string>
+					<string>BasicSynth Extension</string>
 					<key>factoryFunction</key>
-					<string>WaveSynthAUViewController</string>
+					<string>SynthAUViewController</string>
 					<key>manufacturer</key>
 					<string>EEGE</string>
 					<key>name</key>
-					<string>EEGE: WaveSynth</string>
+					<string>EEGE: BasicSynth</string>
 					<key>sandboxSafe</key>
 					<true/>
 					<key>subtype</key>

@@ -1,17 +1,17 @@
 //
-//  WaveSynthProc.hpp
+//  SynthProc.hpp
 //
 //  Created by Eric on 4/23/16.
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#ifndef WaveSynthProc_hpp
-#define WaveSynthProc_hpp
+#ifndef SynthProc_hpp
+#define SynthProc_hpp
 
 #import "DSPKernel.hpp"
 #import "Oscillator.h"
 
-class WaveSynthProc : public DSPKernel
+class SynthProc : public DSPKernel
 {
 public:
     enum {
@@ -19,7 +19,7 @@ public:
         InstrumentParamWaveform = 1
     };
     
-    WaveSynthProc();
+    SynthProc();
     
     void init(int channelCount, double inSampleRate);
     void reset();
@@ -44,4 +44,4 @@ private:
     float volume;
 };
 
-#endif /* WaveSynthProc_hpp */
+#endif /* SynthProc_hpp */

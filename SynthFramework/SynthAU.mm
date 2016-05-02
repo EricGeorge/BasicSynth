@@ -1,17 +1,17 @@
 //
-//  WaveSynthAU.m
+//  SynthAU.m
 //
 //  Created by Eric on 4/22/16.
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-#import "WaveSynthAU.h"
+#import "SynthAU.h"
 
 #import "BufferedAudioBus.hpp"
 #import "Utility.h"
-#import "WaveSynthProc.hpp"
+#import "SynthProc.hpp"
 
-@interface WaveSynthAU ()
+@interface SynthAU ()
 
 @property (nonatomic, strong) AUAudioUnitBus *outputBus;
 @property (nonatomic, strong) AUAudioUnitBusArray *outputBusArray;
@@ -20,10 +20,10 @@
 @end
 
 
-@implementation WaveSynthAU
+@implementation SynthAU
 {
     // C++ members need to be ivars; they would be copied on access if they were properties.
-    WaveSynthProc _kernel;
+    SynthProc _kernel;
     BufferedOutputBus _outputBusBuffer;
 }
 
@@ -50,20 +50,20 @@
     // Create a parameter object for the volume.
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable | kAudioUnitParameterFlag_DisplayLogarithmic;
     AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
-                                                                      address:WaveSynthProc::InstrumentParamVolume
+                                                                      address:SynthProc::InstrumentParamVolume
                                                                           min:0.001 max:1.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
-                                                                      address:WaveSynthProc::InstrumentParamWaveform
+                                                                      address:SynthProc::InstrumentParamWaveform
                                                                           min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
 
     // Initialize the parameter values.
     volumeParam.value = 0.1;
-    _kernel.setParameter(WaveSynthProc::InstrumentParamVolume, volumeParam.value);
+    _kernel.setParameter(SynthProc::InstrumentParamVolume, volumeParam.value);
     
     volumeParam.value = 0;
-    _kernel.setParameter(WaveSynthProc::InstrumentParamWaveform, volumeParam.value);
+    _kernel.setParameter(SynthProc::InstrumentParamWaveform, volumeParam.value);
     
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
@@ -79,7 +79,7 @@
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
     
     // Make a local pointer to the kernel to avoid capturing self.
-    __block WaveSynthProc *instrumentKernel = &_kernel;
+    __block SynthProc *instrumentKernel = &_kernel;
     
     // implementorValueObserver is called when a parameter changes value.
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
@@ -97,11 +97,11 @@
         
         switch (param.address)
         {
-            case WaveSynthProc::InstrumentParamVolume:
+            case SynthProc::InstrumentParamVolume:
             {
                 return [NSString stringWithFormat:@"%.3f", value];
             }
-            case WaveSynthProc::InstrumentParamWaveform:
+            case SynthProc::InstrumentParamWaveform:
             {
                 return [NSString stringWithFormat:@"%d", (uint8_t)value];
             }
@@ -118,12 +118,12 @@
 
 - (OscillatorWave) selectedWaveform
 {
-    return (OscillatorWave)_kernel.getParameter(WaveSynthProc::InstrumentParamWaveform);
+    return (OscillatorWave)_kernel.getParameter(SynthProc::InstrumentParamWaveform);
 }
 
 - (void) setSelectedWaveform:(OscillatorWave)selectedWaveform
 {
-    _kernel.setParameter(WaveSynthProc::InstrumentParamWaveform, selectedWaveform);
+    _kernel.setParameter(SynthProc::InstrumentParamWaveform, selectedWaveform);
 }
 
 - (AUAudioUnitBusArray *)outputBusses
@@ -159,7 +159,7 @@
      Capture in locals to avoid ObjC member lookups. If "self" is captured in
      render, we're doing it wrong.
      */
-    __block WaveSynthProc *state = &_kernel;
+    __block SynthProc *state = &_kernel;
     
     return ^AUAudioUnitStatus(
                               AudioUnitRenderActionFlags *actionFlags,

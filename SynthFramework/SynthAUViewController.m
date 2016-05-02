@@ -1,20 +1,22 @@
 //
-//  WaveSynthAUViewController.m
+//  SynthAUViewController.m
 //
 //  Created by Eric on 4/23/16.
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
+#import "SynthAUViewController.h"
+
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "WaveSynthAUViewController.h"
-#import <WaveSynthFramework/WaveSynthAU.h>
-#import "WaveSynthConstants.h"
+
+#import "SynthAU.h"
+#import "SynthConstants.h"
 
 static NSArray *_waveformNames;
 
-@interface WaveSynthAUViewController ()
+@interface SynthAUViewController ()
 {
     IBOutlet UISlider *_volumeSlider;
     IBOutlet UIButton *_waveformButton;
@@ -27,9 +29,9 @@ static NSArray *_waveformNames;
 
 @end
 
-@implementation WaveSynthAUViewController
+@implementation SynthAUViewController
 
--(void)setAudioUnit:(WaveSynthAU *)audioUnit
+-(void)setAudioUnit:(SynthAU *)audioUnit
 {
     _audioUnit = audioUnit;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -39,7 +41,7 @@ static NSArray *_waveformNames;
     });
 }
 
--(WaveSynthAU *)getAudioUnit
+-(SynthAU *)getAudioUnit
 {
     return _audioUnit;
 }

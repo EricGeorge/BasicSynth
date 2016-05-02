@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WaveSynthConstants.h"
+#import "SynthConstants.h"
 
 @interface Oscillator : NSObject
 

@@ -8,7 +8,7 @@
 #import "MainViewController.h"
 
 @import AudioUnit;
-#import <WaveSynthFramework/WaveSynthFramework.h>
+#import <SynthFramework/SynthFramework.h>
 
 #import "AudioEngine.h"
 #import "MIDILogs.h"
@@ -22,7 +22,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIView *auContainerView;
-@property (strong, nonatomic) WaveSynthAUViewController *waveSynthViewController;
+@property (strong, nonatomic) SynthAUViewController *synthViewController;
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
 
 @end
@@ -45,7 +45,7 @@
     desc.componentFlags = 0;
     desc.componentFlagsMask = 0;
     
-    [AUAudioUnit registerSubclass:WaveSynthAU.self asComponentDescription:desc name:@"Local WaveSynth" version:1];
+    [AUAudioUnit registerSubclass:SynthAU.self asComponentDescription:desc name:@"Basic Synth" version:1];
     
     _audioEngine = [[AudioEngine alloc] init];
     [_audioEngine setupAUWithComponentDescription:desc andCompletion:^{
@@ -60,16 +60,16 @@
     NSBundle *appExtensionBundle = [[NSBundle alloc] initWithURL:pluginURL];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainInterface" bundle:appExtensionBundle];
     
-    self.waveSynthViewController = [storyboard instantiateInitialViewController];
+    self.synthViewController = [storyboard instantiateInitialViewController];
     
-    UIView *view = self.waveSynthViewController.view;
+    UIView *view = self.synthViewController.view;
     if (view)
     {
-        [self addChildViewController:self.waveSynthViewController];
+        [self addChildViewController:self.synthViewController];
         view.frame = self.auContainerView.bounds;
         
         [self.auContainerView addSubview:view];
-        [self.waveSynthViewController didMoveToParentViewController:self];
+        [self.synthViewController didMoveToParentViewController:self];
     }
 }
 
@@ -79,7 +79,7 @@
     
     if (parameterTree)
     {
-        self.waveSynthViewController.audioUnit = (WaveSynthAU *)_audioEngine.synthAU;
+        self.synthViewController.audioUnit = (SynthAU *)_audioEngine.synthAU;
         
         _volumeParameter = [parameterTree valueForKey:volumeParamKey];
         

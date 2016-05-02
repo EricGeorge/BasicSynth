@@ -7,7 +7,7 @@
 
 #import "AudioEngine.h"
 
-#import <WaveSynthFramework/WaveSynthFramework.h>
+#import <SynthFramework/SynthFramework.h>
 
 @interface AudioEngine()
 {

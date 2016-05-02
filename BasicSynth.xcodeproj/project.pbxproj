@@ -16,29 +16,30 @@
 		07407EFD1CD5A20F00BBE231 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EF61CD5A20F00BBE231 /* MainViewController.m */; };
 		07407F021CD5A23600BBE231 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07407EFE1CD5A23600BBE231 /* LaunchScreen.storyboard */; };
 		07407F031CD5A23600BBE231 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07407F001CD5A23600BBE231 /* Main.storyboard */; };
-		075D4F0D1CCB232D001D95E4 /* WaveSynthExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 075D4EFF1CCB232D001D95E4 /* WaveSynthExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		075D4F111CCB234A001D95E4 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
-		075F69C41CCD907C00C7E651 /* MIDIEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 075F69C21CCD907C00C7E651 /* MIDIEvent.h */; };
-		075F69C51CCD907C00C7E651 /* MIDIEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F69C31CCD907C00C7E651 /* MIDIEvent.m */; };
-		0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0765D8911CCF07B200DE7A19 /* WaveSynthAUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */; };
-		0765D8951CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */; };
-		0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1B71CCB00F900D68648 /* WaveSynthFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0765D8A11CCF104700DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */; };
-		0765D8A21CCF12E800DE7A19 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */; };
-		0765D8A61CD53CCD00DE7A19 /* WaveSynthConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765D8A51CD53C6000DE7A19 /* WaveSynthConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0765D8A81CD5504C00DE7A19 /* Utility.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0765D8A71CD5504C00DE7A19 /* Utility.hpp */; };
-		07DBB1BC1CCB00F900D68648 /* WaveSynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; };
-		07DBB1BD1CCB00F900D68648 /* WaveSynthFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		07DBB1E21CCB0A8000D68648 /* BufferedAudioBus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1DF1CCB0A8000D68648 /* BufferedAudioBus.hpp */; };
-		07DBB1E31CCB0A8000D68648 /* DSPKernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E01CCB0A8000D68648 /* DSPKernel.hpp */; };
-		07DBB1E41CCB0A8000D68648 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1E11CCB0A8000D68648 /* DSPKernel.mm */; };
-		07DBB1E71CCB0A9000D68648 /* Oscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E51CCB0A9000D68648 /* Oscillator.h */; };
-		07DBB1E81CCB0A9000D68648 /* Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1E61CCB0A9000D68648 /* Oscillator.m */; };
-		07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		07DBB1EE1CCB0AA900D68648 /* WaveSynthAU.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07DBB1EA1CCB0AA900D68648 /* WaveSynthAU.mm */; };
-		07FD040D1CCC6EEB00BA14BB /* WaveSynthProc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07FD040B1CCC6EEB00BA14BB /* WaveSynthProc.hpp */; };
-		07FD040E1CCC6EEB00BA14BB /* WaveSynthProc.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07FD040C1CCC6EEB00BA14BB /* WaveSynthProc.mm */; };
+		075D4F0D1CCB232D001D95E4 /* SynthExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 075D4EFF1CCB232D001D95E4 /* SynthExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		075D4F111CCB234A001D95E4 /* SynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */; };
+		07DBB1BC1CCB00F900D68648 /* SynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */; };
+		07DBB1BD1CCB00F900D68648 /* SynthFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07FFA4371CD7DC7100F03350 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA42D1CD7DC7100F03350 /* Info.plist */; };
+		07FFA43D1CD7DC7B00F03350 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA43B1CD7DC7B00F03350 /* MainInterface.storyboard */; };
+		07FFA4411CD7DCA300F03350 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA43E1CD7DCA300F03350 /* Info.plist */; };
+		07FFA4431CD7DCED00F03350 /* SynthAUViewController+AUAudioUnitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA4401CD7DCA300F03350 /* SynthAUViewController+AUAudioUnitFactory.m */; };
+		07FFA4441CD7DD1B00F03350 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA4251CD7DC3800F03350 /* DSPKernel.mm */; };
+		07FFA4451CD7DD1B00F03350 /* MIDIEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA4281CD7DC4700F03350 /* MIDIEvent.m */; };
+		07FFA4461CD7DD1B00F03350 /* Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA42B1CD7DC5500F03350 /* Oscillator.m */; };
+		07FFA4471CD7DD1B00F03350 /* SynthAU.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA42F1CD7DC7100F03350 /* SynthAU.mm */; };
+		07FFA4491CD7DD1B00F03350 /* SynthProc.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA4351CD7DC7100F03350 /* SynthProc.mm */; };
+		07FFA44A1CD7DD3200F03350 /* BufferedAudioBus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4231CD7DC3800F03350 /* BufferedAudioBus.hpp */; };
+		07FFA44B1CD7DD3200F03350 /* DSPKernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4241CD7DC3800F03350 /* DSPKernel.hpp */; };
+		07FFA44C1CD7DD3200F03350 /* MIDIEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4271CD7DC4700F03350 /* MIDIEvent.h */; };
+		07FFA44D1CD7DD3200F03350 /* Oscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA42A1CD7DC5500F03350 /* Oscillator.h */; };
+		07FFA44E1CD7DD3200F03350 /* SynthAU.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA42E1CD7DC7100F03350 /* SynthAU.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07FFA44F1CD7DD3200F03350 /* SynthAUViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4301CD7DC7100F03350 /* SynthAUViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07FFA4501CD7DD3200F03350 /* SynthConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4321CD7DC7100F03350 /* SynthConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07FFA4511CD7DD3200F03350 /* SynthProc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4341CD7DC7100F03350 /* SynthProc.hpp */; };
+		07FFA4521CD7DD3200F03350 /* Utility.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4361CD7DC7100F03350 /* Utility.hpp */; };
+		07FFA4531CD7DD3200F03350 /* SynthFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FFA4331CD7DC7100F03350 /* SynthFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07FFA4561CD7DFB800F03350 /* SynthAUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA4541CD7DFA400F03350 /* SynthAUViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				075D4F0D1CCB232D001D95E4 /* WaveSynthExtension.appex in Embed App Extensions */,
+				075D4F0D1CCB232D001D95E4 /* SynthExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,7 +84,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				07DBB1BD1CCB00F900D68648 /* WaveSynthFramework.framework in Embed Frameworks */,
+				07DBB1BD1CCB00F900D68648 /* SynthFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,30 +109,30 @@
 		07407EF71CD5A20F00BBE231 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = BasicSynth/Utility.h; sourceTree = SOURCE_ROOT; };
 		07407EFF1CD5A23600BBE231 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = BasicSynth/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		07407F011CD5A23600BBE231 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = BasicSynth/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
-		075D4EFF1CCB232D001D95E4 /* WaveSynthExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WaveSynthExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		075D4F0A1CCB232D001D95E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		075F69C21CCD907C00C7E651 /* MIDIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIEvent.h; path = MIDIEvent/MIDIEvent.h; sourceTree = "<group>"; };
-		075F69C31CCD907C00C7E651 /* MIDIEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDIEvent.m; path = MIDIEvent/MIDIEvent.m; sourceTree = "<group>"; };
-		0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveSynthAUViewController.h; sourceTree = "<group>"; };
-		0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveSynthAUViewController.m; sourceTree = "<group>"; };
-		0765D8931CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WaveSynthAUViewController+AUAudioUnitFactory.h"; sourceTree = "<group>"; };
-		0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WaveSynthAUViewController+AUAudioUnitFactory.m"; sourceTree = "<group>"; };
-		0765D8A01CCF104700DE7A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		0765D8A51CD53C6000DE7A19 /* WaveSynthConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveSynthConstants.h; sourceTree = "<group>"; };
-		0765D8A71CD5504C00DE7A19 /* Utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
-		07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WaveSynthFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07DBB1B71CCB00F900D68648 /* WaveSynthFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveSynthFramework.h; sourceTree = "<group>"; };
-		07DBB1B91CCB00F900D68648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		07DBB1DF1CCB0A8000D68648 /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BufferedAudioBus.hpp; path = DSPKernel/BufferedAudioBus.hpp; sourceTree = "<group>"; };
-		07DBB1E01CCB0A8000D68648 /* DSPKernel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DSPKernel.hpp; path = DSPKernel/DSPKernel.hpp; sourceTree = "<group>"; };
-		07DBB1E11CCB0A8000D68648 /* DSPKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DSPKernel.mm; path = DSPKernel/DSPKernel.mm; sourceTree = "<group>"; };
-		07DBB1E51CCB0A9000D68648 /* Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Oscillator.h; path = WaveSynthFramework/Oscillator/Oscillator.h; sourceTree = SOURCE_ROOT; };
-		07DBB1E61CCB0A9000D68648 /* Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Oscillator.m; path = WaveSynthFramework/Oscillator/Oscillator.m; sourceTree = SOURCE_ROOT; };
-		07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveSynthAU.h; sourceTree = "<group>"; };
-		07DBB1EA1CCB0AA900D68648 /* WaveSynthAU.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WaveSynthAU.mm; sourceTree = "<group>"; };
+		075D4EFF1CCB232D001D95E4 /* SynthExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SynthExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		07DBB1B51CCB00F900D68648 /* SynthFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SynthFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FC1E851CC09D2D00C4AD6B /* BasicSynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicSynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		07FD040B1CCC6EEB00BA14BB /* WaveSynthProc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WaveSynthProc.hpp; sourceTree = "<group>"; };
-		07FD040C1CCC6EEB00BA14BB /* WaveSynthProc.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WaveSynthProc.mm; sourceTree = "<group>"; };
+		07FFA4231CD7DC3800F03350 /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BufferedAudioBus.hpp; path = SynthFramework/DSPKernel/BufferedAudioBus.hpp; sourceTree = SOURCE_ROOT; };
+		07FFA4241CD7DC3800F03350 /* DSPKernel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DSPKernel.hpp; path = SynthFramework/DSPKernel/DSPKernel.hpp; sourceTree = SOURCE_ROOT; };
+		07FFA4251CD7DC3800F03350 /* DSPKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DSPKernel.mm; path = SynthFramework/DSPKernel/DSPKernel.mm; sourceTree = SOURCE_ROOT; };
+		07FFA4271CD7DC4700F03350 /* MIDIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIEvent.h; path = SynthFramework/MIDIEvent/MIDIEvent.h; sourceTree = SOURCE_ROOT; };
+		07FFA4281CD7DC4700F03350 /* MIDIEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDIEvent.m; path = SynthFramework/MIDIEvent/MIDIEvent.m; sourceTree = SOURCE_ROOT; };
+		07FFA42A1CD7DC5500F03350 /* Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Oscillator.h; path = SynthFramework/Oscillator/Oscillator.h; sourceTree = SOURCE_ROOT; };
+		07FFA42B1CD7DC5500F03350 /* Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Oscillator.m; path = SynthFramework/Oscillator/Oscillator.m; sourceTree = SOURCE_ROOT; };
+		07FFA42D1CD7DC7100F03350 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SynthFramework/Info.plist; sourceTree = SOURCE_ROOT; };
+		07FFA42E1CD7DC7100F03350 /* SynthAU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthAU.h; path = SynthFramework/SynthAU.h; sourceTree = SOURCE_ROOT; };
+		07FFA42F1CD7DC7100F03350 /* SynthAU.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SynthAU.mm; path = SynthFramework/SynthAU.mm; sourceTree = SOURCE_ROOT; };
+		07FFA4301CD7DC7100F03350 /* SynthAUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthAUViewController.h; path = SynthFramework/SynthAUViewController.h; sourceTree = SOURCE_ROOT; };
+		07FFA4321CD7DC7100F03350 /* SynthConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthConstants.h; path = SynthFramework/SynthConstants.h; sourceTree = SOURCE_ROOT; };
+		07FFA4331CD7DC7100F03350 /* SynthFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthFramework.h; path = SynthFramework/SynthFramework.h; sourceTree = SOURCE_ROOT; };
+		07FFA4341CD7DC7100F03350 /* SynthProc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SynthProc.hpp; path = SynthFramework/SynthProc.hpp; sourceTree = SOURCE_ROOT; };
+		07FFA4351CD7DC7100F03350 /* SynthProc.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SynthProc.mm; path = SynthFramework/SynthProc.mm; sourceTree = SOURCE_ROOT; };
+		07FFA4361CD7DC7100F03350 /* Utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Utility.hpp; path = SynthFramework/Utility.hpp; sourceTree = SOURCE_ROOT; };
+		07FFA43C1CD7DC7B00F03350 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = SynthFramework/Base.lproj/MainInterface.storyboard; sourceTree = SOURCE_ROOT; };
+		07FFA43E1CD7DCA300F03350 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SynthExtension/Info.plist; sourceTree = SOURCE_ROOT; };
+		07FFA43F1CD7DCA300F03350 /* SynthAUViewController+AUAudioUnitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SynthAUViewController+AUAudioUnitFactory.h"; path = "SynthExtension/SynthAUViewController+AUAudioUnitFactory.h"; sourceTree = SOURCE_ROOT; };
+		07FFA4401CD7DCA300F03350 /* SynthAUViewController+AUAudioUnitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SynthAUViewController+AUAudioUnitFactory.m"; path = "SynthExtension/SynthAUViewController+AUAudioUnitFactory.m"; sourceTree = SOURCE_ROOT; };
+		07FFA4541CD7DFA400F03350 /* SynthAUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SynthAUViewController.m; path = SynthFramework/SynthAUViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				075D4F111CCB234A001D95E4 /* WaveSynthFramework.framework in Frameworks */,
+				075D4F111CCB234A001D95E4 /* SynthFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,28 +155,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07DBB1BC1CCB00F900D68648 /* WaveSynthFramework.framework in Frameworks */,
+				07DBB1BC1CCB00F900D68648 /* SynthFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		075D4F001CCB232D001D95E4 /* WaveSynthExtension */ = {
+		075D4F001CCB232D001D95E4 /* SynthExtension */ = {
 			isa = PBXGroup;
 			children = (
-				0765D8931CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.h */,
-				0765D8941CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m */,
-				075D4F0A1CCB232D001D95E4 /* Info.plist */,
+				07FFA43F1CD7DCA300F03350 /* SynthAUViewController+AUAudioUnitFactory.h */,
+				07FFA4401CD7DCA300F03350 /* SynthAUViewController+AUAudioUnitFactory.m */,
+				07FFA43E1CD7DCA300F03350 /* Info.plist */,
 			);
+			name = SynthExtension;
 			path = WaveSynthExtension;
 			sourceTree = "<group>";
 		};
 		075F69C11CCD904400C7E651 /* MIDIEvent */ = {
 			isa = PBXGroup;
 			children = (
-				075F69C21CCD907C00C7E651 /* MIDIEvent.h */,
-				075F69C31CCD907C00C7E651 /* MIDIEvent.m */,
+				07FFA4271CD7DC4700F03350 /* MIDIEvent.h */,
+				07FFA4281CD7DC4700F03350 /* MIDIEvent.m */,
 			);
 			name = MIDIEvent;
 			sourceTree = "<group>";
@@ -204,39 +206,40 @@
 		07DBB1521CC83B0E00D68648 /* Oscillator */ = {
 			isa = PBXGroup;
 			children = (
-				07DBB1E51CCB0A9000D68648 /* Oscillator.h */,
-				07DBB1E61CCB0A9000D68648 /* Oscillator.m */,
+				07FFA42A1CD7DC5500F03350 /* Oscillator.h */,
+				07FFA42B1CD7DC5500F03350 /* Oscillator.m */,
 			);
 			name = Oscillator;
 			path = ../SineSynth;
 			sourceTree = "<group>";
 		};
-		07DBB1B61CCB00F900D68648 /* WaveSynthFramework */ = {
+		07DBB1B61CCB00F900D68648 /* SynthFramework */ = {
 			isa = PBXGroup;
 			children = (
 				07DBB1CA1CCB097400D68648 /* DSPKernel */,
 				075F69C11CCD904400C7E651 /* MIDIEvent */,
 				07DBB1521CC83B0E00D68648 /* Oscillator */,
-				0765D8A71CD5504C00DE7A19 /* Utility.hpp */,
-				07DBB1E91CCB0AA900D68648 /* WaveSynthAU.h */,
-				07DBB1EA1CCB0AA900D68648 /* WaveSynthAU.mm */,
-				0765D8A51CD53C6000DE7A19 /* WaveSynthConstants.h */,
-				07FD040B1CCC6EEB00BA14BB /* WaveSynthProc.hpp */,
-				07FD040C1CCC6EEB00BA14BB /* WaveSynthProc.mm */,
-				0765D88E1CCF07B200DE7A19 /* WaveSynthAUViewController.h */,
-				0765D88F1CCF07B200DE7A19 /* WaveSynthAUViewController.m */,
-				0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */,
+				07FFA42E1CD7DC7100F03350 /* SynthAU.h */,
+				07FFA42F1CD7DC7100F03350 /* SynthAU.mm */,
+				07FFA4341CD7DC7100F03350 /* SynthProc.hpp */,
+				07FFA4351CD7DC7100F03350 /* SynthProc.mm */,
+				07FFA4301CD7DC7100F03350 /* SynthAUViewController.h */,
+				07FFA4541CD7DFA400F03350 /* SynthAUViewController.m */,
+				07FFA4321CD7DC7100F03350 /* SynthConstants.h */,
+				07FFA4361CD7DC7100F03350 /* Utility.hpp */,
+				07FFA43B1CD7DC7B00F03350 /* MainInterface.storyboard */,
 				07FD040F1CCC6EF900BA14BB /* Supporting Files */,
 			);
+			name = SynthFramework;
 			path = WaveSynthFramework;
 			sourceTree = "<group>";
 		};
 		07DBB1CA1CCB097400D68648 /* DSPKernel */ = {
 			isa = PBXGroup;
 			children = (
-				07DBB1DF1CCB0A8000D68648 /* BufferedAudioBus.hpp */,
-				07DBB1E01CCB0A8000D68648 /* DSPKernel.hpp */,
-				07DBB1E11CCB0A8000D68648 /* DSPKernel.mm */,
+				07FFA4231CD7DC3800F03350 /* BufferedAudioBus.hpp */,
+				07FFA4241CD7DC3800F03350 /* DSPKernel.hpp */,
+				07FFA4251CD7DC3800F03350 /* DSPKernel.mm */,
 			);
 			name = DSPKernel;
 			sourceTree = "<group>";
@@ -245,8 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				07FC1E871CC09D2D00C4AD6B /* BasicSynthApp */,
-				07DBB1B61CCB00F900D68648 /* WaveSynthFramework */,
-				075D4F001CCB232D001D95E4 /* WaveSynthExtension */,
+				07DBB1B61CCB00F900D68648 /* SynthFramework */,
+				075D4F001CCB232D001D95E4 /* SynthExtension */,
 				07FC1E861CC09D2D00C4AD6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -255,8 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				07FC1E851CC09D2D00C4AD6B /* BasicSynth.app */,
-				07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */,
-				075D4EFF1CCB232D001D95E4 /* WaveSynthExtension.appex */,
+				07DBB1B51CCB00F900D68648 /* SynthFramework.framework */,
+				075D4EFF1CCB232D001D95E4 /* SynthExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,8 +295,8 @@
 		07FD040F1CCC6EF900BA14BB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				07DBB1B71CCB00F900D68648 /* WaveSynthFramework.h */,
-				07DBB1B91CCB00F900D68648 /* Info.plist */,
+				07FFA42D1CD7DC7100F03350 /* Info.plist */,
+				07FFA4331CD7DC7100F03350 /* SynthFramework.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -305,25 +308,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0765D8961CCF0C0E00DE7A19 /* WaveSynthFramework.h in Headers */,
-				0765D8901CCF07B200DE7A19 /* WaveSynthAUViewController.h in Headers */,
-				0765D8A61CD53CCD00DE7A19 /* WaveSynthConstants.h in Headers */,
-				07DBB1ED1CCB0AA900D68648 /* WaveSynthAU.h in Headers */,
-				07FD040D1CCC6EEB00BA14BB /* WaveSynthProc.hpp in Headers */,
-				07DBB1E21CCB0A8000D68648 /* BufferedAudioBus.hpp in Headers */,
-				07DBB1E31CCB0A8000D68648 /* DSPKernel.hpp in Headers */,
-				0765D8A81CD5504C00DE7A19 /* Utility.hpp in Headers */,
-				075F69C41CCD907C00C7E651 /* MIDIEvent.h in Headers */,
-				07DBB1E71CCB0A9000D68648 /* Oscillator.h in Headers */,
+				07FFA4531CD7DD3200F03350 /* SynthFramework.h in Headers */,
+				07FFA4501CD7DD3200F03350 /* SynthConstants.h in Headers */,
+				07FFA44E1CD7DD3200F03350 /* SynthAU.h in Headers */,
+				07FFA44F1CD7DD3200F03350 /* SynthAUViewController.h in Headers */,
+				07FFA44A1CD7DD3200F03350 /* BufferedAudioBus.hpp in Headers */,
+				07FFA44B1CD7DD3200F03350 /* DSPKernel.hpp in Headers */,
+				07FFA44C1CD7DD3200F03350 /* MIDIEvent.h in Headers */,
+				07FFA44D1CD7DD3200F03350 /* Oscillator.h in Headers */,
+				07FFA4511CD7DD3200F03350 /* SynthProc.hpp in Headers */,
+				07FFA4521CD7DD3200F03350 /* Utility.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		075D4EFE1CCB232D001D95E4 /* WaveSynthExtension */ = {
+		075D4EFE1CCB232D001D95E4 /* SynthExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 075D4F0E1CCB232D001D95E4 /* Build configuration list for PBXNativeTarget "WaveSynthExtension" */;
+			buildConfigurationList = 075D4F0E1CCB232D001D95E4 /* Build configuration list for PBXNativeTarget "SynthExtension" */;
 			buildPhases = (
 				075D4EFB1CCB232D001D95E4 /* Sources */,
 				075D4EFC1CCB232D001D95E4 /* Frameworks */,
@@ -334,14 +337,14 @@
 			dependencies = (
 				0765D8981CCF0C8400DE7A19 /* PBXTargetDependency */,
 			);
-			name = WaveSynthExtension;
+			name = SynthExtension;
 			productName = WaveSynthExtension;
-			productReference = 075D4EFF1CCB232D001D95E4 /* WaveSynthExtension.appex */;
+			productReference = 075D4EFF1CCB232D001D95E4 /* SynthExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		07DBB1B41CCB00F900D68648 /* WaveSynthFramework */ = {
+		07DBB1B41CCB00F900D68648 /* SynthFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07DBB1BE1CCB00F900D68648 /* Build configuration list for PBXNativeTarget "WaveSynthFramework" */;
+			buildConfigurationList = 07DBB1BE1CCB00F900D68648 /* Build configuration list for PBXNativeTarget "SynthFramework" */;
 			buildPhases = (
 				07DBB1B01CCB00F900D68648 /* Sources */,
 				07DBB1B11CCB00F900D68648 /* Frameworks */,
@@ -352,9 +355,9 @@
 			);
 			dependencies = (
 			);
-			name = WaveSynthFramework;
+			name = SynthFramework;
 			productName = WaveSynthFramework;
-			productReference = 07DBB1B51CCB00F900D68648 /* WaveSynthFramework.framework */;
+			productReference = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		07FC1E841CC09D2C00C4AD6B /* BasicSynth */ = {
@@ -412,8 +415,8 @@
 			projectRoot = "";
 			targets = (
 				07FC1E841CC09D2C00C4AD6B /* BasicSynth */,
-				07DBB1B41CCB00F900D68648 /* WaveSynthFramework */,
-				075D4EFE1CCB232D001D95E4 /* WaveSynthExtension */,
+				07DBB1B41CCB00F900D68648 /* SynthFramework */,
+				075D4EFE1CCB232D001D95E4 /* SynthExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -423,7 +426,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0765D8A21CCF12E800DE7A19 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +433,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0765D8A11CCF104700DE7A19 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +440,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07FFA4371CD7DC7100F03350 /* Info.plist in Resources */,
+				07FFA43D1CD7DC7B00F03350 /* MainInterface.storyboard in Resources */,
+				07FFA4411CD7DCA300F03350 /* Info.plist in Resources */,
 				07407F021CD5A23600BBE231 /* LaunchScreen.storyboard in Resources */,
 				07407EF91CD5A20F00BBE231 /* Assets.xcassets in Resources */,
 				07407F031CD5A23600BBE231 /* Main.storyboard in Resources */,
@@ -452,7 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0765D8951CCF081100DE7A19 /* WaveSynthAUViewController+AUAudioUnitFactory.m in Sources */,
+				07FFA4431CD7DCED00F03350 /* SynthAUViewController+AUAudioUnitFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,12 +464,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07DBB1E41CCB0A8000D68648 /* DSPKernel.mm in Sources */,
-				07DBB1EE1CCB0AA900D68648 /* WaveSynthAU.mm in Sources */,
-				075F69C51CCD907C00C7E651 /* MIDIEvent.m in Sources */,
-				07FD040E1CCC6EEB00BA14BB /* WaveSynthProc.mm in Sources */,
-				0765D8911CCF07B200DE7A19 /* WaveSynthAUViewController.m in Sources */,
-				07DBB1E81CCB0A9000D68648 /* Oscillator.m in Sources */,
+				07FFA4561CD7DFB800F03350 /* SynthAUViewController.m in Sources */,
+				07FFA4441CD7DD1B00F03350 /* DSPKernel.mm in Sources */,
+				07FFA4451CD7DD1B00F03350 /* MIDIEvent.m in Sources */,
+				07FFA4461CD7DD1B00F03350 /* Oscillator.m in Sources */,
+				07FFA4471CD7DD1B00F03350 /* SynthAU.mm in Sources */,
+				07FFA4491CD7DD1B00F03350 /* SynthProc.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,17 +491,17 @@
 /* Begin PBXTargetDependency section */
 		075D4F0C1CCB232D001D95E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 075D4EFE1CCB232D001D95E4 /* WaveSynthExtension */;
+			target = 075D4EFE1CCB232D001D95E4 /* SynthExtension */;
 			targetProxy = 075D4F0B1CCB232D001D95E4 /* PBXContainerItemProxy */;
 		};
 		0765D8981CCF0C8400DE7A19 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 07DBB1B41CCB00F900D68648 /* WaveSynthFramework */;
+			target = 07DBB1B41CCB00F900D68648 /* SynthFramework */;
 			targetProxy = 0765D8971CCF0C8400DE7A19 /* PBXContainerItemProxy */;
 		};
 		07DBB1BB1CCB00F900D68648 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 07DBB1B41CCB00F900D68648 /* WaveSynthFramework */;
+			target = 07DBB1B41CCB00F900D68648 /* SynthFramework */;
 			targetProxy = 07DBB1BA1CCB00F900D68648 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -519,10 +523,10 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		0765D89F1CCF104700DE7A19 /* MainInterface.storyboard */ = {
+		07FFA43B1CD7DC7B00F03350 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0765D8A01CCF104700DE7A19 /* Base */,
+				07FFA43C1CD7DC7B00F03350 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -535,9 +539,9 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = WaveSynthExtension/Info.plist;
+				INFOPLIST_FILE = SynthExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EEGE.BasicSynth.WaveSynthExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = EEGE.BasicSynth.SynthExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -548,9 +552,9 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = WaveSynthExtension/Info.plist;
+				INFOPLIST_FILE = SynthExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EEGE.BasicSynth.WaveSynthExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = EEGE.BasicSynth.SynthExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -567,10 +571,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WaveSynthFramework/Info.plist;
+				INFOPLIST_FILE = SynthFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EEGE.WaveSynthFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = EEGE.SynthFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -589,10 +593,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WaveSynthFramework/Info.plist;
+				INFOPLIST_FILE = SynthFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EEGE.WaveSynthFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = EEGE.SynthFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -715,7 +719,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		075D4F0E1CCB232D001D95E4 /* Build configuration list for PBXNativeTarget "WaveSynthExtension" */ = {
+		075D4F0E1CCB232D001D95E4 /* Build configuration list for PBXNativeTarget "SynthExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				075D4F0F1CCB232D001D95E4 /* Debug */,
@@ -724,7 +728,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		07DBB1BE1CCB00F900D68648 /* Build configuration list for PBXNativeTarget "WaveSynthFramework" */ = {
+		07DBB1BE1CCB00F900D68648 /* Build configuration list for PBXNativeTarget "SynthFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07DBB1BF1CCB00F900D68648 /* Debug */,
