@@ -1,6 +1,5 @@
 //
 //  Utility.h
-//  BasicSynth
 //
 //  Created by Eric on 4/16/16.
 //  Copyright © 2016 Eric George. All rights reserved.
