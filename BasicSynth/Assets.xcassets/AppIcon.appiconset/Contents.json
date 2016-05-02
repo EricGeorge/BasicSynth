@@ -38,13 +38,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AU-Logo_120.png",
+      "filename" : "BasicSynth-Logo_120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AU-Logo_180.png",
+      "filename" : "BasicSynth-Logo_180.png",
       "scale" : "3x"
     },
     {
@@ -90,19 +90,19 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AU-Logo_76.png",
+      "filename" : "BasicSynth-Logo_76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AU-Logo_152.png",
+      "filename" : "BasicSynth-Logo_152.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "AU-Logo_167.png",
+      "filename" : "BasicSynth-Logo_167.png",
       "scale" : "2x"
     }
   ],
