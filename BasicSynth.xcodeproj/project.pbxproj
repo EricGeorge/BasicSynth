@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		071D1BDE1CD7EFAB00A762CC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA43B1CD7DC7B00F03350 /* MainInterface.storyboard */; };
+		071D1BDF1CD7EFAC00A762CC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA43B1CD7DC7B00F03350 /* MainInterface.storyboard */; };
 		07407EE71CD5A1D800BBE231 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EE61CD5A1D800BBE231 /* AudioEngine.m */; };
 		07407EED1CD5A1ED00BBE231 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEA1CD5A1ED00BBE231 /* MIDILogs.m */; };
 		07407EEE1CD5A1ED00BBE231 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEC1CD5A1ED00BBE231 /* MIDIManager.m */; };
@@ -392,6 +394,7 @@
 				TargetAttributes = {
 					075D4EFE1CCB232D001D95E4 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6Q6V5XHE7R;
 					};
 					07DBB1B41CCB00F900D68648 = {
 						CreatedOnToolsVersion = 7.3;
@@ -426,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				071D1BDF1CD7EFAC00A762CC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				071D1BDE1CD7EFAB00A762CC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,10 +544,12 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SynthExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = EEGE.BasicSynth.SynthExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -552,10 +559,12 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SynthExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = EEGE.BasicSynth.SynthExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
