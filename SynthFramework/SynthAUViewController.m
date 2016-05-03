@@ -19,10 +19,14 @@ static NSArray *_waveformNames;
 @interface SynthAUViewController ()
 {
     IBOutlet UISlider *_volumeSlider;
+    IBOutlet UILabel *_volumeValue;
+    IBOutlet UISlider *_panSlider;
+    IBOutlet UILabel *_panValue;
     IBOutlet UIButton *_waveformButton;
     IBOutlet UILabel *_waveformLabel;
     
     AUParameter *_volumeParameter;
+    AUParameter *_panParameter;
     AUParameter *_waveformParameter;
     AUParameterObserverToken *_parameterObserverToken;
 }
@@ -54,12 +58,17 @@ static NSArray *_waveformNames;
     {
         _volumeParameter = [parameterTree valueForKey:@"volume"];
         _waveformParameter = [parameterTree valueForKey:@"waveform"];
+        _panParameter = [parameterTree valueForKey:@"pan"];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 if (address == _volumeParameter.address)
                 {
                     [self updateVolume];
+                }
+                else if (address == _panParameter.address)
+                {
+                    [self updatePan];
                 }
                 else if (address == _waveformParameter.address)
                 {
@@ -96,11 +105,25 @@ static NSArray *_waveformNames;
 - (void) updateVolume
 {
     _volumeSlider.value = _volumeParameter.value;
+    _volumeValue.text = [NSString stringWithFormat:@"%.2f", _volumeSlider.value];
 }
 
 - (IBAction)volumeChanged:(UISlider *)sender
 {
     _volumeParameter.value =  sender.value;
+    _volumeValue.text = [NSString stringWithFormat:@"%.2f", _volumeSlider.value];
+}
+
+- (void) updatePan
+{
+    _panSlider.value = _panParameter.value;
+    _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
+}
+
+- (IBAction)panChanged:(UISlider *)sender
+{
+    _panParameter.value = sender.value;
+    _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
 }
 
 - (void) updateWaveform

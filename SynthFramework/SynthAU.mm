@@ -48,27 +48,37 @@
     _kernel.init(defaultFormat.channelCount, defaultFormat.sampleRate);
     
     // Create a parameter object for the volume.
-    AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable | kAudioUnitParameterFlag_DisplayLogarithmic;
+    AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable;
     AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
                                                                       address:SynthProc::InstrumentParamVolume
-                                                                          min:0.001 max:1.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
+                                                                          min:-96.0 max:24.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
+    
     AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
                                                                       address:SynthProc::InstrumentParamWaveform
                                                                           min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
+    
+    AUParameter *panParam = [AUParameterTree createParameterWithIdentifier:panParamKey name:@"Pan"
+                                                                      address:SynthProc::InstrumentParamPan
+                                                                          min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Pan unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
 
     // Initialize the parameter values.
-    volumeParam.value = 0.1;
+    volumeParam.value = 0.0;
     _kernel.setParameter(SynthProc::InstrumentParamVolume, volumeParam.value);
     
-    volumeParam.value = 0;
-    _kernel.setParameter(SynthProc::InstrumentParamWaveform, volumeParam.value);
+    waveformParam.value = 0;
+    _kernel.setParameter(SynthProc::InstrumentParamWaveform, waveformParam.value);
+    
+    panParam.value = 0;
+    _kernel.setParameter(SynthProc::InstrumentParamPan, panParam.value);
     
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
                                                                volumeParam,
-                                                               waveformParam
+                                                               waveformParam,
+                                                               panParam
                                                                ]];
 
     // Create the output bus.
@@ -98,6 +108,7 @@
         switch (param.address)
         {
             case SynthProc::InstrumentParamVolume:
+            case SynthProc::InstrumentParamPan:
             {
                 return [NSString stringWithFormat:@"%.3f", value];
             }
