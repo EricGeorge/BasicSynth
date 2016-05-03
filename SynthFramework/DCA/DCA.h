@@ -12,6 +12,7 @@
 
 @property(nonatomic, assign) double volume_dB;
 @property(nonatomic, assign) uint8_t midiVelocity;
+@property(nonatomic, assign) double pan;
 
 - (void) compute:(double)leftInput
       rightInput:(double)rightInput

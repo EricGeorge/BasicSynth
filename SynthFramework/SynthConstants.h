@@ -17,3 +17,4 @@ typedef NS_ENUM(NSInteger, OscillatorWave)
 
 static NSString *volumeParamKey = @"volume";
 static NSString *waveformParamKey = @"waveform";
+static NSString *panParamKey = @"pan";

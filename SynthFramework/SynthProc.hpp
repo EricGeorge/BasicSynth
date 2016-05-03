@@ -18,7 +18,8 @@ class SynthProc : public DSPKernel
 public:
     enum {
         InstrumentParamVolume = 0,
-        InstrumentParamWaveform = 1
+        InstrumentParamWaveform = 1,
+        InstrumentParamPan = 2
     };
     
     SynthProc();

@@ -13,6 +13,8 @@
 @interface DCA()
 {
     double _volume;
+    double _panL;
+    double _panR;
 }
 
 @end;
@@ -37,14 +39,20 @@
     _volume = convertFromDecibels(_volume_dB);
 }
 
+- (void) setPan:(double)pan
+{
+    _pan = pan;
+    calculatePan(_pan, &_panL, &_panR);
+}
+
 - (void) compute:(double)leftInput
       rightInput:(double)rightInput
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * _volume * self.midiVelocity / 127.0;
-    *rightOutput = rightInput * _volume * self.midiVelocity / 127.0;
+    *leftOutput = leftInput * _volume * self.midiVelocity / 127.0 * _panL;
+    *rightOutput = rightInput * _volume * self.midiVelocity / 127.0 * _panR;
 }
 
 @end

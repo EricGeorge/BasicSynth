@@ -48,6 +48,9 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
         case SynthProc::InstrumentParamWaveform:
             osc.wave = (OscillatorWave)value;
             break;
+        case SynthProc::InstrumentParamPan:
+            dca.pan = value;
+            break;
     }
 }
 
@@ -62,6 +65,9 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
             break;
         case InstrumentParamWaveform:
             value = osc.wave;
+            break;
+        case InstrumentParamPan:
+            value = dca.pan;
             break;
     }
     
