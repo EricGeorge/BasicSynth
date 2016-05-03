@@ -7,7 +7,9 @@
 
 #import "SynthProc.hpp"
 
+#import "DCA.h"
 #import "MIDIEvent.h"
+#import "Oscillator.h"
 #import "Utility.hpp"
 
 SynthProc::SynthProc()
@@ -16,19 +18,19 @@ SynthProc::SynthProc()
     frequencyScale = 2. * M_PI / sampleRate;
     
     outBufferListPtr = nullptr;
-    
-    osc = [[Oscillator alloc] init];
-    osc.wave = OSCILLATOR_WAVE_SINE;
     noteOn = NO;
-    velocity = 0;
-    volume = 0.1;
+    
+    // osc
+    osc = [[Oscillator alloc] init];
+    
+    // dca
+    dca = [[DCA alloc] init];
 }
 
 void SynthProc::init(int channelCount, double inSampleRate)
 {
     sampleRate = float(inSampleRate);
-    
-    frequencyScale = 2. * M_PI / sampleRate;
+    frequencyScale = 2.0 * M_PI / sampleRate;
 }
 
 void SynthProc::reset()
@@ -41,7 +43,7 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
     switch (address)
     {
         case SynthProc::InstrumentParamVolume:
-            volume = clamp(value, 0.001f, 1.0f);
+            dca.volume = clamp(value, 0.001f, 1.0f);
             break;
         case SynthProc::InstrumentParamWaveform:
             osc.wave = (OscillatorWave)value;
@@ -56,7 +58,7 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
     switch (address)
     {
         case InstrumentParamVolume:
-            value = volume;
+            value = dca.volume;
             break;
         case InstrumentParamWaveform:
             value = osc.wave;
@@ -87,11 +89,11 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             break;
         case MIDIMessageType_NoteOff:
             noteOn = NO;
-            velocity = 0;
+            dca.midiVelocity = 0;
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
-            velocity = event.data2;
+            dca.midiVelocity = event.data2;
             noteOn = YES;
             break;
     }
@@ -99,14 +101,32 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 
 void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset)
 {
-    float* outL = (float*)outBufferListPtr->mBuffers[0].mData + bufferOffset;
-    float* outR = (float*)outBufferListPtr->mBuffers[1].mData + bufferOffset;
-    
+    float* left = (float*)outBufferListPtr->mBuffers[0].mData + bufferOffset;
+    float* right = (float*)outBufferListPtr->mBuffers[1].mData + bufferOffset;
+
+    double inL = 0.0;
+    double inR = 0.0;
+    double outL = 0.0;
+    double outR = 0.0;
+
     if (noteOn)
     {
         for (AUAudioFrameCount i = 0; i < frameCount; ++i)
         {
-            outL[i] = outR[i] = [osc nextSample] * (double)velocity / 127.0 * volume;
+            inL = 0.0;
+            inR = 0.0;
+            outL = 0.0;
+            outR = 0.0;
+            
+            // oscillator
+            inL = inR = [osc nextSample];
+            
+            // dca
+            [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
+    
+            // update the buffer
+            left[i] = outL;
+            right[i] = outR;
         }
     }
 }

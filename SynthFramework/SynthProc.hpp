@@ -9,7 +9,9 @@
 #define SynthProc_hpp
 
 #import "DSPKernel.hpp"
-#import "Oscillator.h"
+
+@class Oscillator;
+@class DCA;
 
 class SynthProc : public DSPKernel
 {
@@ -39,6 +41,7 @@ private:
     AudioBufferList* outBufferListPtr;
     
     Oscillator *osc;
+    DCA *dca;
     BOOL noteOn;
     uint8_t velocity;
     float volume;
