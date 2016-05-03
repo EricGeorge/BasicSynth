@@ -41,6 +41,18 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LK0-Ol-27s" userLabel="Pan Slider">
+                                <rect key="frame" x="154" y="223" width="292" height="31"/>
+                                <connections>
+                                    <action selector="panChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="zKf-UM-Oi2"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pan" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhU-kj-VTa">
+                                <rect key="frame" x="103" y="226" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8P-A9-NaM">
                                 <rect key="frame" x="223" y="48" width="154" height="43"/>
                                 <constraints>
@@ -58,8 +70,13 @@
                         <color key="backgroundColor" red="1" green="0.58005560579470128" blue="0.27396684659247583" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Z8P-A9-NaM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="28" id="AUr-tT-Rcq"/>
+                            <constraint firstItem="LK0-Ol-27s" firstAttribute="top" secondItem="exE-ff-bHx" secondAttribute="bottom" constant="10" id="FGe-f5-QMV"/>
                             <constraint firstItem="exE-ff-bHx" firstAttribute="centerX" secondItem="Z8P-A9-NaM" secondAttribute="centerX" id="T2r-3E-GSM"/>
                             <constraint firstItem="exE-ff-bHx" firstAttribute="centerX" secondItem="Byu-Uc-NIA" secondAttribute="centerX" id="UaA-el-O80"/>
+                            <constraint firstItem="rhU-kj-VTa" firstAttribute="trailing" secondItem="E9p-Xm-Nk4" secondAttribute="trailing" id="ZSr-at-pn9"/>
+                            <constraint firstItem="LK0-Ol-27s" firstAttribute="trailing" secondItem="exE-ff-bHx" secondAttribute="trailing" id="boU-nY-0wo"/>
+                            <constraint firstItem="LK0-Ol-27s" firstAttribute="leading" secondItem="exE-ff-bHx" secondAttribute="leading" id="gOG-Zs-hZI"/>
+                            <constraint firstItem="rhU-kj-VTa" firstAttribute="top" secondItem="E9p-Xm-Nk4" secondAttribute="bottom" constant="18" id="jMd-rp-fFH"/>
                             <constraint firstItem="exE-ff-bHx" firstAttribute="leading" secondItem="E9p-Xm-Nk4" secondAttribute="trailing" constant="24" id="m0w-cT-j6m"/>
                             <constraint firstItem="Byu-Uc-NIA" firstAttribute="top" secondItem="Z8P-A9-NaM" secondAttribute="bottom" constant="13" id="o7g-Ax-wEv"/>
                             <constraint firstItem="Z8P-A9-NaM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rnd-Pl-0LJ"/>
@@ -68,6 +85,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_panSlider" destination="LK0-Ol-27s" id="hwy-Qn-IWF"/>
                         <outlet property="_volumeSlider" destination="exE-ff-bHx" id="xcZ-kf-6Zl"/>
                         <outlet property="waveformButton" destination="Z8P-A9-NaM" id="9Na-CT-lcW"/>
                         <outlet property="waveformLabel" destination="Byu-Uc-NIA" id="WWl-yD-vYB"/>
