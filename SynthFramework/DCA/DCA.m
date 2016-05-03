@@ -28,6 +28,7 @@
         _volume = 0;
         self.volume_dB = 0.0;
         self.midiVelocity = 0;
+        _panL = _panR = 0.707;
     }
     
     return self;
