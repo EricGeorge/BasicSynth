@@ -10,6 +10,9 @@
 
 static inline double noteToHz(int noteNumber)
 {
+    // midi note frequency  =  2^((m−69)/12) * 440 Hz
+    // https://newt.phys.unsw.edu.au/jw/notes.html
+    
     return 440. * exp2((noteNumber - 69)/12.);
 }
 
@@ -30,6 +33,7 @@ static inline double getEqualPowerLeft(double bipolarValue)
 {
     // p = pi/4 * (bipolar control + 1)
     // left = cos(p)
+    
     return cos((M_PI/4.0)*(bipolarValue + 1.0));
 }
 
@@ -37,6 +41,7 @@ static inline double getEqualPowerRight(double bipolarValue)
 {
     // p = pi/4 * (bipolar control + 1)
     // right = sin(p)
+    
     return sin((M_PI/4.0)*(bipolarValue + 1.0));
 }
 
