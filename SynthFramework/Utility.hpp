@@ -18,16 +18,26 @@ static inline double convertFromDecibels(double decibels)
     return pow((double)10.0, decibels/(double)20.0);
 }
 
-static inline void calculatePan(double pan, double *panL, double *panR)
+static inline double convertToDecibels(double value)
 {
-    *panL = cos((M_PI/4.0)*(pan + 1.0));
-    *panR = sin((M_PI/4.0)*(pan + 1.0));
-    
-    *panL = fmax(*panL, (double)0.0);
-    *panL = fmin(*panL, (double)1.0);
-    *panR = fmax(*panR, (double)0.0);
-    *panR = fmin(*panR, (double)1.0);
-    
+    return 20 * log(value);
+}
+
+/** Equal power crossfade utilities:
+    essentially use the first quadrant of sine and cosine waves (which overlap at 0.707) **/
+
+static inline double getEqualPowerLeft(double bipolarValue)
+{
+    // p = pi/4 * (bipolar control + 1)
+    // left = cos(p)
+    return cos((M_PI/4.0)*(bipolarValue + 1.0));
+}
+
+static inline double getEqualPowerRight(double bipolarValue)
+{
+    // p = pi/4 * (bipolar control + 1)
+    // right = sin(p)
+    return sin((M_PI/4.0)*(bipolarValue + 1.0));
 }
 
 #endif /* Utility_h */

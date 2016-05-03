@@ -8,8 +8,8 @@
 #import "SynthAU.h"
 
 #import "BufferedAudioBus.hpp"
-#import "Utility.h"
 #import "SynthProc.hpp"
+#import "Utility.hpp"
 
 @interface SynthAU ()
 

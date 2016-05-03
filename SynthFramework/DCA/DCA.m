@@ -42,7 +42,10 @@
 - (void) setPan:(double)pan
 {
     _pan = pan;
-    calculatePan(_pan, &_panL, &_panR);
+    
+    // use equal power crossfades to get the left and right channels from the bipolar pan value
+    _panL = getEqualPowerLeft(_pan);
+    _panR = getEqualPowerRight(_pan);
 }
 
 - (void) compute:(double)leftInput
