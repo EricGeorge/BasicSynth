@@ -13,4 +13,9 @@ static inline double noteToHz(int noteNumber)
     return 440. * exp2((noteNumber - 69)/12.);
 }
 
+static inline double convertFromDecibels(double decibels)
+{
+    return pow((double)10.0, decibels/(double)20.0);
+}
+
 #endif /* Utility_h */

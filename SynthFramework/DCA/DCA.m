@@ -8,17 +8,33 @@
 
 #import "DCA.h"
 
+#import "Utility.hpp"
+
+@interface DCA()
+{
+    double _volume;
+}
+
+@end;
+
 @implementation DCA
 
 - (instancetype)init
 {
     if (self = [super init])
     {
-        self.volume = 0.0;
+        _volume = 0;
+        self.volume_dB = 0.0;
         self.midiVelocity = 0;
     }
     
     return self;
+}
+
+- (void) setVolume_dB:(double)volume_dB
+{
+    _volume_dB = volume_dB;
+    _volume = convertFromDecibels(_volume_dB);
 }
 
 - (void) compute:(double)leftInput
@@ -27,8 +43,8 @@
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * self.volume * self.midiVelocity / 127.0;
-    *rightOutput = rightInput * self.volume * self.midiVelocity / 127.0;
+    *leftOutput = leftInput * _volume * self.midiVelocity / 127.0;
+    *rightOutput = rightInput * _volume * self.midiVelocity / 127.0;
 }
 
 @end

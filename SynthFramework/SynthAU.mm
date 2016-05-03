@@ -51,7 +51,7 @@
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable | kAudioUnitParameterFlag_DisplayLogarithmic;
     AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
                                                                       address:SynthProc::InstrumentParamVolume
-                                                                          min:0.001 max:1.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
+                                                                          min:-96.0 max:24.0 unit:kAudioUnitParameterUnit_Decibels unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
                                                                       address:SynthProc::InstrumentParamWaveform
@@ -59,11 +59,11 @@
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
 
     // Initialize the parameter values.
-    volumeParam.value = 0.1;
+    volumeParam.value = 0.0;
     _kernel.setParameter(SynthProc::InstrumentParamVolume, volumeParam.value);
     
-    volumeParam.value = 0;
-    _kernel.setParameter(SynthProc::InstrumentParamWaveform, volumeParam.value);
+    waveformParam.value = 0;
+    _kernel.setParameter(SynthProc::InstrumentParamWaveform, waveformParam.value);
     
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[

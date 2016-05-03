@@ -43,8 +43,6 @@ private:
     Oscillator *osc;
     DCA *dca;
     BOOL noteOn;
-    uint8_t velocity;
-    float volume;
 };
 
 #endif /* SynthProc_hpp */
