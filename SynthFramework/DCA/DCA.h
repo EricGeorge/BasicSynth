@@ -10,7 +10,7 @@
 
 @interface DCA : NSObject
 
-@property(nonatomic, assign) double volume_dB;
+@property(nonatomic, assign) double volumePct;
 @property(nonatomic, assign) uint8_t midiVelocity;
 @property(nonatomic, assign) double pan;
 

@@ -26,20 +26,20 @@
 {
     if (self = [super init])
     {
-        _volume = 0;
-        self.volume_dB = 0.0;
+        self.volumePct = 100.0;
         self.midiVelocity = 0;
-        _midiVelocityGain = 0.0;
-        _panL = _panR = 0.707;
+        self.pan = 0;
     }
     
     return self;
 }
 
-- (void) setVolume_dB:(double)volume_dB
+- (void) setVolumePct:(double)volumePct
 {
-    _volume_dB = volume_dB;
-    _volume = convertFromDecibels(_volume_dB);
+    _volumePct = volumePct;
+    
+    // put an exponential curve on the volume input (and normalize to 0-1)
+    _volume = pow2(_volumePct/100.0);
 }
 
 - (void) setMidiVelocity:(uint8_t)midiVelocity
