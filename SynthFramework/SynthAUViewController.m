@@ -79,9 +79,9 @@ static NSArray *_waveformNames;
         }];
         
         [self updateVolume];
+        [self updatePan];
+        [self updateWaveform];
     }
-
-    [self updateVolume];
 }
 
 - (void)viewDidLoad
