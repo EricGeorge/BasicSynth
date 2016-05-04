@@ -63,8 +63,8 @@
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * _volume * _midiVelocityGain * _panL;
-    *rightOutput = rightInput * _volume * _midiVelocityGain * _panR;
+    *leftOutput = leftInput * _envGain * _volume * _midiVelocityGain * _panL;
+    *rightOutput = rightInput * _envGain * _volume * _midiVelocityGain * _panR;
 }
 
 @end

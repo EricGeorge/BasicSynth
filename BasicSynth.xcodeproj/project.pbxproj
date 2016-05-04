@@ -11,6 +11,8 @@
 		071D1BDF1CD7EFAC00A762CC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA43B1CD7DC7B00F03350 /* MainInterface.storyboard */; };
 		071D1BE21CD83DFF00A762CC /* DCA.h in Headers */ = {isa = PBXBuildFile; fileRef = 071D1BE01CD83DFF00A762CC /* DCA.h */; };
 		071D1BE31CD83DFF00A762CC /* DCA.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BE11CD83DFF00A762CC /* DCA.m */; };
+		071D1BEC1CD9931E00A762CC /* EnvelopeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 071D1BEA1CD9931E00A762CC /* EnvelopeGenerator.h */; };
+		071D1BED1CD9931E00A762CC /* EnvelopeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BEB1CD9931E00A762CC /* EnvelopeGenerator.m */; };
 		07407EE71CD5A1D800BBE231 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EE61CD5A1D800BBE231 /* AudioEngine.m */; };
 		07407EED1CD5A1ED00BBE231 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEA1CD5A1ED00BBE231 /* MIDILogs.m */; };
 		07407EEE1CD5A1ED00BBE231 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEC1CD5A1ED00BBE231 /* MIDIManager.m */; };
@@ -98,6 +100,8 @@
 /* Begin PBXFileReference section */
 		071D1BE01CD83DFF00A762CC /* DCA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCA.h; path = SynthFramework/DCA/DCA.h; sourceTree = SOURCE_ROOT; };
 		071D1BE11CD83DFF00A762CC /* DCA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCA.m; path = SynthFramework/DCA/DCA.m; sourceTree = SOURCE_ROOT; };
+		071D1BEA1CD9931E00A762CC /* EnvelopeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvelopeGenerator.h; path = SynthFramework/EnvelopeGenerator/EnvelopeGenerator.h; sourceTree = SOURCE_ROOT; };
+		071D1BEB1CD9931E00A762CC /* EnvelopeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvelopeGenerator.m; path = SynthFramework/EnvelopeGenerator/EnvelopeGenerator.m; sourceTree = SOURCE_ROOT; };
 		07407EE51CD5A1D800BBE231 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioEngine.h; path = "BasicSynth/Audio Engine/AudioEngine.h"; sourceTree = SOURCE_ROOT; };
 		07407EE61CD5A1D800BBE231 /* AudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioEngine.m; path = "BasicSynth/Audio Engine/AudioEngine.m"; sourceTree = SOURCE_ROOT; };
 		07407EE81CD5A1ED00BBE231 /* MIDIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIConstants.h; path = BasicSynth/MIDI/MIDIConstants.h; sourceTree = SOURCE_ROOT; };
@@ -177,6 +181,15 @@
 			name = DCA;
 			sourceTree = "<group>";
 		};
+		071D1BEE1CD9932200A762CC /* EnvelopeGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				071D1BEA1CD9931E00A762CC /* EnvelopeGenerator.h */,
+				071D1BEB1CD9931E00A762CC /* EnvelopeGenerator.m */,
+			);
+			name = EnvelopeGenerator;
+			sourceTree = "<group>";
+		};
 		075D4F001CCB232D001D95E4 /* SynthExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				071D1BE41CD83E0700A762CC /* DCA */,
+				071D1BEE1CD9932200A762CC /* EnvelopeGenerator */,
 				07DBB1CA1CCB097400D68648 /* DSPKernel */,
 				075F69C11CCD904400C7E651 /* MIDIEvent */,
 				07DBB1521CC83B0E00D68648 /* Oscillator */,
@@ -334,6 +348,7 @@
 				07FFA44C1CD7DD3200F03350 /* MIDIEvent.h in Headers */,
 				07FFA44D1CD7DD3200F03350 /* Oscillator.h in Headers */,
 				07FFA4511CD7DD3200F03350 /* SynthProc.hpp in Headers */,
+				071D1BEC1CD9931E00A762CC /* EnvelopeGenerator.h in Headers */,
 				07FFA4521CD7DD3200F03350 /* Utility.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +502,7 @@
 				07FFA4561CD7DFB800F03350 /* SynthAUViewController.m in Sources */,
 				07FFA4441CD7DD1B00F03350 /* DSPKernel.mm in Sources */,
 				07FFA4451CD7DD1B00F03350 /* MIDIEvent.m in Sources */,
+				071D1BED1CD9931E00A762CC /* EnvelopeGenerator.m in Sources */,
 				071D1BE31CD83DFF00A762CC /* DCA.m in Sources */,
 				07FFA4461CD7DD1B00F03350 /* Oscillator.m in Sources */,
 				07FFA4471CD7DD1B00F03350 /* SynthAU.mm in Sources */,

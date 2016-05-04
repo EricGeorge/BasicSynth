@@ -8,6 +8,7 @@
 #import "SynthProc.hpp"
 
 #import "DCA.h"
+#import "EnvelopeGenerator.h"
 #import "MIDIEvent.h"
 #import "Oscillator.h"
 #import "Utility.hpp"
@@ -25,6 +26,9 @@ SynthProc::SynthProc()
     
     // dca
     dca = [[DCA alloc] init];
+    
+    // env
+    env = [[EnvelopeGenerator alloc] init];
 }
 
 void SynthProc::init(int channelCount, double inSampleRate)
@@ -126,6 +130,9 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
             
             // oscillator
             inL = inR = [osc nextSample];
+            
+            // env
+            [dca setEnvGain: [env process]];
             
             // dca
             [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];

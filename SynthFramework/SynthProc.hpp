@@ -12,6 +12,7 @@
 
 @class Oscillator;
 @class DCA;
+@class EnvelopeGenerator;
 
 class SynthProc : public DSPKernel
 {
@@ -43,6 +44,7 @@ private:
     
     Oscillator *osc;
     DCA *dca;
+    EnvelopeGenerator *env;
     BOOL noteOn;
 };
 
