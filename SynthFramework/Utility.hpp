@@ -8,6 +8,11 @@
 #ifndef Utility_h
 #define Utility_h
 
+static inline double pow2(double x)
+{
+    return x*x;
+}
+
 static inline double noteToHz(int noteNumber)
 {
     // midi note frequency  =  2^((m−69)/12) * 440 Hz
@@ -43,6 +48,13 @@ static inline double getEqualPowerRight(double bipolarValue)
     // right = sin(p)
     
     return sin((M_PI/4.0)*(bipolarValue + 1.0));
+}
+
+static inline double gainFromMidiVelocity(uint8_t velocity)
+{
+    // approximate an exponential convex curve: x^2/127^2
+    
+    return pow2(velocity/127.0);
 }
 
 #endif /* Utility_h */

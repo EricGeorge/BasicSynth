@@ -15,6 +15,7 @@
     double _volume;
     double _panL;
     double _panR;
+    double _midiVelocityGain;
 }
 
 @end;
@@ -28,6 +29,7 @@
         _volume = 0;
         self.volume_dB = 0.0;
         self.midiVelocity = 0;
+        _midiVelocityGain = 0.0;
         _panL = _panR = 0.707;
     }
     
@@ -38,6 +40,12 @@
 {
     _volume_dB = volume_dB;
     _volume = convertFromDecibels(_volume_dB);
+}
+
+- (void) setMidiVelocity:(uint8_t)midiVelocity
+{
+    _midiVelocity = midiVelocity;
+    _midiVelocity = _midiVelocityGain = gainFromMidiVelocity(midiVelocity);
 }
 
 - (void) setPan:(double)pan
@@ -55,8 +63,8 @@
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * _volume * self.midiVelocity / 127.0 * _panL;
-    *rightOutput = rightInput * _volume * self.midiVelocity / 127.0 * _panR;
+    *leftOutput = leftInput * _volume * _midiVelocityGain * _panL;
+    *rightOutput = rightInput * _volume * _midiVelocityGain * _panR;
 }
 
 @end
