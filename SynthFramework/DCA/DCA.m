@@ -15,6 +15,7 @@
     double _volume;
     double _panL;
     double _panR;
+    double _midiVelocityGain;
 }
 
 @end;
@@ -25,24 +26,35 @@
 {
     if (self = [super init])
     {
-        _volume = 0;
-        self.volume_dB = 0.0;
+        self.volumePct = 100.0;
         self.midiVelocity = 0;
+        self.pan = 0;
     }
     
     return self;
 }
 
-- (void) setVolume_dB:(double)volume_dB
+- (void) setVolumePct:(double)volumePct
 {
-    _volume_dB = volume_dB;
-    _volume = convertFromDecibels(_volume_dB);
+    _volumePct = volumePct;
+    
+    // put an exponential curve on the volume input (and normalize to 0-1)
+    _volume = pow2(_volumePct/100.0);
+}
+
+- (void) setMidiVelocity:(uint8_t)midiVelocity
+{
+    _midiVelocity = midiVelocity;
+    _midiVelocity = _midiVelocityGain = gainFromMidiVelocity(midiVelocity);
 }
 
 - (void) setPan:(double)pan
 {
     _pan = pan;
-    calculatePan(_pan, &_panL, &_panR);
+    
+    // use equal power crossfades to get the left and right channels from the bipolar pan value
+    _panL = getEqualPowerLeft(_pan);
+    _panR = getEqualPowerRight(_pan);
 }
 
 - (void) compute:(double)leftInput
@@ -51,8 +63,8 @@
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * _volume * self.midiVelocity / 127.0 * _panL;
-    *rightOutput = rightInput * _volume * self.midiVelocity / 127.0 * _panR;
+    *leftOutput = leftInput * _volume * _midiVelocityGain * _panL;
+    *rightOutput = rightInput * _volume * _midiVelocityGain * _panR;
 }
 
 @end

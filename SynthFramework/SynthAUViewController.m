@@ -79,9 +79,9 @@ static NSArray *_waveformNames;
         }];
         
         [self updateVolume];
+        [self updatePan];
+        [self updateWaveform];
     }
-
-    [self updateVolume];
 }
 
 - (void)viewDidLoad
@@ -105,13 +105,13 @@ static NSArray *_waveformNames;
 - (void) updateVolume
 {
     _volumeSlider.value = _volumeParameter.value;
-    _volumeValue.text = [NSString stringWithFormat:@"%.2f", _volumeSlider.value];
+    _volumeValue.text = [NSString stringWithFormat:@"%d%%", (uint8_t)_volumeSlider.value];
 }
 
 - (IBAction)volumeChanged:(UISlider *)sender
 {
     _volumeParameter.value =  sender.value;
-    _volumeValue.text = [NSString stringWithFormat:@"%.2f", _volumeSlider.value];
+    _volumeValue.text = [NSString stringWithFormat:@"%d%%", (uint8_t)_volumeSlider.value];
 }
 
 - (void) updatePan

@@ -43,7 +43,7 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
     switch (address)
     {
         case SynthProc::InstrumentParamVolume:
-            dca.volume_dB = value;
+            dca.volumePct = value;
             break;
         case SynthProc::InstrumentParamWaveform:
             osc.wave = (OscillatorWave)value;
@@ -61,7 +61,7 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
     switch (address)
     {
         case InstrumentParamVolume:
-            value = dca.volume_dB;
+            value = dca.volumePct;
             break;
         case InstrumentParamWaveform:
             value = osc.wave;
