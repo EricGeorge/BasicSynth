@@ -19,7 +19,6 @@ SynthProc::SynthProc()
     frequencyScale = 2. * M_PI / sampleRate;
     
     outBufferListPtr = nullptr;
-    noteOn = NO;
     
     // osc
     osc = [[Oscillator alloc] init];
@@ -99,14 +98,11 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 //            NSLog(@"Instrument received unhandled MIDI event");
             break;
         case MIDIMessageType_NoteOff:
-            noteOn = NO;
-            dca.midiVelocity = 0;
             [env enterStage:ENVELOPE_STAGE_RELEASE];
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
             dca.midiVelocity = event.data2;
-            noteOn = YES;
             [env enterStage:ENVELOPE_STAGE_ATTACK];
             break;
     }
@@ -122,27 +118,24 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
     double outL = 0.0;
     double outR = 0.0;
 
-    if (noteOn)
+    for (AUAudioFrameCount i = 0; i < frameCount; ++i)
     {
-        for (AUAudioFrameCount i = 0; i < frameCount; ++i)
-        {
-            inL = 0.0;
-            inR = 0.0;
-            outL = 0.0;
-            outR = 0.0;
-            
-            // oscillator
-            inL = inR = [osc nextSample];
-            
-            // env
-            [dca setEnvGain: [env process]];
-            
-            // dca
-            [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
-    
-            // update the buffer
-            left[i] = outL;
-            right[i] = outR;
-        }
+        inL = 0.0;
+        inR = 0.0;
+        outL = 0.0;
+        outR = 0.0;
+        
+        // oscillator
+        inL = inR = [osc nextSample];
+        
+        // env
+        [dca setEnvGain: [env process]];
+        
+        // dca
+        [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
+
+        // update the buffer
+        left[i] = outL;
+        right[i] = outR;
     }
 }

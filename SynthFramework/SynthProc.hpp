@@ -45,7 +45,6 @@ private:
     Oscillator *osc;
     DCA *dca;
     EnvelopeGenerator *env;
-    BOOL noteOn;
 };
 
 #endif /* SynthProc_hpp */

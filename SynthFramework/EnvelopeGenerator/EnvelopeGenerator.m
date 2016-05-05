@@ -32,10 +32,10 @@
         
         self.stageValue = [[NSMutableDictionary alloc] init];
         self.stageValue[@(ENVELOPE_STAGE_OFF)] = [NSNumber numberWithFloat:0.0];
-        self.stageValue[@(ENVELOPE_STAGE_ATTACK)] = [NSNumber numberWithFloat:0.01];
+        self.stageValue[@(ENVELOPE_STAGE_ATTACK)] = [NSNumber numberWithFloat:0.1];
         self.stageValue[@(ENVELOPE_STAGE_DECAY)] = [NSNumber numberWithFloat:0.5];
         self.stageValue[@(ENVELOPE_STAGE_SUSTAIN)] = [NSNumber numberWithFloat:0.1];
-        self.stageValue[@(ENVELOPE_STAGE_RELEASE)] = [NSNumber numberWithFloat:1.0];
+        self.stageValue[@(ENVELOPE_STAGE_RELEASE)] = [NSNumber numberWithFloat:2.0];
         
         _minimumLevel = 0.0001;
         _currentLevel = self.minimumLevel,
@@ -62,7 +62,6 @@
         _currentSampleIndex++;
     }
     
-    NSLog(@"EG level is %f", _currentLevel);
     return _currentLevel;
 }
 
