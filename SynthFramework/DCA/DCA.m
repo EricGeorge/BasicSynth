@@ -62,6 +62,7 @@
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput
 {
+    NSLog(@"DCA:envGain is %f", _envGain);
     // form left and right outputs
     *leftOutput = leftInput * _envGain * _volume * _midiVelocityGain * _panL;
     *rightOutput = rightInput * _envGain * _volume * _midiVelocityGain * _panR;

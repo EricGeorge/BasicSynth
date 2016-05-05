@@ -29,6 +29,7 @@ SynthProc::SynthProc()
     
     // env
     env = [[EnvelopeGenerator alloc] init];
+    env.sampleRate = sampleRate;
 }
 
 void SynthProc::init(int channelCount, double inSampleRate)
@@ -100,11 +101,13 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case MIDIMessageType_NoteOff:
             noteOn = NO;
             dca.midiVelocity = 0;
+            [env enterStage:ENVELOPE_STAGE_RELEASE];
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
             dca.midiVelocity = event.data2;
             noteOn = YES;
+            [env enterStage:ENVELOPE_STAGE_ATTACK];
             break;
     }
 }
