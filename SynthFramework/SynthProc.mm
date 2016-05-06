@@ -98,12 +98,12 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 //            NSLog(@"Instrument received unhandled MIDI event");
             break;
         case MIDIMessageType_NoteOff:
-            [env enterStage:ENVELOPE_STAGE_RELEASE];
+            [env stop];
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
             dca.midiVelocity = event.data2;
-            [env enterStage:ENVELOPE_STAGE_ATTACK];
+            [env start];
             break;
     }
 }
@@ -129,7 +129,7 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
         inL = inR = [osc nextSample];
         
         // env
-        [dca setEnvGain: [env process]];
+        [dca setEnvGain: [env nextSample]];
         
         // dca
         [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];

@@ -8,17 +8,33 @@
 
 #import "EnvelopeGenerator.h"
 
+typedef NS_ENUM(NSUInteger, EnvelopeStage)
+{
+    ENVELOPE_STAGE_IDLE = 0,
+    ENVELOPE_STAGE_ATTACK,
+    ENVELOPE_STAGE_DECAY,
+    ENVELOPE_STAGE_SUSTAIN,
+    ENVELOPE_STAGE_RELEASE,
+};
+
 @interface EnvelopeGenerator()
 {
-    double _currentLevel;
-    double _multiplier;
-    uint64_t _currentSampleIndex;
-    uint64_t _nextStageSampleIndex;
+    double _attackCoeff;
+    double _attackOffset;
+    double _attackTCO;
+    
+    double _decayCoeff;
+    double _decayOffset;
+    double _decayTCO;
+    
+    double _releaseCoeff;
+    double _releaseOffset;
+    double _releaseTCO;
+    
+    EnvelopeStage _currentStage;
+    
+    double _envelopeOutput;
 }
-
-@property (nonatomic, assign) EnvelopeStage currentStage;
-@property (nonatomic, strong) NSMutableDictionary *stageValue;
-@property (nonatomic, readonly) double minimumLevel;
 
 @end
 
@@ -28,93 +44,141 @@
 {
     if (self = [super init])
     {
-        self.currentStage = ENVELOPE_STAGE_OFF;
+        // analog time constants
+        _attackTCO = exp(-0.5);  // fast attack
+        _decayTCO = exp(-5.0);
+        _releaseTCO = _decayTCO;
         
-        self.stageValue = [[NSMutableDictionary alloc] init];
-        self.stageValue[@(ENVELOPE_STAGE_OFF)] = [NSNumber numberWithFloat:0.0];
-        self.stageValue[@(ENVELOPE_STAGE_ATTACK)] = [NSNumber numberWithFloat:0.1];
-        self.stageValue[@(ENVELOPE_STAGE_DECAY)] = [NSNumber numberWithFloat:0.5];
-        self.stageValue[@(ENVELOPE_STAGE_SUSTAIN)] = [NSNumber numberWithFloat:0.1];
-        self.stageValue[@(ENVELOPE_STAGE_RELEASE)] = [NSNumber numberWithFloat:2.0];
-        
-        _minimumLevel = 0.0001;
-        _currentLevel = self.minimumLevel,
-        _sampleRate = 44100.0;
-        _multiplier = 1.0;
-        _currentSampleIndex = 0;
-        _nextStageSampleIndex = 0;
+        // digital time constants
+//        _attackTCO = pow(10.0, -96.0/20.0);
+//        _decayTCO = _attackTCO;
+//        _releaseTCO = _decayTCO;
+    
+        self.attackTime = 0.1;
+        self.decayTime = 0.5;
+        self.releaseTime = 1.0;
+        self.sustainLevel = 0.7;
     }
     
     return self;
 }
 
-- (double) process
+- (void) setSampleRate:(double)sampleRate
 {
-    if (self.currentStage != ENVELOPE_STAGE_OFF &&
-        self.currentStage != ENVELOPE_STAGE_SUSTAIN)
-    {
-        if (_currentSampleIndex == _nextStageSampleIndex)
-        {
-            EnvelopeStage newStage = (EnvelopeStage)(++self.currentStage % kNumEnvelopeStages);
-            [self enterStage:newStage];
-        }
-        _currentLevel *= _multiplier;
-        _currentSampleIndex++;
-    }
+    _sampleRate = sampleRate;
     
-    return _currentLevel;
+    [self calculateAttackTime];
+    [self calculateDecayTime];
+    [self calculateReleaseTime];
 }
 
-- (void) calculateMultiplier:(double) startLevel
-                withEndLevel:(double) endLevel
-                  andLength:(uint64_t) lengthInSamples
+- (void) setAttackTime:(double)attackTime
 {
-    _multiplier = 1.0 + (log(endLevel) - log(startLevel)) / (lengthInSamples);
+    _attackTime = attackTime;
+    
+    [self calculateAttackTime];
 }
 
-- (void) enterStage:(EnvelopeStage) newStage
+- (void) setDecayTime:(double)decayTime
 {
-    self.currentStage = newStage;
-    _currentSampleIndex = 0;
-    if (self.currentStage == ENVELOPE_STAGE_OFF ||
-        self.currentStage == ENVELOPE_STAGE_SUSTAIN)
+    _decayTime = decayTime;
+    
+    [self calculateDecayTime];
+}
+
+- (void) setReleaseTime:(double)releaseTime
+{
+    _releaseTime = releaseTime;
+    
+    [self calculateReleaseTime];
+}
+
+- (void) setSustainLevel:(double)sustainLevel
+{
+    _sustainLevel = sustainLevel;
+}
+
+- (void) calculateAttackTime
+{
+    double stageSampleCount = _attackTime * _sampleRate;
+    
+    _attackCoeff = exp(-log((1.0 + _attackTCO)/_attackTCO)/stageSampleCount);
+    _attackOffset = (1.0 + _attackTCO) * (1.0 - _attackCoeff);
+}
+
+- (void) calculateDecayTime
+{
+    double stageSampleCount = _decayTime * _sampleRate;
+    
+    _decayCoeff = exp(-log((1.0 + _decayTCO)/_decayTCO)/stageSampleCount);
+    _decayOffset = (_sustainLevel - _decayTCO) * (1.0 - _decayCoeff);
+}
+
+- (void) calculateReleaseTime
+{
+    double stageSampleCount = _releaseTime * _sampleRate;
+    
+    _releaseCoeff = exp(-log((1.0 + _releaseTCO)/_releaseTCO)/stageSampleCount);
+    _releaseOffset = -_releaseTCO * (1.0 - _releaseCoeff);
+}
+
+- (void) start
+{
+    _currentStage = ENVELOPE_STAGE_ATTACK;
+}
+
+- (void) stop
+{
+    _currentStage = ENVELOPE_STAGE_RELEASE;
+}
+
+- (double) nextSample
+{
+    switch(_currentStage)
     {
-        _nextStageSampleIndex = 0;
-    }
-    else
-    {
-        _nextStageSampleIndex = [[self.stageValue objectForKey:@(self.currentStage)] floatValue] * self.sampleRate;
-    }
-    switch (newStage)
-    {
-        case ENVELOPE_STAGE_OFF:
-            _currentLevel = 0.0;
-            _multiplier = 1.0;
+        case ENVELOPE_STAGE_IDLE:
+            _envelopeOutput = 0.0;
             break;
+            
         case ENVELOPE_STAGE_ATTACK:
-            _currentLevel = _minimumLevel;
-            [self calculateMultiplier:_currentLevel
-                         withEndLevel:1.0
-                           andLength:_nextStageSampleIndex];
+            _envelopeOutput = _attackOffset + _envelopeOutput * _attackCoeff;
+            
+            if(_envelopeOutput >= 1.0 || _attackTime <= 0.0)
+            {
+                _envelopeOutput = 1.0;
+                _currentStage = ENVELOPE_STAGE_DECAY;
+            }
+            
             break;
+            
         case ENVELOPE_STAGE_DECAY:
-            _currentLevel = 1.0;
-            [self calculateMultiplier:_currentLevel
-                         withEndLevel:fmax([[self.stageValue objectForKey:@(ENVELOPE_STAGE_SUSTAIN)] floatValue], self.minimumLevel)
-                            andLength:_nextStageSampleIndex];
+            _envelopeOutput = _decayOffset + _envelopeOutput * _decayCoeff;
+            
+            if(_envelopeOutput <= _sustainLevel || _decayTime <= 0.0)
+            {
+                _envelopeOutput = _sustainLevel;
+                _currentStage = ENVELOPE_STAGE_SUSTAIN;
+            }
+            
             break;
+
         case ENVELOPE_STAGE_SUSTAIN:
-            _currentLevel = [[self.stageValue objectForKey:@(ENVELOPE_STAGE_SUSTAIN)] floatValue];
-            _multiplier = 1.0;
+            _envelopeOutput = _sustainLevel;
+            
             break;
+
         case ENVELOPE_STAGE_RELEASE:
-            [self calculateMultiplier:_currentLevel
-                         withEndLevel:_minimumLevel
-                            andLength:_nextStageSampleIndex];
+            _envelopeOutput = _releaseOffset + _envelopeOutput * _releaseCoeff;
+            
+            if(_envelopeOutput <= 0.0 || _releaseTime <= 0.0)
+            {
+                _envelopeOutput = 0.0;
+                _currentStage = ENVELOPE_STAGE_IDLE;
+            }
             break;
-        default:
-            break;
-    }
+        }
+    
+    return _envelopeOutput;
 }
 
-@end
+    @end
