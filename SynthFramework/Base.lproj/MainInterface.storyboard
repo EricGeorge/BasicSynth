@@ -137,8 +137,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="O3i-r6-esy" userLabel="Attack Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="O3i-r6-esy" userLabel="Attack Slider">
                                 <rect key="frame" x="86" y="16" width="176" height="31"/>
+                                <connections>
+                                    <action selector="attackSliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="Yop-tj-rff"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e87-1T-c9S" userLabel="Attack Value">
                                 <rect key="frame" x="283" y="20" width="57" height="21"/>
@@ -147,7 +150,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mSec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjf-KD-Fu5" userLabel="Attack mSec">
-                                <rect key="frame" x="340" y="20" width="44" height="21"/>
+                                <rect key="frame" x="335" y="20" width="44" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -158,8 +161,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-be-N9P" userLabel="Decay Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-be-N9P" userLabel="Decay Slider">
                                 <rect key="frame" x="86" y="49" width="176" height="31"/>
+                                <connections>
+                                    <action selector="decaySliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="KBY-Lj-l6L"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDE-7h-lsO" userLabel="Decay Value">
                                 <rect key="frame" x="283" y="52" width="57" height="21"/>
@@ -168,7 +174,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mSec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKU-Wx-hds" userLabel="Decay mSec">
-                                <rect key="frame" x="340" y="52" width="44" height="21"/>
+                                <rect key="frame" x="335" y="52" width="44" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -179,8 +185,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rgk-X4-ULV" userLabel="Sustain Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="75" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Rgk-X4-ULV" userLabel="Sustain Slider">
                                 <rect key="frame" x="86" y="81" width="176" height="31"/>
+                                <connections>
+                                    <action selector="sustainSliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="p5p-4q-hzC"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqK-u9-7ai" userLabel="Sustain Value">
                                 <rect key="frame" x="283" y="83" width="57" height="21"/>
@@ -194,8 +203,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7tJ-9b-21q" userLabel="Release Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="7tJ-9b-21q" userLabel="Release Slider">
                                 <rect key="frame" x="86" y="112" width="176" height="31"/>
+                                <connections>
+                                    <action selector="releaseSliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="Gp7-4t-6gc"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44X-fK-6IC" userLabel="Release Value">
                                 <rect key="frame" x="283" y="114" width="57" height="21"/>
@@ -204,7 +216,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mSec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJe-HF-U4J" userLabel="Release mSec">
-                                <rect key="frame" x="340" y="114" width="44" height="21"/>
+                                <rect key="frame" x="335" y="114" width="44" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -212,10 +224,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="attackSlider" destination="O3i-r6-esy" id="cWN-Jc-MHZ"/>
+                        <outlet property="attackValue" destination="e87-1T-c9S" id="PyK-4Y-a8N"/>
+                        <outlet property="decaySlider" destination="gtP-be-N9P" id="qC2-HN-b4A"/>
+                        <outlet property="decayValue" destination="LDE-7h-lsO" id="BxB-LW-ZMZ"/>
+                        <outlet property="releaseSlider" destination="7tJ-9b-21q" id="gry-3d-zOg"/>
+                        <outlet property="releaseValue" destination="44X-fK-6IC" id="FV5-32-7Ui"/>
+                        <outlet property="sustainSlider" destination="Rgk-X4-ULV" id="Lnh-Xm-BIq"/>
+                        <outlet property="sustainValue" destination="qqK-u9-7ai" id="S6b-Tu-BE9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VJa-eF-BAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106.5" y="286.5"/>
+            <point key="canvasLocation" x="1025.5" y="272.5"/>
         </scene>
     </scenes>
 </document>
