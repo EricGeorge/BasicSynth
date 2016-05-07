@@ -51,7 +51,7 @@
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable;
     AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
                                                                       address:SynthProc::InstrumentParamVolume
-                                                                          min:0 max:100 unit:kAudioUnitParameterUnit_Decibels unitName:nil
+                                                                          min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
@@ -60,10 +60,30 @@
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *panParam = [AUParameterTree createParameterWithIdentifier:panParamKey name:@"Pan"
-                                                                      address:SynthProc::InstrumentParamPan
-                                                                          min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Pan unitName:nil
+                                                                   address:SynthProc::InstrumentParamPan
+                                                                       min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Pan unitName:nil
+                                                                     flags: flags valueStrings:nil dependentParameters:nil];
+    
+    AUParameter *attackParam = [AUParameterTree createParameterWithIdentifier:attackParamKey name:@"Attack"
+                                                                      address:SynthProc::InstrumentParamAttack
+                                                                          min:0 max:5000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
-
+    
+    AUParameter *decayParam = [AUParameterTree createParameterWithIdentifier:decayParamKey name:@"Decay"
+                                                                      address:SynthProc::InstrumentParamDecay
+                                                                          min:0 max:5000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
+    
+    AUParameter *sustainParam = [AUParameterTree createParameterWithIdentifier:sustainParamKey name:@"Sustain"
+                                                                      address:SynthProc::InstrumentParamSustain
+                                                                          min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
+    
+    AUParameter *releaseParam = [AUParameterTree createParameterWithIdentifier:releaseParamKey name:@"Release"
+                                                                      address:SynthProc::InstrumentParamRelease
+                                                                          min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
+    
     // Initialize the parameter values.
     volumeParam.value = 100.0;
     _kernel.setParameter(SynthProc::InstrumentParamVolume, volumeParam.value);
@@ -74,11 +94,27 @@
     panParam.value = 0;
     _kernel.setParameter(SynthProc::InstrumentParamPan, panParam.value);
     
+    attackParam.value = 100;
+    _kernel.setParameter(SynthProc::InstrumentParamAttack, attackParam.value);
+    
+    decayParam.value = 100;
+    _kernel.setParameter(SynthProc::InstrumentParamDecay, decayParam.value);
+    
+    sustainParam.value = 75;
+    _kernel.setParameter(SynthProc::InstrumentParamSustain, sustainParam.value);
+    
+    releaseParam.value = 1000;
+    _kernel.setParameter(SynthProc::InstrumentParamRelease, releaseParam.value);
+    
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
                                                                volumeParam,
                                                                waveformParam,
-                                                               panParam
+                                                               panParam,
+                                                               attackParam,
+                                                               decayParam,
+                                                               sustainParam,
+                                                               releaseParam
                                                                ]];
 
     // Create the output bus.
