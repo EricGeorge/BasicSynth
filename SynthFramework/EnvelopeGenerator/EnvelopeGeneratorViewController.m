@@ -7,6 +7,8 @@
 
 #import "EnvelopeGeneratorViewController.h"
 
+#import "SynthAUViewController.h"
+
 @interface EnvelopeGeneratorViewController ()
 @property (strong, nonatomic) IBOutlet UISlider *attackSlider;
 @property (strong, nonatomic) IBOutlet UILabel *attackValue;
@@ -44,6 +46,7 @@
 - (IBAction)attackSliderChanged:(UISlider *)sender
 {
     _attackValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_attackSlider.value];
+    [self.parentVC attackChanged:_attackSlider.value];
 }
 
 - (void) updateAttack:(double)value
@@ -55,6 +58,7 @@
 - (IBAction)decaySliderChanged:(UISlider *)sender
 {
     _decayValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_decaySlider.value];
+    [self.parentVC decayChanged:_decaySlider.value];
 }
 
 - (void) updateDecay:(double)value
@@ -66,6 +70,7 @@
 - (IBAction)sustainSliderChanged:(UISlider *)sender
 {
     _sustainValue.text = [NSString stringWithFormat:@"%d%%", (uint16_t)_sustainSlider.value];
+    [self.parentVC sustainChanged:_sustainSlider.value];
 }
 
 - (void) updateSustain:(double)value
@@ -77,6 +82,7 @@
 - (IBAction)releaseSliderChanged:(UISlider *)sender
 {
     _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_releaseSlider.value];
+    [self.parentVC releaseChanged:_releaseSlider.value];
 }
 
 - (void) updateRelease:(double)value

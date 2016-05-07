@@ -37,6 +37,8 @@ static NSArray *_waveformNames;
     AUParameterObserverToken *_parameterObserverToken;
 }
 
+@property (nonatomic, weak) EnvelopeGeneratorViewController *envVC;
+
 @end
 
 @implementation SynthAUViewController
@@ -134,6 +136,16 @@ static NSArray *_waveformNames;
     _waveformLabel.text = _waveformNames[waveform];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"EnvVC"])
+    {
+        self.envVC = (EnvelopeGeneratorViewController *)segue.destinationViewController;
+        self.envVC.parentVC = self;
+    }
+}
+
+
 - (void) updateWaveform
 {
     OscillatorWave waveform = self.audioUnit.selectedWaveform;
@@ -182,22 +194,42 @@ static NSArray *_waveformNames;
 
 - (void) updateAttack
 {
-    
+    [self.envVC updateAttack:_attackParameter.value];
+}
+
+- (void) attackChanged:(double)value
+{
+    _attackParameter.value = value;
 }
 
 - (void) updateDecay
 {
-    
+    [self.envVC updateDecay:_decayParameter.value];
+}
+
+- (void) decayChanged:(double)value
+{
+    _decayParameter.value = value;
 }
 
 - (void) updateSustain
 {
-    
+    [self.envVC updateSustain:_sustainParameter.value];
+}
+
+- (void) sustainChanged:(double)value
+{
+    _sustainParameter.value = value;
 }
 
 - (void) updateRelease
 {
-    
+    [self.envVC updateRelease:_releaseParameter.value];
+}
+
+- (void) releaseChanged:(double)value
+{
+    _releaseParameter.value = value;
 }
 
 @end

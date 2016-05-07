@@ -61,16 +61,16 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
             
         // envelope generator
         case SynthProc::InstrumentParamAttack:
-            env.attackTime = value;
+            env.attackTime = value/1000.0;
             break;
         case SynthProc::InstrumentParamDecay:
-            env.decayTime = value;
+            env.decayTime = value/1000.0;
             break;
         case SynthProc::InstrumentParamSustain:
-            env.sustainLevel= value;
+            env.sustainLevel= value/100.0;
             break;
         case SynthProc::InstrumentParamRelease:
-            env.releaseTime = value;
+            env.releaseTime = value/1000.0;
             break;
     }
 }
@@ -96,16 +96,16 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
             
         // envelope generator
         case InstrumentParamAttack:
-            value = env.attackTime;
+            value = env.attackTime * 1000;
             break;
         case InstrumentParamDecay:
-            value = env.decayTime;
+            value = env.decayTime * 1000;
             break;
         case InstrumentParamSustain:
-            value = env.sustainLevel;
+            value = env.sustainLevel * 100;
             break;
         case InstrumentParamRelease:
-            value = env.releaseTime;
+            value = env.releaseTime * 1000;
             break;
     }
     

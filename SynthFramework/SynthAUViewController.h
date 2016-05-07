@@ -13,4 +13,9 @@
 
 @property (nonatomic)SynthAU *audioUnit;
 
+- (void) attackChanged:(double)value;
+- (void) decayChanged:(double)value;
+- (void) sustainChanged:(double)value;
+- (void) releaseChanged:(double)value;
+
 @end
