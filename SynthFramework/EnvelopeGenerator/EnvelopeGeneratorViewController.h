@@ -9,4 +9,9 @@
 
 @interface EnvelopeGeneratorViewController : UIViewController
 
+- (void) updateAttack:(double)value;
+- (void) updateDecay:(double)value;
+- (void) updateSustain:(double)value;
+- (void) updateRelease:(double)value;
+
 @end

@@ -46,14 +46,31 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
 {
     switch (address)
     {
-        case SynthProc::InstrumentParamVolume:
-            dca.volumePct = value;
-            break;
+        // oscillator
         case SynthProc::InstrumentParamWaveform:
             osc.wave = (OscillatorWave)value;
             break;
+            
+        // dca
+        case SynthProc::InstrumentParamVolume:
+            dca.volumePct = value;
+            break;
         case SynthProc::InstrumentParamPan:
             dca.pan = value;
+            break;
+            
+        // envelope generator
+        case SynthProc::InstrumentParamAttack:
+            env.attackTime = value;
+            break;
+        case SynthProc::InstrumentParamDecay:
+            env.decayTime = value;
+            break;
+        case SynthProc::InstrumentParamSustain:
+            env.sustainLevel= value;
+            break;
+        case SynthProc::InstrumentParamRelease:
+            env.releaseTime = value;
             break;
     }
 }
@@ -64,14 +81,31 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
     
     switch (address)
     {
-        case InstrumentParamVolume:
-            value = dca.volumePct;
-            break;
+        // oscillator
         case InstrumentParamWaveform:
             value = osc.wave;
             break;
+            
+        // dca
+        case InstrumentParamVolume:
+            value = dca.volumePct;
+            break;
         case InstrumentParamPan:
             value = dca.pan;
+            break;
+            
+        // envelope generator
+        case InstrumentParamAttack:
+            value = env.attackTime;
+            break;
+        case InstrumentParamDecay:
+            value = env.decayTime;
+            break;
+        case InstrumentParamSustain:
+            value = env.sustainLevel;
+            break;
+        case InstrumentParamRelease:
+            value = env.releaseTime;
             break;
     }
     

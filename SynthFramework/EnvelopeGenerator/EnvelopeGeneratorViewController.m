@@ -46,8 +46,20 @@
     _attackValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_attackSlider.value];
 }
 
+- (void) updateAttack:(double)value
+{
+    _attackSlider.value = value;
+    _attackValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_attackSlider.value];
+}
+
 - (IBAction)decaySliderChanged:(UISlider *)sender
 {
+    _decayValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_decaySlider.value];
+}
+
+- (void) updateDecay:(double)value
+{
+    _decaySlider.value = value;
     _decayValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_decaySlider.value];
 }
 
@@ -56,8 +68,20 @@
     _sustainValue.text = [NSString stringWithFormat:@"%d%%", (uint16_t)_sustainSlider.value];
 }
 
+- (void) updateSustain:(double)value
+{
+    _sustainSlider.value = value;
+    _sustainValue.text = [NSString stringWithFormat:@"%d%%", (uint16_t)_sustainSlider.value];
+}
+
 - (IBAction)releaseSliderChanged:(UISlider *)sender
 {
+    _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_releaseSlider.value];
+}
+
+- (void) updateRelease:(double)value
+{
+    _releaseSlider.value = value;
     _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_releaseSlider.value];
 }
 

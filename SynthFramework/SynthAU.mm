@@ -149,6 +149,10 @@
                 return [NSString stringWithFormat:@"%.3f", value];
             }
             case SynthProc::InstrumentParamWaveform:
+            case SynthProc::InstrumentParamAttack:
+            case SynthProc::InstrumentParamDecay:
+            case SynthProc::InstrumentParamSustain:
+            case SynthProc::InstrumentParamRelease:
             {
                 return [NSString stringWithFormat:@"%d", (uint8_t)value];
             }

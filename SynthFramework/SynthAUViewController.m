@@ -10,9 +10,10 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-
 #import "SynthAU.h"
 #import "SynthConstants.h"
+
+#import "EnvelopeGeneratorViewController.h"
 
 static NSArray *_waveformNames;
 
@@ -25,9 +26,14 @@ static NSArray *_waveformNames;
     IBOutlet UIButton *_waveformButton;
     IBOutlet UILabel *_waveformLabel;
     
+    AUParameter *_waveformParameter;
     AUParameter *_volumeParameter;
     AUParameter *_panParameter;
-    AUParameter *_waveformParameter;
+    AUParameter *_attackParameter;
+    AUParameter *_decayParameter;
+    AUParameter *_sustainParameter;
+    AUParameter *_releaseParameter;
+    
     AUParameterObserverToken *_parameterObserverToken;
 }
 
@@ -56,12 +62,22 @@ static NSArray *_waveformNames;
     
     if (parameterTree)
     {
-        _volumeParameter = [parameterTree valueForKey:@"volume"];
         _waveformParameter = [parameterTree valueForKey:@"waveform"];
+
+        _volumeParameter = [parameterTree valueForKey:@"volume"];
         _panParameter = [parameterTree valueForKey:@"pan"];
+        
+        _attackParameter = [parameterTree valueForKey:@"attack"];
+        _decayParameter = [parameterTree valueForKey:@"decay"];
+        _sustainParameter = [parameterTree valueForKey:@"sustain"];
+        _releaseParameter = [parameterTree valueForKey:@"release"];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                if (address == _waveformParameter.address)
+                {
+                    [self updateWaveform];
+                }
                 if (address == _volumeParameter.address)
                 {
                     [self updateVolume];
@@ -70,17 +86,33 @@ static NSArray *_waveformNames;
                 {
                     [self updatePan];
                 }
-                else if (address == _waveformParameter.address)
+                else if (address == _attackParameter.address)
                 {
-                    [self updateWaveform];
+                    [self updateAttack];
+                }
+                else if (address == _decayParameter.address)
+                {
+                    [self updateDecay];
+                }
+                else if (address == _sustainParameter.address)
+                {
+                    [self updateSustain];
+                }
+                else if (address == _releaseParameter.address)
+                {
+                    [self updateRelease];
                 }
                 
             });
         }];
         
+        [self updateWaveform];
         [self updateVolume];
         [self updatePan];
-        [self updateWaveform];
+        [self updateAttack];
+        [self updateDecay];
+        [self updateSustain];
+        [self updateRelease];
     }
 }
 
@@ -99,6 +131,28 @@ static NSArray *_waveformNames;
     _waveformNames = @[@"Sine", @"Sawtooth", @"Square", @"Triangle"];
     
     OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    _waveformLabel.text = _waveformNames[waveform];
+}
+
+- (void) updateWaveform
+{
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    _waveformLabel.text = _waveformNames[waveform];
+}
+
+- (IBAction)waveformChanged:(id)sender
+{
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    if (waveform == OSCILLATOR_WAVE_LAST)
+    {
+        waveform = OSCILLATOR_WAVE_FIRST;
+    }
+    else
+    {
+        ++waveform;
+    }
+    
+    self.audioUnit.selectedWaveform = waveform;
     _waveformLabel.text = _waveformNames[waveform];
 }
 
@@ -126,26 +180,24 @@ static NSArray *_waveformNames;
     _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
 }
 
-- (void) updateWaveform
+- (void) updateAttack
 {
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    _waveformLabel.text = _waveformNames[waveform];
+    
 }
 
-- (IBAction)waveformChanged:(id)sender
+- (void) updateDecay
 {
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    if (waveform == OSCILLATOR_WAVE_LAST)
-    {
-        waveform = OSCILLATOR_WAVE_FIRST;
-    }
-    else
-    {
-        ++waveform;
-    }
     
-    self.audioUnit.selectedWaveform = waveform;
-    _waveformLabel.text = _waveformNames[waveform];
+}
+
+- (void) updateSustain
+{
+    
+}
+
+- (void) updateRelease
+{
+    
 }
 
 @end
