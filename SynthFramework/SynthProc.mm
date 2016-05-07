@@ -8,6 +8,7 @@
 #import "SynthProc.hpp"
 
 #import "DCA.h"
+#import "EnvelopeGenerator.h"
 #import "MIDIEvent.h"
 #import "Oscillator.h"
 #import "Utility.hpp"
@@ -18,13 +19,16 @@ SynthProc::SynthProc()
     frequencyScale = 2. * M_PI / sampleRate;
     
     outBufferListPtr = nullptr;
-    noteOn = NO;
     
     // osc
     osc = [[Oscillator alloc] init];
     
     // dca
     dca = [[DCA alloc] init];
+    
+    // env
+    env = [[EnvelopeGenerator alloc] init];
+    env.sampleRate = sampleRate;
 }
 
 void SynthProc::init(int channelCount, double inSampleRate)
@@ -94,13 +98,12 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 //            NSLog(@"Instrument received unhandled MIDI event");
             break;
         case MIDIMessageType_NoteOff:
-            noteOn = NO;
-            dca.midiVelocity = 0;
+            [env stop];
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
             dca.midiVelocity = event.data2;
-            noteOn = YES;
+            [env start];
             break;
     }
 }
@@ -115,24 +118,24 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
     double outL = 0.0;
     double outR = 0.0;
 
-    if (noteOn)
+    for (AUAudioFrameCount i = 0; i < frameCount; ++i)
     {
-        for (AUAudioFrameCount i = 0; i < frameCount; ++i)
-        {
-            inL = 0.0;
-            inR = 0.0;
-            outL = 0.0;
-            outR = 0.0;
-            
-            // oscillator
-            inL = inR = [osc nextSample];
-            
-            // dca
-            [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
-    
-            // update the buffer
-            left[i] = outL;
-            right[i] = outR;
-        }
+        inL = 0.0;
+        inR = 0.0;
+        outL = 0.0;
+        outR = 0.0;
+        
+        // oscillator
+        inL = inR = [osc nextSample];
+        
+        // env
+        [dca setEnvGain: [env nextSample]];
+        
+        // dca
+        [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
+
+        // update the buffer
+        left[i] = outL;
+        right[i] = outR;
     }
 }
