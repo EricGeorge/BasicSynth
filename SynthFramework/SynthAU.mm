@@ -66,12 +66,12 @@
     
     AUParameter *attackParam = [AUParameterTree createParameterWithIdentifier:attackParamKey name:@"Attack"
                                                                       address:SynthProc::InstrumentParamAttack
-                                                                          min:0 max:5000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                          min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *decayParam = [AUParameterTree createParameterWithIdentifier:decayParamKey name:@"Decay"
                                                                       address:SynthProc::InstrumentParamDecay
-                                                                          min:0 max:5000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                          min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *sustainParam = [AUParameterTree createParameterWithIdentifier:sustainParamKey name:@"Sustain"

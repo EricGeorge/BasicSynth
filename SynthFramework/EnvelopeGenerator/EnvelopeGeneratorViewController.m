@@ -45,26 +45,28 @@
 
 - (IBAction)attackSliderChanged:(UISlider *)sender
 {
-    _attackValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_attackSlider.value];
-    [self.parentVC attackChanged:_attackSlider.value];
+    uint16_t valueInRange = (long)(powf(10, _attackSlider.value) + 0.5);
+    _attackValue.text = [NSString stringWithFormat:@"%d", valueInRange];
+    [self.parentVC attackChanged:valueInRange];
 }
 
 - (void) updateAttack:(double)value
 {
-    _attackSlider.value = value;
-    _attackValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_attackSlider.value];
+    _attackSlider.value = log10(value);
+    _attackValue.text = [NSString stringWithFormat:@"%d", (uint16_t)value];
 }
 
 - (IBAction)decaySliderChanged:(UISlider *)sender
 {
-    _decayValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_decaySlider.value];
-    [self.parentVC decayChanged:_decaySlider.value];
+    uint16_t valueInRange = (long)(powf(10, _decaySlider.value) + 0.5);
+    _decayValue.text = [NSString stringWithFormat:@"%d", valueInRange];
+    [self.parentVC decayChanged:valueInRange];
 }
 
 - (void) updateDecay:(double)value
 {
-    _decaySlider.value = value;
-    _decayValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_decaySlider.value];
+    _decaySlider.value = log10(value);
+    _decayValue.text = [NSString stringWithFormat:@"%d", (uint16_t)value];
 }
 
 - (IBAction)sustainSliderChanged:(UISlider *)sender
@@ -81,14 +83,15 @@
 
 - (IBAction)releaseSliderChanged:(UISlider *)sender
 {
-    _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_releaseSlider.value];
-    [self.parentVC releaseChanged:_releaseSlider.value];
+    uint16_t valueInRange = (long)(powf(10, _releaseSlider.value) + 0.5);
+    _releaseValue.text = [NSString stringWithFormat:@"%d", valueInRange];
+    [self.parentVC releaseChanged:valueInRange];
 }
 
 - (void) updateRelease:(double)value
 {
-    _releaseSlider.value = value;
-    _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)_releaseSlider.value];
+    _releaseSlider.value = log10(value);
+    _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)value];
 }
 
 @end

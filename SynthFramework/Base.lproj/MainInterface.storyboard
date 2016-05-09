@@ -137,7 +137,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="O3i-r6-esy" userLabel="Attack Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="O3i-r6-esy" userLabel="Attack Slider">
                                 <rect key="frame" x="86" y="16" width="176" height="31"/>
                                 <connections>
                                     <action selector="attackSliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="Yop-tj-rff"/>
@@ -161,7 +161,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-be-N9P" userLabel="Decay Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-be-N9P" userLabel="Decay Slider">
                                 <rect key="frame" x="86" y="49" width="176" height="31"/>
                                 <connections>
                                     <action selector="decaySliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="KBY-Lj-l6L"/>
@@ -203,7 +203,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="0.0" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="7tJ-9b-21q" userLabel="Release Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="7tJ-9b-21q" userLabel="Release Slider">
                                 <rect key="frame" x="86" y="112" width="176" height="31"/>
                                 <connections>
                                     <action selector="releaseSliderChanged:" destination="O1O-ev-ww4" eventType="valueChanged" id="Gp7-4t-6gc"/>
