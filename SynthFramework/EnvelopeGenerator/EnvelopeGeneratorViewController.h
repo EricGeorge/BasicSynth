@@ -7,15 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class SynthAUViewController;
+#import "SynthAUViewController.h"
 
-@interface EnvelopeGeneratorViewController : UIViewController
 
-- (void) updateAttack:(double)value;
-- (void) updateDecay:(double)value;
-- (void) updateSustain:(double)value;
-- (void) updateRelease:(double)value;
-
-@property(nonatomic, weak) SynthAUViewController *parentVC;
+@interface EnvelopeGeneratorViewController : UIViewController<SynthComponentDelegate>
 
 @end

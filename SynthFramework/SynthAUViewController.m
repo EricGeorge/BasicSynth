@@ -29,15 +29,11 @@ static NSArray *_waveformNames;
     AUParameter *_waveformParameter;
     AUParameter *_volumeParameter;
     AUParameter *_panParameter;
-    AUParameter *_attackParameter;
-    AUParameter *_decayParameter;
-    AUParameter *_sustainParameter;
-    AUParameter *_releaseParameter;
     
     AUParameterObserverToken *_parameterObserverToken;
 }
 
-@property (nonatomic, weak) EnvelopeGeneratorViewController *envVC;
+@property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
 
 @end
 
@@ -64,15 +60,12 @@ static NSArray *_waveformNames;
     
     if (parameterTree)
     {
-        _waveformParameter = [parameterTree valueForKey:@"waveform"];
+        _waveformParameter = [parameterTree valueForKey:waveformParamKey];
 
-        _volumeParameter = [parameterTree valueForKey:@"volume"];
-        _panParameter = [parameterTree valueForKey:@"pan"];
+        _volumeParameter = [parameterTree valueForKey:volumeParamKey];
+        _panParameter = [parameterTree valueForKey:panParamKey];
         
-        _attackParameter = [parameterTree valueForKey:@"attack"];
-        _decayParameter = [parameterTree valueForKey:@"decay"];
-        _sustainParameter = [parameterTree valueForKey:@"sustain"];
-        _releaseParameter = [parameterTree valueForKey:@"release"];
+        [self.envVC registerParameters:parameterTree];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -88,22 +81,8 @@ static NSArray *_waveformNames;
                 {
                     [self updatePan];
                 }
-                else if (address == _attackParameter.address)
-                {
-                    [self updateAttack];
-                }
-                else if (address == _decayParameter.address)
-                {
-                    [self updateDecay];
-                }
-                else if (address == _sustainParameter.address)
-                {
-                    [self updateSustain];
-                }
-                else if (address == _releaseParameter.address)
-                {
-                    [self updateRelease];
-                }
+                
+                [self.envVC updateParameter:address andValue:value];
                 
             });
         }];
@@ -111,10 +90,8 @@ static NSArray *_waveformNames;
         [self updateWaveform];
         [self updateVolume];
         [self updatePan];
-        [self updateAttack];
-        [self updateDecay];
-        [self updateSustain];
-        [self updateRelease];
+        
+        [self.envVC updateAllParameters];
     }
 }
 
@@ -141,7 +118,6 @@ static NSArray *_waveformNames;
     if ([segue.identifier isEqualToString:@"EnvVC"])
     {
         self.envVC = (EnvelopeGeneratorViewController *)segue.destinationViewController;
-        self.envVC.parentVC = self;
     }
 }
 
@@ -190,46 +166,6 @@ static NSArray *_waveformNames;
 {
     _panParameter.value = sender.value;
     _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
-}
-
-- (void) updateAttack
-{
-    [self.envVC updateAttack:_attackParameter.value];
-}
-
-- (void) attackChanged:(double)value
-{
-    _attackParameter.value = value;
-}
-
-- (void) updateDecay
-{
-    [self.envVC updateDecay:_decayParameter.value];
-}
-
-- (void) decayChanged:(double)value
-{
-    _decayParameter.value = value;
-}
-
-- (void) updateSustain
-{
-    [self.envVC updateSustain:_sustainParameter.value];
-}
-
-- (void) sustainChanged:(double)value
-{
-    _sustainParameter.value = value;
-}
-
-- (void) updateRelease
-{
-    [self.envVC updateRelease:_releaseParameter.value];
-}
-
-- (void) releaseChanged:(double)value
-{
-    _releaseParameter.value = value;
 }
 
 @end
