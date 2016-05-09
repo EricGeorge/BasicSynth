@@ -100,7 +100,7 @@
     decayParam.value = 100;
     _kernel.setParameter(SynthProc::InstrumentParamDecay, decayParam.value);
     
-    sustainParam.value = 75;
+    sustainParam.value = 70;
     _kernel.setParameter(SynthProc::InstrumentParamSustain, sustainParam.value);
     
     releaseParam.value = 1000;

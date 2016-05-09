@@ -11,10 +11,10 @@
 
 @property (nonatomic, assign) double sampleRate;
 
-@property (nonatomic, assign) double attackTime;    // seconds
-@property (nonatomic, assign) double decayTime;     // seconds
-@property (nonatomic, assign) double releaseTime;   // seconds
-@property (nonatomic, assign) double sustainLevel;  // 0-1
+@property (nonatomic, assign) double attackTime;    // msec
+@property (nonatomic, assign) double decayTime;     // msec
+@property (nonatomic, assign) double releaseTime;   // msec
+@property (nonatomic, assign) double sustainLevel;  // percent
 
 - (void) start;
 - (void) stop;
