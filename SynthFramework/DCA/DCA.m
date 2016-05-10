@@ -12,7 +12,7 @@
 
 @interface DCA()
 {
-    double _volume;
+    double _normalizedVolume;
     double _panL;
     double _panR;
     double _midiVelocityGain;
@@ -26,7 +26,7 @@
 {
     if (self = [super init])
     {
-        self.volumePct = 100.0;
+        self.volume = 100.0;
         self.midiVelocity = 0;
         self.pan = 0;
     }
@@ -34,12 +34,12 @@
     return self;
 }
 
-- (void) setVolumePct:(double)volumePct
+- (void) setVolume:(double)volume
 {
-    _volumePct = volumePct;
+    _volume = volume;
     
     // put an exponential curve on the volume input (and normalize to 0-1)
-    _volume = pow2(_volumePct/100.0);
+    _normalizedVolume = pow2(_volume/100.0);
 }
 
 - (void) setMidiVelocity:(uint8_t)midiVelocity
@@ -63,8 +63,8 @@
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * _envGain * _volume * _midiVelocityGain * _panL;
-    *rightOutput = rightInput * _envGain * _volume * _midiVelocityGain * _panR;
+    *leftOutput = leftInput * _envGain * _normalizedVolume * _midiVelocityGain * _panL;
+    *rightOutput = rightInput * _envGain * _normalizedVolume * _midiVelocityGain * _panR;
 }
 
 @end
