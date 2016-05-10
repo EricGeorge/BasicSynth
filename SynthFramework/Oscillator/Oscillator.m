@@ -26,7 +26,7 @@ const double twoPI = 2 * M_PI;
 {
     if (self = [super init])
     {
-        self.wave = OSCILLATOR_WAVE_SINE;
+        self.wave = OscillatorWaveSine;
         self.frequency = 440.0;
         self.sampleRate = 44100;
         _phase = 0.0;
@@ -60,13 +60,13 @@ const double twoPI = 2 * M_PI;
     
     switch (self.wave)
     {
-        case OSCILLATOR_WAVE_SINE:
+        case OscillatorWaveSine:
             sample = sin(_phase);
             break;
-        case OSCILLATOR_WAVE_SAW:
+        case OscillatorWaveSaw:
             sample = 1.0 - (2.0 * _phase / twoPI);
             break;
-        case OSCILLATOR_WAVE_SQUARE:
+        case OscillatorWaveSquare:
             if (_phase <= M_PI)
             {
                 sample = 1.0;
@@ -76,7 +76,7 @@ const double twoPI = 2 * M_PI;
                 sample = -1.0;
             }
             break;
-        case OSCILLATOR_WAVE_TRIANGLE:
+        case OscillatorWaveTriangle:
             sample = -1.0 + (2.0 * _phase / twoPI);
             sample = 2.0 * (fabs(sample) - 0.5);
             break;

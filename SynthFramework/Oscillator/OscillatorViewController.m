@@ -7,6 +7,7 @@
 
 #import "OscillatorViewController.h"
 
+#import "Oscillator.h"
 #import "SynthConstants.h"
 
 @interface OscillatorViewController ()
@@ -51,9 +52,9 @@ static NSArray *_waveformNames;
 - (IBAction)waveformChanged:(id)sender
 {
     OscillatorWave waveform = _waveformParameter.value;
-    if (waveform == OSCILLATOR_WAVE_LAST)
+    if (waveform == OscillatorWaveLast)
     {
-        waveform = OSCILLATOR_WAVE_FIRST;
+        waveform = OscillatorWaveFirst;
     }
     else
     {

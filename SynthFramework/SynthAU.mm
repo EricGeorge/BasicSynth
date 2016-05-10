@@ -49,61 +49,61 @@
     // Create a parameter object for the volume.
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable;
     AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
-                                                                      address:SynthProc::InstrumentParamVolume
+                                                                      address:InstrumentParamVolume
                                                                           min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
-                                                                      address:SynthProc::InstrumentParamWaveform
+                                                                      address:InstrumentParamWaveform
                                                                           min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *panParam = [AUParameterTree createParameterWithIdentifier:panParamKey name:@"Pan"
-                                                                   address:SynthProc::InstrumentParamPan
+                                                                   address:InstrumentParamPan
                                                                        min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Pan unitName:nil
                                                                      flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *attackParam = [AUParameterTree createParameterWithIdentifier:attackParamKey name:@"Attack"
-                                                                      address:SynthProc::InstrumentParamAttack
+                                                                      address:InstrumentParamAttack
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *decayParam = [AUParameterTree createParameterWithIdentifier:decayParamKey name:@"Decay"
-                                                                      address:SynthProc::InstrumentParamDecay
+                                                                      address:InstrumentParamDecay
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *sustainParam = [AUParameterTree createParameterWithIdentifier:sustainParamKey name:@"Sustain"
-                                                                      address:SynthProc::InstrumentParamSustain
+                                                                      address:InstrumentParamSustain
                                                                           min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *releaseParam = [AUParameterTree createParameterWithIdentifier:releaseParamKey name:@"Release"
-                                                                      address:SynthProc::InstrumentParamRelease
+                                                                      address:InstrumentParamRelease
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     // Initialize the parameter values.
     volumeParam.value = 100.0;
-    _kernel.setParameter(SynthProc::InstrumentParamVolume, volumeParam.value);
+    _kernel.setParameter(InstrumentParamVolume, volumeParam.value);
     
     waveformParam.value = 0;
-    _kernel.setParameter(SynthProc::InstrumentParamWaveform, waveformParam.value);
+    _kernel.setParameter(InstrumentParamWaveform, waveformParam.value);
     
     panParam.value = 0;
-    _kernel.setParameter(SynthProc::InstrumentParamPan, panParam.value);
+    _kernel.setParameter(InstrumentParamPan, panParam.value);
     
     attackParam.value = 100;
-    _kernel.setParameter(SynthProc::InstrumentParamAttack, attackParam.value);
+    _kernel.setParameter(InstrumentParamAttack, attackParam.value);
     
     decayParam.value = 100;
-    _kernel.setParameter(SynthProc::InstrumentParamDecay, decayParam.value);
+    _kernel.setParameter(InstrumentParamDecay, decayParam.value);
     
     sustainParam.value = 70;
-    _kernel.setParameter(SynthProc::InstrumentParamSustain, sustainParam.value);
+    _kernel.setParameter(InstrumentParamSustain, sustainParam.value);
     
     releaseParam.value = 1000;
-    _kernel.setParameter(SynthProc::InstrumentParamRelease, releaseParam.value);
+    _kernel.setParameter(InstrumentParamRelease, releaseParam.value);
     
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
@@ -142,16 +142,16 @@
         
         switch (param.address)
         {
-            case SynthProc::InstrumentParamVolume:
-            case SynthProc::InstrumentParamPan:
+            case InstrumentParamVolume:
+            case InstrumentParamPan:
             {
                 return [NSString stringWithFormat:@"%.3f", value];
             }
-            case SynthProc::InstrumentParamWaveform:
-            case SynthProc::InstrumentParamAttack:
-            case SynthProc::InstrumentParamDecay:
-            case SynthProc::InstrumentParamSustain:
-            case SynthProc::InstrumentParamRelease:
+            case InstrumentParamWaveform:
+            case InstrumentParamAttack:
+            case InstrumentParamDecay:
+            case InstrumentParamSustain:
+            case InstrumentParamRelease:
             {
                 return [NSString stringWithFormat:@"%d", (uint8_t)value];
             }

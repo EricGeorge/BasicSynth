@@ -5,14 +5,15 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
-typedef NS_ENUM(NSInteger, OscillatorWave)
+typedef NS_ENUM(NSInteger, InstrumentParam)
 {
-    OSCILLATOR_WAVE_SINE,
-    OSCILLATOR_WAVE_FIRST = OSCILLATOR_WAVE_SINE,
-    OSCILLATOR_WAVE_SAW,
-    OSCILLATOR_WAVE_SQUARE,
-    OSCILLATOR_WAVE_TRIANGLE,
-    OSCILLATOR_WAVE_LAST = OSCILLATOR_WAVE_TRIANGLE
+    InstrumentParamVolume = 0,
+    InstrumentParamWaveform,
+    InstrumentParamPan,
+    InstrumentParamAttack,
+    InstrumentParamDecay,
+    InstrumentParamSustain,
+    InstrumentParamRelease
 };
 
 static NSString *volumeParamKey = @"volume";

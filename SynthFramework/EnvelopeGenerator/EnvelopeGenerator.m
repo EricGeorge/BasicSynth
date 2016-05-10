@@ -9,11 +9,11 @@
 
 typedef NS_ENUM(NSUInteger, EnvelopeStage)
 {
-    ENVELOPE_STAGE_IDLE = 0,
-    ENVELOPE_STAGE_ATTACK,
-    ENVELOPE_STAGE_DECAY,
-    ENVELOPE_STAGE_SUSTAIN,
-    ENVELOPE_STAGE_RELEASE,
+    EnvelopeStageIdle = 0,
+    EnvelopeStageAttack,
+    EnvelopeStageDecay,
+    EnvelopeStageSustain,
+    EnvelopeStageRelease,
 };
 
 @interface EnvelopeGenerator()
@@ -134,56 +134,56 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) start
 {
-    _currentStage = ENVELOPE_STAGE_ATTACK;
+    _currentStage = EnvelopeStageAttack;
 }
 
 - (void) stop
 {
-    _currentStage = ENVELOPE_STAGE_RELEASE;
+    _currentStage = EnvelopeStageRelease;
 }
 
 - (double) nextSample
 {
     switch(_currentStage)
     {
-        case ENVELOPE_STAGE_IDLE:
+        case EnvelopeStageIdle:
             _envelopeOutput = 0.0;
             break;
             
-        case ENVELOPE_STAGE_ATTACK:
+        case EnvelopeStageAttack:
             _envelopeOutput = _attackOffset + _envelopeOutput * _attackCoeff;
             
             if(_envelopeOutput >= 1.0 || _normalizedAttackTime <= 0.0)
             {
                 _envelopeOutput = 1.0;
-                _currentStage = ENVELOPE_STAGE_DECAY;
+                _currentStage = EnvelopeStageDecay;
             }
             
             break;
             
-        case ENVELOPE_STAGE_DECAY:
+        case EnvelopeStageDecay:
             _envelopeOutput = _decayOffset + _envelopeOutput * _decayCoeff;
             
             if(_envelopeOutput <= _normalizedSustainLevel || _normalizedDecayTime <= 0.0)
             {
                 _envelopeOutput = _normalizedSustainLevel;
-                _currentStage = ENVELOPE_STAGE_SUSTAIN;
+                _currentStage = EnvelopeStageSustain;
             }
             
             break;
 
-        case ENVELOPE_STAGE_SUSTAIN:
+        case EnvelopeStageSustain:
             _envelopeOutput = _normalizedSustainLevel;
             
             break;
 
-        case ENVELOPE_STAGE_RELEASE:
+        case EnvelopeStageRelease:
             _envelopeOutput = _releaseOffset + _envelopeOutput * _releaseCoeff;
             
             if(_envelopeOutput <= 0.0 || _normalizedReleaseTime <= 0.0)
             {
                 _envelopeOutput = 0.0;
-                _currentStage = ENVELOPE_STAGE_IDLE;
+                _currentStage = EnvelopeStageIdle;
             }
             break;
         }

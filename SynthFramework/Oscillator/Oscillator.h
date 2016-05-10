@@ -8,11 +8,21 @@
 #import <Foundation/Foundation.h>
 #import "SynthConstants.h"
 
+typedef NS_ENUM(NSInteger, OscillatorWave)
+{
+    OscillatorWaveSine,
+    OscillatorWaveFirst = OscillatorWaveSine,
+    OscillatorWaveSaw,
+    OscillatorWaveSquare,
+    OscillatorWaveTriangle,
+    OscillatorWaveLast = OscillatorWaveTriangle
+};
+
 @interface Oscillator : NSObject
 
-@property (nonatomic, assign) OscillatorWave wave;
 @property (nonatomic, assign) double frequency;
 @property (nonatomic, assign) double sampleRate;
+@property (nonatomic, assign) OscillatorWave wave;
 
 - (double) nextSample;
 

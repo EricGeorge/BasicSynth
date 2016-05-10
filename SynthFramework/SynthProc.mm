@@ -11,6 +11,7 @@
 #import "EnvelopeGenerator.h"
 #import "MIDIEvent.h"
 #import "Oscillator.h"
+#import "SynthConstants.h"
 #import "Utility.hpp"
 
 SynthProc::SynthProc()
@@ -44,29 +45,29 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
     switch (address)
     {
         // oscillator
-        case SynthProc::InstrumentParamWaveform:
+        case InstrumentParamWaveform:
             osc.wave = (OscillatorWave)value;
             break;
             
         // dca
-        case SynthProc::InstrumentParamVolume:
+        case InstrumentParamVolume:
             dca.volume = value;
             break;
-        case SynthProc::InstrumentParamPan:
+        case InstrumentParamPan:
             dca.pan = value;
             break;
             
         // envelope generator
-        case SynthProc::InstrumentParamAttack:
+        case InstrumentParamAttack:
             env.attackTime = value;
             break;
-        case SynthProc::InstrumentParamDecay:
+        case InstrumentParamDecay:
             env.decayTime = value;
             break;
-        case SynthProc::InstrumentParamSustain:
+        case InstrumentParamSustain:
             env.sustainLevel= value;
             break;
-        case SynthProc::InstrumentParamRelease:
+        case InstrumentParamRelease:
             env.releaseTime = value;
             break;
     }

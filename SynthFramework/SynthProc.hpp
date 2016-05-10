@@ -17,16 +17,6 @@
 class SynthProc : public DSPKernel
 {
 public:
-    enum {
-        InstrumentParamVolume = 0,
-        InstrumentParamWaveform,
-        InstrumentParamPan,
-        InstrumentParamAttack,
-        InstrumentParamDecay,
-        InstrumentParamSustain,
-        InstrumentParamRelease
-    };
-    
     SynthProc();
     
     void init(int channelCount, double inSampleRate);
