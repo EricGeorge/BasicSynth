@@ -9,6 +9,7 @@
 
 #import "DCA.h"
 #import "EnvelopeGenerator.h"
+#import "Filter.h"
 #import "MIDIEvent.h"
 #import "Oscillator.h"
 #import "SynthConstants.h"
@@ -157,8 +158,11 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
         outL = 0.0;
         outR = 0.0;
         
-        // oscillator
-        inL = inR = [osc nextSample];
+//        // oscillator
+//        inL = inR = [osc nextSample];
+//        
+        // oscillator + filter
+        inL = inR = [filter process:[osc nextSample]];
         
         // env
         [dca setEnvGain: [env nextSample]];
