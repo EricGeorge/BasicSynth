@@ -16,9 +16,12 @@
 SynthProc::SynthProc()
 {
     sampleRate = 44100.0;
-    frequencyScale = 2. * M_PI / sampleRate;
-    
     outBufferListPtr = nullptr;
+}
+
+void SynthProc::init(int channelCount, double inSampleRate)
+{
+    sampleRate = float(inSampleRate);
     
     // osc
     osc = [[Oscillator alloc] init];
@@ -29,12 +32,6 @@ SynthProc::SynthProc()
     // env
     env = [[EnvelopeGenerator alloc] init];
     env.sampleRate = sampleRate;
-}
-
-void SynthProc::init(int channelCount, double inSampleRate)
-{
-    sampleRate = float(inSampleRate);
-    frequencyScale = 2.0 * M_PI / sampleRate;
 }
 
 void SynthProc::reset()

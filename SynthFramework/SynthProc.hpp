@@ -42,7 +42,6 @@ public:
     
 private:
     float sampleRate;
-    double frequencyScale;
     
     AudioBufferList* outBufferListPtr;
     
