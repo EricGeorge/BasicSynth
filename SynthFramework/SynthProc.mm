@@ -53,7 +53,7 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
             
         // dca
         case SynthProc::InstrumentParamVolume:
-            dca.volumePct = value;
+            dca.volume = value;
             break;
         case SynthProc::InstrumentParamPan:
             dca.pan = value;
@@ -88,7 +88,7 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
             
         // dca
         case InstrumentParamVolume:
-            value = dca.volumePct;
+            value = dca.volume;
             break;
         case InstrumentParamPan:
             value = dca.pan;
