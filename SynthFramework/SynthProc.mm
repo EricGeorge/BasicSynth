@@ -166,7 +166,7 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
         [dca setEnvGain: [env nextSample]];
         
         // dca
-        [dca compute:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
+        [dca process:inL rightInput:inR leftOutput:&outL rightOutput:&outR];
 
         // update the buffer
         left[i] = outL;

@@ -9,7 +9,6 @@
 
 #import "SynthAUViewController.h"
 
-
 @interface EnvelopeGeneratorViewController : UIViewController<SynthComponentDelegate>
 
 @end

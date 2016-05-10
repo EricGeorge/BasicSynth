@@ -15,7 +15,7 @@
 @property(nonatomic, assign) double pan;
 @property(nonatomic, assign) double envGain;
 
-- (void) compute:(double)leftInput
+- (void) process:(double)leftInput
       rightInput:(double)rightInput
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput;
