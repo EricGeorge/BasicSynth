@@ -128,7 +128,6 @@
     {
         [self updateRelease:value];
     }
-    
 }
 
 - (void) updateAllParameters

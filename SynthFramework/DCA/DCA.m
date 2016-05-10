@@ -57,7 +57,7 @@
     _panR = getEqualPowerRight(_pan);
 }
 
-- (void) compute:(double)leftInput
+- (void) process:(double)leftInput
       rightInput:(double)rightInput
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput
