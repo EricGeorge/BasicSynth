@@ -13,27 +13,23 @@
 #import "SynthAU.h"
 #import "SynthConstants.h"
 
+#import "DCAViewController.h"
 #import "EnvelopeGeneratorViewController.h"
 
 static NSArray *_waveformNames;
 
 @interface SynthAUViewController ()
 {
-    IBOutlet UISlider *_volumeSlider;
-    IBOutlet UILabel *_volumeValue;
-    IBOutlet UISlider *_panSlider;
-    IBOutlet UILabel *_panValue;
     IBOutlet UIButton *_waveformButton;
     IBOutlet UILabel *_waveformLabel;
     
     AUParameter *_waveformParameter;
-    AUParameter *_volumeParameter;
-    AUParameter *_panParameter;
     
     AUParameterObserverToken *_parameterObserverToken;
 }
 
 @property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
+@property (nonatomic, strong) DCAViewController *dcaVC;
 
 @end
 
@@ -62,10 +58,8 @@ static NSArray *_waveformNames;
     {
         _waveformParameter = [parameterTree valueForKey:waveformParamKey];
 
-        _volumeParameter = [parameterTree valueForKey:volumeParamKey];
-        _panParameter = [parameterTree valueForKey:panParamKey];
-        
         [self.envVC registerParameters:parameterTree];
+        [self.dcaVC registerParameters:parameterTree];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -73,25 +67,17 @@ static NSArray *_waveformNames;
                 {
                     [self updateWaveform];
                 }
-                if (address == _volumeParameter.address)
-                {
-                    [self updateVolume];
-                }
-                else if (address == _panParameter.address)
-                {
-                    [self updatePan];
-                }
                 
                 [self.envVC updateParameter:address andValue:value];
+                [self.dcaVC updateParameter:address andValue:value];
                 
             });
         }];
         
         [self updateWaveform];
-        [self updateVolume];
-        [self updatePan];
         
         [self.envVC updateAllParameters];
+        [self.dcaVC updateAllParameters];
     }
 }
 
@@ -119,8 +105,11 @@ static NSArray *_waveformNames;
     {
         self.envVC = (EnvelopeGeneratorViewController *)segue.destinationViewController;
     }
+    else if ([segue.identifier isEqualToString:@"dcaVC"])
+    {
+        self.dcaVC = (DCAViewController *)segue.destinationViewController;
+    }
 }
-
 
 - (void) updateWaveform
 {
@@ -142,30 +131,6 @@ static NSArray *_waveformNames;
     
     self.audioUnit.selectedWaveform = waveform;
     _waveformLabel.text = _waveformNames[waveform];
-}
-
-- (void) updateVolume
-{
-    _volumeSlider.value = _volumeParameter.value;
-    _volumeValue.text = [NSString stringWithFormat:@"%d%%", (uint8_t)_volumeSlider.value];
-}
-
-- (IBAction)volumeChanged:(UISlider *)sender
-{
-    _volumeParameter.value =  sender.value;
-    _volumeValue.text = [NSString stringWithFormat:@"%d%%", (uint8_t)_volumeSlider.value];
-}
-
-- (void) updatePan
-{
-    _panSlider.value = _panParameter.value;
-    _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
-}
-
-- (IBAction)panChanged:(UISlider *)sender
-{
-    _panParameter.value = sender.value;
-    _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
 }
 
 @end
