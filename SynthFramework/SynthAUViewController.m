@@ -8,7 +8,6 @@
 #import "SynthAUViewController.h"
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
 #import "SynthAU.h"
 #import "SynthConstants.h"
