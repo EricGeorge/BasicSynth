@@ -9,6 +9,14 @@
 
 @class SynthAU;
 
+@protocol SynthComponentDelegate
+
+- (void) registerParameters:(AUParameterTree *)parameterTree;
+- (void) updateParameter:(AUParameterAddress)address andValue:(AUValue)value;
+- (void) updateAllParameters;
+
+@end
+
 @interface SynthAUViewController : AUViewController
 
 @property (nonatomic)SynthAU *audioUnit;

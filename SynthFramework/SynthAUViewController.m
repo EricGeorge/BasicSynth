@@ -10,9 +10,10 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-
 #import "SynthAU.h"
 #import "SynthConstants.h"
+
+#import "EnvelopeGeneratorViewController.h"
 
 static NSArray *_waveformNames;
 
@@ -25,11 +26,14 @@ static NSArray *_waveformNames;
     IBOutlet UIButton *_waveformButton;
     IBOutlet UILabel *_waveformLabel;
     
+    AUParameter *_waveformParameter;
     AUParameter *_volumeParameter;
     AUParameter *_panParameter;
-    AUParameter *_waveformParameter;
+    
     AUParameterObserverToken *_parameterObserverToken;
 }
+
+@property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
 
 @end
 
@@ -56,12 +60,19 @@ static NSArray *_waveformNames;
     
     if (parameterTree)
     {
-        _volumeParameter = [parameterTree valueForKey:@"volume"];
-        _waveformParameter = [parameterTree valueForKey:@"waveform"];
-        _panParameter = [parameterTree valueForKey:@"pan"];
+        _waveformParameter = [parameterTree valueForKey:waveformParamKey];
+
+        _volumeParameter = [parameterTree valueForKey:volumeParamKey];
+        _panParameter = [parameterTree valueForKey:panParamKey];
+        
+        [self.envVC registerParameters:parameterTree];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                if (address == _waveformParameter.address)
+                {
+                    [self updateWaveform];
+                }
                 if (address == _volumeParameter.address)
                 {
                     [self updateVolume];
@@ -70,17 +81,17 @@ static NSArray *_waveformNames;
                 {
                     [self updatePan];
                 }
-                else if (address == _waveformParameter.address)
-                {
-                    [self updateWaveform];
-                }
+                
+                [self.envVC updateParameter:address andValue:value];
                 
             });
         }];
         
+        [self updateWaveform];
         [self updateVolume];
         [self updatePan];
-        [self updateWaveform];
+        
+        [self.envVC updateAllParameters];
     }
 }
 
@@ -99,6 +110,37 @@ static NSArray *_waveformNames;
     _waveformNames = @[@"Sine", @"Sawtooth", @"Square", @"Triangle"];
     
     OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    _waveformLabel.text = _waveformNames[waveform];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"EnvVC"])
+    {
+        self.envVC = (EnvelopeGeneratorViewController *)segue.destinationViewController;
+    }
+}
+
+
+- (void) updateWaveform
+{
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    _waveformLabel.text = _waveformNames[waveform];
+}
+
+- (IBAction)waveformChanged:(id)sender
+{
+    OscillatorWave waveform = self.audioUnit.selectedWaveform;
+    if (waveform == OSCILLATOR_WAVE_LAST)
+    {
+        waveform = OSCILLATOR_WAVE_FIRST;
+    }
+    else
+    {
+        ++waveform;
+    }
+    
+    self.audioUnit.selectedWaveform = waveform;
     _waveformLabel.text = _waveformNames[waveform];
 }
 
@@ -124,28 +166,6 @@ static NSArray *_waveformNames;
 {
     _panParameter.value = sender.value;
     _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];
-}
-
-- (void) updateWaveform
-{
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    _waveformLabel.text = _waveformNames[waveform];
-}
-
-- (IBAction)waveformChanged:(id)sender
-{
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    if (waveform == OSCILLATOR_WAVE_LAST)
-    {
-        waveform = OSCILLATOR_WAVE_FIRST;
-    }
-    else
-    {
-        ++waveform;
-    }
-    
-    self.audioUnit.selectedWaveform = waveform;
-    _waveformLabel.text = _waveformNames[waveform];
 }
 
 @end

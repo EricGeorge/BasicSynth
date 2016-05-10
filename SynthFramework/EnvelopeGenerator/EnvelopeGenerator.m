@@ -30,6 +30,11 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
     double _releaseOffset;
     double _releaseTCO;
     
+    double _normalizedAttackTime;
+    double _normalizedDecayTime;
+    double _normalizedSustainLevel;
+    double _normalizedReleaseTime;
+    
     EnvelopeStage _currentStage;
     
     double _envelopeOutput;
@@ -53,10 +58,10 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 //        _decayTCO = _attackTCO;
 //        _releaseTCO = _decayTCO;
     
-        self.attackTime = 0.1;
-        self.decayTime = 0.5;
-        self.releaseTime = 1.0;
-        self.sustainLevel = 0.7;
+        self.attackTime = 100;  // msec
+        self.decayTime = 500;   // msec
+        self.releaseTime = 1000;// msec
+        self.sustainLevel = 70; // percent
     }
     
     return self;
@@ -74,6 +79,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 - (void) setAttackTime:(double)attackTime
 {
     _attackTime = attackTime;
+    _normalizedAttackTime = _attackTime/1000.0;
     
     [self calculateAttackTime];
 }
@@ -81,6 +87,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 - (void) setDecayTime:(double)decayTime
 {
     _decayTime = decayTime;
+    _normalizedDecayTime = _decayTime/1000.0;
     
     [self calculateDecayTime];
 }
@@ -88,6 +95,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 - (void) setReleaseTime:(double)releaseTime
 {
     _releaseTime = releaseTime;
+    _normalizedReleaseTime = _releaseTime/1000.0;
     
     [self calculateReleaseTime];
 }
@@ -95,11 +103,14 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 - (void) setSustainLevel:(double)sustainLevel
 {
     _sustainLevel = sustainLevel;
+    _normalizedSustainLevel = _sustainLevel/100.0;
+    
+    [self calculateDecayTime];
 }
 
 - (void) calculateAttackTime
 {
-    double stageSampleCount = _attackTime * _sampleRate;
+    double stageSampleCount = _normalizedAttackTime * _sampleRate;
     
     _attackCoeff = exp(-log((1.0 + _attackTCO)/_attackTCO)/stageSampleCount);
     _attackOffset = (1.0 + _attackTCO) * (1.0 - _attackCoeff);
@@ -107,15 +118,15 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) calculateDecayTime
 {
-    double stageSampleCount = _decayTime * _sampleRate;
+    double stageSampleCount = _normalizedDecayTime * _sampleRate;
     
     _decayCoeff = exp(-log((1.0 + _decayTCO)/_decayTCO)/stageSampleCount);
-    _decayOffset = (_sustainLevel - _decayTCO) * (1.0 - _decayCoeff);
+    _decayOffset = (_normalizedSustainLevel - _decayTCO) * (1.0 - _decayCoeff);
 }
 
 - (void) calculateReleaseTime
 {
-    double stageSampleCount = _releaseTime * _sampleRate;
+    double stageSampleCount = _normalizedReleaseTime * _sampleRate;
     
     _releaseCoeff = exp(-log((1.0 + _releaseTCO)/_releaseTCO)/stageSampleCount);
     _releaseOffset = -_releaseTCO * (1.0 - _releaseCoeff);
@@ -142,7 +153,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
         case ENVELOPE_STAGE_ATTACK:
             _envelopeOutput = _attackOffset + _envelopeOutput * _attackCoeff;
             
-            if(_envelopeOutput >= 1.0 || _attackTime <= 0.0)
+            if(_envelopeOutput >= 1.0 || _normalizedAttackTime <= 0.0)
             {
                 _envelopeOutput = 1.0;
                 _currentStage = ENVELOPE_STAGE_DECAY;
@@ -153,23 +164,23 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
         case ENVELOPE_STAGE_DECAY:
             _envelopeOutput = _decayOffset + _envelopeOutput * _decayCoeff;
             
-            if(_envelopeOutput <= _sustainLevel || _decayTime <= 0.0)
+            if(_envelopeOutput <= _normalizedSustainLevel || _normalizedDecayTime <= 0.0)
             {
-                _envelopeOutput = _sustainLevel;
+                _envelopeOutput = _normalizedSustainLevel;
                 _currentStage = ENVELOPE_STAGE_SUSTAIN;
             }
             
             break;
 
         case ENVELOPE_STAGE_SUSTAIN:
-            _envelopeOutput = _sustainLevel;
+            _envelopeOutput = _normalizedSustainLevel;
             
             break;
 
         case ENVELOPE_STAGE_RELEASE:
             _envelopeOutput = _releaseOffset + _envelopeOutput * _releaseCoeff;
             
-            if(_envelopeOutput <= 0.0 || _releaseTime <= 0.0)
+            if(_envelopeOutput <= 0.0 || _normalizedReleaseTime <= 0.0)
             {
                 _envelopeOutput = 0.0;
                 _currentStage = ENVELOPE_STAGE_IDLE;
