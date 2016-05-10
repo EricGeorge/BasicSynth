@@ -38,7 +38,7 @@
 
 - (void) updateVolume:(double)value
 {
-    _volumeSlider.value = _volumeParameter.value;
+    _volumeSlider.value = value;
     _volumeValue.text = [NSString stringWithFormat:@"%d%%", (uint8_t)_volumeSlider.value];    
 }
 
@@ -50,7 +50,7 @@
 
 - (void) updatePan:(double)value
 {
-    _panSlider.value = _panParameter.value;
+    _panSlider.value = value;
     _panValue.text = [NSString stringWithFormat:@"%.2f", _panSlider.value];    
 }
 

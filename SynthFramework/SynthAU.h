@@ -10,6 +10,4 @@
 
 @interface SynthAU : AUAudioUnit
 
-@property(nonatomic, assign) OscillatorWave selectedWaveform;
-
 @end

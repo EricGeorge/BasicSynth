@@ -17,53 +17,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8P-A9-NaM">
-                                <rect key="frame" x="223" y="48" width="154" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="154" id="0EV-jL-MkB"/>
-                                    <constraint firstAttribute="height" constant="43" id="vfl-i7-sdq"/>
-                                </constraints>
-                                <state key="normal" title="Change Waveform">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="waveformChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b3u-vL-wpB"/>
-                                </connections>
-                            </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGg-UQ-iB7">
-                                <rect key="frame" x="20" y="289" width="395" height="157"/>
-                                <connections>
-                                    <segue destination="O1O-ev-ww4" kind="embed" identifier="EnvVC" id="o5o-RY-oda"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMn-2C-70D">
-                                <rect key="frame" x="20" y="190" width="395" height="101"/>
+                                <rect key="frame" x="20" y="139" width="395" height="101"/>
                                 <connections>
                                     <segue destination="aWm-7K-TG4" kind="embed" identifier="dcaVC" id="fdF-nt-nMz"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byu-Uc-NIA">
-                                <rect key="frame" x="233" y="104" width="134" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="134" id="ybh-Dv-haQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hrq-Uy-FGv">
+                                <rect key="frame" x="20" y="13" width="395" height="128"/>
+                                <connections>
+                                    <segue destination="Blz-YU-9M9" kind="embed" identifier="oscVC" id="Ico-1R-p1n"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGg-UQ-iB7">
+                                <rect key="frame" x="20" y="238" width="395" height="157"/>
+                                <connections>
+                                    <segue destination="O1O-ev-ww4" kind="embed" identifier="EnvVC" id="o5o-RY-oda"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.58005560579470128" blue="0.27396684659247583" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Z8P-A9-NaM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="28" id="AUr-tT-Rcq"/>
-                            <constraint firstItem="Byu-Uc-NIA" firstAttribute="centerX" secondItem="Z8P-A9-NaM" secondAttribute="centerX" id="LfS-hg-OAh"/>
-                            <constraint firstItem="Byu-Uc-NIA" firstAttribute="top" secondItem="Z8P-A9-NaM" secondAttribute="bottom" constant="13" id="o7g-Ax-wEv"/>
-                            <constraint firstItem="Z8P-A9-NaM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rnd-Pl-0LJ"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="waveformButton" destination="Z8P-A9-NaM" id="9Na-CT-lcW"/>
-                        <outlet property="waveformLabel" destination="Byu-Uc-NIA" id="WWl-yD-vYB"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VJa-eF-BAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025.5" y="272.5"/>
+            <point key="canvasLocation" x="1018.5" y="397.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="10P-YI-NDe">
@@ -245,7 +219,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJU-Rb-V3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025.5" y="451"/>
+            <point key="canvasLocation" x="1018.5" y="233.5"/>
+        </scene>
+        <!--Oscillator View Controller-->
+        <scene sceneID="kUP-gh-mAE">
+            <objects>
+                <viewController id="Blz-YU-9M9" customClass="OscillatorViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wly-2V-RUX">
+                        <rect key="frame" x="0.0" y="0.0" width="395" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byu-Uc-NIA">
+                                <rect key="frame" x="130" y="76" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8P-A9-NaM">
+                                <rect key="frame" x="120" y="20" width="154" height="43"/>
+                                <state key="normal" title="Change Waveform">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="waveformChanged:" destination="Blz-YU-9M9" eventType="touchUpInside" id="9mi-h0-coU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="waveformButton" destination="Z8P-A9-NaM" id="hfb-aS-Z3a"/>
+                        <outlet property="waveformLabel" destination="Byu-Uc-NIA" id="0vk-qK-Vdf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tg6-PX-guo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018.5" y="85"/>
         </scene>
     </scenes>
 </document>

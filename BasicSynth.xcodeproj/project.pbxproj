@@ -17,6 +17,8 @@
 		071D1BF21CDD6D2000A762CC /* EnvelopeGeneratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BF01CDD6D2000A762CC /* EnvelopeGeneratorViewController.m */; };
 		071D1BF51CE1785200A762CC /* DCAViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 071D1BF31CE1785200A762CC /* DCAViewController.h */; };
 		071D1BF61CE1785200A762CC /* DCAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BF41CE1785200A762CC /* DCAViewController.m */; };
+		071D1BF91CE185CB00A762CC /* OscillatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 071D1BF71CE185CB00A762CC /* OscillatorViewController.h */; };
+		071D1BFA1CE185CB00A762CC /* OscillatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BF81CE185CB00A762CC /* OscillatorViewController.m */; };
 		07407EE71CD5A1D800BBE231 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EE61CD5A1D800BBE231 /* AudioEngine.m */; };
 		07407EED1CD5A1ED00BBE231 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEA1CD5A1ED00BBE231 /* MIDILogs.m */; };
 		07407EEE1CD5A1ED00BBE231 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEC1CD5A1ED00BBE231 /* MIDIManager.m */; };
@@ -110,6 +112,8 @@
 		071D1BF01CDD6D2000A762CC /* EnvelopeGeneratorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvelopeGeneratorViewController.m; path = SynthFramework/EnvelopeGenerator/EnvelopeGeneratorViewController.m; sourceTree = SOURCE_ROOT; };
 		071D1BF31CE1785200A762CC /* DCAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAViewController.h; path = SynthFramework/DCA/DCAViewController.h; sourceTree = SOURCE_ROOT; };
 		071D1BF41CE1785200A762CC /* DCAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCAViewController.m; path = SynthFramework/DCA/DCAViewController.m; sourceTree = SOURCE_ROOT; };
+		071D1BF71CE185CB00A762CC /* OscillatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscillatorViewController.h; path = SynthFramework/Oscillator/OscillatorViewController.h; sourceTree = SOURCE_ROOT; };
+		071D1BF81CE185CB00A762CC /* OscillatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OscillatorViewController.m; path = SynthFramework/Oscillator/OscillatorViewController.m; sourceTree = SOURCE_ROOT; };
 		07407EE51CD5A1D800BBE231 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioEngine.h; path = "BasicSynth/Audio Engine/AudioEngine.h"; sourceTree = SOURCE_ROOT; };
 		07407EE61CD5A1D800BBE231 /* AudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioEngine.m; path = "BasicSynth/Audio Engine/AudioEngine.m"; sourceTree = SOURCE_ROOT; };
 		07407EE81CD5A1ED00BBE231 /* MIDIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIConstants.h; path = BasicSynth/MIDI/MIDIConstants.h; sourceTree = SOURCE_ROOT; };
@@ -248,6 +252,8 @@
 			children = (
 				07FFA42A1CD7DC5500F03350 /* Oscillator.h */,
 				07FFA42B1CD7DC5500F03350 /* Oscillator.m */,
+				071D1BF71CE185CB00A762CC /* OscillatorViewController.h */,
+				071D1BF81CE185CB00A762CC /* OscillatorViewController.m */,
 			);
 			name = Oscillator;
 			path = ../SineSynth;
@@ -362,6 +368,7 @@
 				07FFA44C1CD7DD3200F03350 /* MIDIEvent.h in Headers */,
 				07FFA44D1CD7DD3200F03350 /* Oscillator.h in Headers */,
 				07FFA4511CD7DD3200F03350 /* SynthProc.hpp in Headers */,
+				071D1BF91CE185CB00A762CC /* OscillatorViewController.h in Headers */,
 				071D1BEC1CD9931E00A762CC /* EnvelopeGenerator.h in Headers */,
 				07FFA4521CD7DD3200F03350 /* Utility.hpp in Headers */,
 			);
@@ -519,6 +526,7 @@
 				071D1BED1CD9931E00A762CC /* EnvelopeGenerator.m in Sources */,
 				071D1BE31CD83DFF00A762CC /* DCA.m in Sources */,
 				071D1BF61CE1785200A762CC /* DCAViewController.m in Sources */,
+				071D1BFA1CE185CB00A762CC /* OscillatorViewController.m in Sources */,
 				07FFA4461CD7DD1B00F03350 /* Oscillator.m in Sources */,
 				07FFA4471CD7DD1B00F03350 /* SynthAU.mm in Sources */,
 				07FFA4491CD7DD1B00F03350 /* SynthProc.mm in Sources */,

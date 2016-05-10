@@ -13,23 +13,18 @@
 #import "SynthAU.h"
 #import "SynthConstants.h"
 
+#import "OscillatorViewController.h"
 #import "DCAViewController.h"
 #import "EnvelopeGeneratorViewController.h"
 
-static NSArray *_waveformNames;
-
 @interface SynthAUViewController ()
 {
-    IBOutlet UIButton *_waveformButton;
-    IBOutlet UILabel *_waveformLabel;
-    
-    AUParameter *_waveformParameter;
-    
     AUParameterObserverToken *_parameterObserverToken;
 }
 
-@property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
 @property (nonatomic, strong) DCAViewController *dcaVC;
+@property (nonatomic, strong) OscillatorViewController *oscVC;
+@property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
 
 @end
 
@@ -56,28 +51,23 @@ static NSArray *_waveformNames;
     
     if (parameterTree)
     {
-        _waveformParameter = [parameterTree valueForKey:waveformParamKey];
-
-        [self.envVC registerParameters:parameterTree];
+        [self.oscVC registerParameters:parameterTree];
         [self.dcaVC registerParameters:parameterTree];
+        [self.envVC registerParameters:parameterTree];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                if (address == _waveformParameter.address)
-                {
-                    [self updateWaveform];
-                }
                 
-                [self.envVC updateParameter:address andValue:value];
                 [self.dcaVC updateParameter:address andValue:value];
+                [self.oscVC updateParameter:address andValue:value];
+                [self.envVC updateParameter:address andValue:value];
                 
             });
         }];
         
-        [self updateWaveform];
-        
-        [self.envVC updateAllParameters];
+        [self.oscVC updateAllParameters];
         [self.dcaVC updateAllParameters];
+        [self.envVC updateAllParameters];
     }
 }
 
@@ -85,23 +75,16 @@ static NSArray *_waveformNames;
 {
     [super viewDidLoad];
 
-    [[_waveformButton layer] setBorderWidth:1.0f];
-    [[_waveformButton layer] setBorderColor:[UIColor blackColor].CGColor];
-    
     if (_audioUnit)
     {
         [self connectViewWithAU];
     }
 
-    _waveformNames = @[@"Sine", @"Sawtooth", @"Square", @"Triangle"];
-    
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    _waveformLabel.text = _waveformNames[waveform];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"EnvVC"])
+    if ([segue.identifier isEqualToString:@"envVC"])
     {
         self.envVC = (EnvelopeGeneratorViewController *)segue.destinationViewController;
     }
@@ -109,28 +92,10 @@ static NSArray *_waveformNames;
     {
         self.dcaVC = (DCAViewController *)segue.destinationViewController;
     }
-}
-
-- (void) updateWaveform
-{
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    _waveformLabel.text = _waveformNames[waveform];
-}
-
-- (IBAction)waveformChanged:(id)sender
-{
-    OscillatorWave waveform = self.audioUnit.selectedWaveform;
-    if (waveform == OSCILLATOR_WAVE_LAST)
+    else if ([segue.identifier isEqualToString:@"oscVC"])
     {
-        waveform = OSCILLATOR_WAVE_FIRST;
+        self.oscVC = (OscillatorViewController *)segue.destinationViewController;
     }
-    else
-    {
-        ++waveform;
-    }
-    
-    self.audioUnit.selectedWaveform = waveform;
-    _waveformLabel.text = _waveformNames[waveform];
 }
 
 @end
