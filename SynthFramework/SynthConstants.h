@@ -13,7 +13,9 @@ typedef NS_ENUM(NSInteger, InstrumentParam)
     InstrumentParamAttack,
     InstrumentParamDecay,
     InstrumentParamSustain,
-    InstrumentParamRelease
+    InstrumentParamRelease,
+    InstrumentParamCutoff,
+    InstrumentParamResonance
 };
 
 static NSString *volumeParamKey = @"volume";
@@ -23,3 +25,5 @@ static NSString *attackParamKey = @"attack";
 static NSString *decayParamKey = @"decay";
 static NSString *sustainParamKey = @"sustain";
 static NSString *releaseParamKey = @"release";
+static NSString *cutoffParamKey = @"cutoff";
+static NSString *resonanceParamKey = @"resonance";

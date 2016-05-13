@@ -21,6 +21,8 @@
 		071D1BFA1CE185CB00A762CC /* OscillatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BF81CE185CB00A762CC /* OscillatorViewController.m */; };
 		071D1BFD1CE276CD00A762CC /* Filter.h in Headers */ = {isa = PBXBuildFile; fileRef = 071D1BFB1CE276CD00A762CC /* Filter.h */; };
 		071D1BFE1CE276CD00A762CC /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1BFC1CE276CD00A762CC /* Filter.m */; };
+		071D1C021CE2865900A762CC /* FilterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 071D1C001CE2865900A762CC /* FilterViewController.h */; };
+		071D1C031CE2865900A762CC /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071D1C011CE2865900A762CC /* FilterViewController.m */; };
 		07407EE71CD5A1D800BBE231 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EE61CD5A1D800BBE231 /* AudioEngine.m */; };
 		07407EED1CD5A1ED00BBE231 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEA1CD5A1ED00BBE231 /* MIDILogs.m */; };
 		07407EEE1CD5A1ED00BBE231 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEC1CD5A1ED00BBE231 /* MIDIManager.m */; };
@@ -118,6 +120,8 @@
 		071D1BF81CE185CB00A762CC /* OscillatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OscillatorViewController.m; path = SynthFramework/Oscillator/OscillatorViewController.m; sourceTree = SOURCE_ROOT; };
 		071D1BFB1CE276CD00A762CC /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = SynthFramework/Filter/Filter.h; sourceTree = SOURCE_ROOT; };
 		071D1BFC1CE276CD00A762CC /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = SynthFramework/Filter/Filter.m; sourceTree = SOURCE_ROOT; };
+		071D1C001CE2865900A762CC /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterViewController.h; path = SynthFramework/Filter/FilterViewController.h; sourceTree = SOURCE_ROOT; };
+		071D1C011CE2865900A762CC /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterViewController.m; path = SynthFramework/Filter/FilterViewController.m; sourceTree = SOURCE_ROOT; };
 		07407EE51CD5A1D800BBE231 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioEngine.h; path = "BasicSynth/Audio Engine/AudioEngine.h"; sourceTree = SOURCE_ROOT; };
 		07407EE61CD5A1D800BBE231 /* AudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioEngine.m; path = "BasicSynth/Audio Engine/AudioEngine.m"; sourceTree = SOURCE_ROOT; };
 		07407EE81CD5A1ED00BBE231 /* MIDIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIConstants.h; path = BasicSynth/MIDI/MIDIConstants.h; sourceTree = SOURCE_ROOT; };
@@ -215,6 +219,8 @@
 			children = (
 				071D1BFB1CE276CD00A762CC /* Filter.h */,
 				071D1BFC1CE276CD00A762CC /* Filter.m */,
+				071D1C001CE2865900A762CC /* FilterViewController.h */,
+				071D1C011CE2865900A762CC /* FilterViewController.m */,
 			);
 			name = Filter;
 			sourceTree = "<group>";
@@ -377,6 +383,7 @@
 				071D1BFD1CE276CD00A762CC /* Filter.h in Headers */,
 				07FFA44E1CD7DD3200F03350 /* SynthAU.h in Headers */,
 				07FFA44F1CD7DD3200F03350 /* SynthAUViewController.h in Headers */,
+				071D1C021CE2865900A762CC /* FilterViewController.h in Headers */,
 				071D1BF51CE1785200A762CC /* DCAViewController.h in Headers */,
 				07FFA44A1CD7DD3200F03350 /* BufferedAudioBus.hpp in Headers */,
 				07FFA44B1CD7DD3200F03350 /* DSPKernel.hpp in Headers */,
@@ -538,6 +545,7 @@
 				07FFA4561CD7DFB800F03350 /* SynthAUViewController.m in Sources */,
 				071D1BFE1CE276CD00A762CC /* Filter.m in Sources */,
 				07FFA4441CD7DD1B00F03350 /* DSPKernel.mm in Sources */,
+				071D1C031CE2865900A762CC /* FilterViewController.m in Sources */,
 				07FFA4451CD7DD1B00F03350 /* MIDIEvent.m in Sources */,
 				071D1BED1CD9931E00A762CC /* EnvelopeGenerator.m in Sources */,
 				071D1BE31CD83DFF00A762CC /* DCA.m in Sources */,
