@@ -13,6 +13,7 @@
 @class Oscillator;
 @class DCA;
 @class EnvelopeGenerator;
+@class Filter;
 
 class SynthProc : public DSPKernel
 {
@@ -38,6 +39,7 @@ private:
     Oscillator *osc;
     DCA *dca;
     EnvelopeGenerator *env;
+    Filter *filter;
 };
 
 #endif /* SynthProc_hpp */

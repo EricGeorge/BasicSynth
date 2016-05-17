@@ -15,6 +15,7 @@
 #import "OscillatorViewController.h"
 #import "DCAViewController.h"
 #import "EnvelopeGeneratorViewController.h"
+#import "FilterViewController.h"
 
 @interface SynthAUViewController ()
 {
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) DCAViewController *dcaVC;
 @property (nonatomic, strong) OscillatorViewController *oscVC;
 @property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
+@property (nonatomic, strong) FilterViewController *filterVC;
 
 @end
 
@@ -53,6 +55,7 @@
         [self.oscVC registerParameters:parameterTree];
         [self.dcaVC registerParameters:parameterTree];
         [self.envVC registerParameters:parameterTree];
+        [self.filterVC registerParameters:parameterTree];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -60,6 +63,7 @@
                 [self.dcaVC updateParameter:address andValue:value];
                 [self.oscVC updateParameter:address andValue:value];
                 [self.envVC updateParameter:address andValue:value];
+                [self.filterVC updateParameter:address andValue:value];
                 
             });
         }];
@@ -67,6 +71,7 @@
         [self.oscVC updateAllParameters];
         [self.dcaVC updateAllParameters];
         [self.envVC updateAllParameters];
+        [self.filterVC updateAllParameters];
     }
 }
 
@@ -94,6 +99,10 @@
     else if ([segue.identifier isEqualToString:@"oscVC"])
     {
         self.oscVC = (OscillatorViewController *)segue.destinationViewController;
+    }
+    else if ([segue.identifier isEqualToString:@"filterVC"])
+    {
+        self.filterVC = (FilterViewController *)segue.destinationViewController;
     }
 }
 

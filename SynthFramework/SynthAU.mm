@@ -48,14 +48,17 @@
     
     // Create a parameter object for the volume.
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable;
+    
+    // oscillator
+    AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
+                                                                        address:InstrumentParamWaveform
+                                                                            min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
+                                                                          flags: flags valueStrings:nil dependentParameters:nil];
+    
+    // dca
     AUParameter *volumeParam = [AUParameterTree createParameterWithIdentifier:volumeParamKey name:@"Volume"
                                                                       address:InstrumentParamVolume
                                                                           min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
-                                                                        flags: flags valueStrings:nil dependentParameters:nil];
-    
-    AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
-                                                                      address:InstrumentParamWaveform
-                                                                          min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
     AUParameter *panParam = [AUParameterTree createParameterWithIdentifier:panParamKey name:@"Pan"
@@ -63,6 +66,7 @@
                                                                        min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Pan unitName:nil
                                                                      flags: flags valueStrings:nil dependentParameters:nil];
     
+    // envelope generator
     AUParameter *attackParam = [AUParameterTree createParameterWithIdentifier:attackParamKey name:@"Attack"
                                                                       address:InstrumentParamAttack
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
@@ -83,16 +87,31 @@
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
-    // Initialize the parameter values.
-    volumeParam.value = 100.0;
-    _kernel.setParameter(InstrumentParamVolume, volumeParam.value);
+    // filter
+    AUParameter *cutoffParam = [AUParameterTree createParameterWithIdentifier:cutoffParamKey name:@"Cutoff"
+                                                                      address:InstrumentParamCutoff
+                                                                          min:0 max:0.99 unit:kAudioUnitParameterUnit_Generic unitName:nil
+                                                                        flags: flags valueStrings:nil dependentParameters:nil];
+
+    AUParameter *resonanceParam = [AUParameterTree createParameterWithIdentifier:resonanceParamKey name:@"Resonance"
+                                                                   address:InstrumentParamResonance
+                                                                       min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Generic unitName:nil
+                                                                     flags: flags valueStrings:nil dependentParameters:nil];
     
+
+    
+    // oscillator
     waveformParam.value = 0;
     _kernel.setParameter(InstrumentParamWaveform, waveformParam.value);
+    
+    // dca
+    volumeParam.value = 100.0;
+    _kernel.setParameter(InstrumentParamVolume, volumeParam.value);
     
     panParam.value = 0;
     _kernel.setParameter(InstrumentParamPan, panParam.value);
     
+    // envelope generator
     attackParam.value = 100;
     _kernel.setParameter(InstrumentParamAttack, attackParam.value);
     
@@ -105,15 +124,31 @@
     releaseParam.value = 1000;
     _kernel.setParameter(InstrumentParamRelease, releaseParam.value);
     
+    // filter
+    cutoffParam.value = 0.99;
+    _kernel.setParameter(InstrumentParamCutoff, cutoffParam.value);
+    
+    resonanceParam.value = 0.0;
+    _kernel.setParameter(InstrumentParamResonance, resonanceParam.value);
+    
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
-                                                               volumeParam,
+                                                               // oscillator
                                                                waveformParam,
+                                                               
+                                                               // dca
+                                                               volumeParam,
                                                                panParam,
+                                                               
+                                                               // envelope generator
                                                                attackParam,
                                                                decayParam,
                                                                sustainParam,
-                                                               releaseParam
+                                                               releaseParam,
+                                                               
+                                                               // filter
+                                                               cutoffParam,
+                                                               resonanceParam
                                                                ]];
 
     // Create the output bus.
@@ -144,6 +179,8 @@
         {
             case InstrumentParamVolume:
             case InstrumentParamPan:
+            case InstrumentParamCutoff:
+            case InstrumentParamResonance:
             {
                 return [NSString stringWithFormat:@"%.3f", value];
             }
