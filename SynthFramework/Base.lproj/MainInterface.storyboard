@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -18,27 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hrq-Uy-FGv">
-                                <rect key="frame" x="20" y="13" width="395" height="100"/>
+                                <rect key="frame" x="20" y="0.0" width="395" height="100"/>
                                 <connections>
-                                    <segue destination="Blz-YU-9M9" kind="embed" identifier="envVC" id="Ico-1R-p1n"/>
+                                    <segue destination="Blz-YU-9M9" kind="embed" identifier="oscVC" id="Ico-1R-p1n"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGg-UQ-iB7">
-                                <rect key="frame" x="20" y="211" width="395" height="157"/>
+                                <rect key="frame" x="20" y="198" width="395" height="157"/>
                                 <connections>
-                                    <segue destination="O1O-ev-ww4" kind="embed" identifier="oscVC" id="o5o-RY-oda"/>
+                                    <segue destination="O1O-ev-ww4" kind="embed" identifier="ampEnvVC" id="o5o-RY-oda"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMn-2C-70D">
-                                <rect key="frame" x="20" y="112" width="395" height="101"/>
+                                <rect key="frame" x="20" y="99" width="395" height="101"/>
                                 <connections>
                                     <segue destination="aWm-7K-TG4" kind="embed" identifier="dcaVC" id="fdF-nt-nMz"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CXo-UX-Ef4">
-                                <rect key="frame" x="20" y="366" width="395" height="103"/>
+                                <rect key="frame" x="20" y="353" width="395" height="103"/>
                                 <connections>
                                     <segue destination="WxK-xs-7j9" kind="embed" identifier="filterVC" id="mga-vM-hEm"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bQ6-ho-kKu">
+                                <rect key="frame" x="20" y="453" width="395" height="147"/>
+                                <connections>
+                                    <segue destination="DXq-BM-2V2" kind="embed" identifier="filterEnvVC" id="kf0-ke-5az"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -49,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="318" y="273"/>
         </scene>
-        <!--Envelope Generator View Controller-->
+        <!--Amp EnvelopeView Controller-->
         <scene sceneID="a1Q-hy-twa">
             <objects>
-                <viewController id="O1O-ev-ww4" userLabel="Envelope Generator View Controller" customClass="EnvelopeGeneratorViewController" sceneMemberID="viewController">
+                <viewController id="O1O-ev-ww4" userLabel="Amp EnvelopeView Controller" customClass="AmpEnvelopeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CjY-fM-y8h"/>
                         <viewControllerLayoutGuide type="bottom" id="1Gz-FW-GKC"/>
@@ -167,12 +173,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VJa-eF-BAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1018.5" y="397.5"/>
+            <point key="canvasLocation" x="1020.5" y="242.5"/>
         </scene>
-        <!--View Controller-->
+        <!--DCA View Controller-->
         <scene sceneID="10P-YI-NDe">
             <objects>
-                <viewController id="aWm-7K-TG4" customClass="DCAViewController" sceneMemberID="viewController">
+                <viewController id="aWm-7K-TG4" userLabel="DCA View Controller" customClass="DCAViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qxs-xT-XQH"/>
                         <viewControllerLayoutGuide type="bottom" id="ozk-Q8-3uN"/>
@@ -229,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJU-Rb-V3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1018.5" y="233.5"/>
+            <point key="canvasLocation" x="1020.5" y="76.5"/>
         </scene>
         <!--Oscillator View Controller-->
         <scene sceneID="kUP-gh-mAE">
@@ -268,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tg6-PX-guo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1018.5" y="85"/>
+            <point key="canvasLocation" x="1020.5" y="-62"/>
         </scene>
         <!--Filter View Controller-->
         <scene sceneID="fKr-cj-ggN">
@@ -330,7 +336,127 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xyj-ZH-cX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1018.5" y="572.5"/>
+            <point key="canvasLocation" x="1020.5" y="410.5"/>
+        </scene>
+        <!--Filter Envelope View Controller-->
+        <scene sceneID="ByX-rb-raO">
+            <objects>
+                <viewController id="DXq-BM-2V2" customClass="FilterEnvelopeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FrY-z7-9T5"/>
+                        <viewControllerLayoutGuide type="bottom" id="KeB-9f-6nm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oQn-8f-REa">
+                        <rect key="frame" x="0.0" y="0.0" width="395" height="147"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Attack:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtb-zb-d4F">
+                                <rect key="frame" x="21" y="20" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="rjU-dn-wFb" userLabel="Attack Slider">
+                                <rect key="frame" x="86" y="16" width="176" height="31"/>
+                                <connections>
+                                    <action selector="attackSliderChanged:" destination="DXq-BM-2V2" eventType="valueChanged" id="pNa-bX-Rr0"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kN-xQ-jbu" userLabel="Attack Value">
+                                <rect key="frame" x="283" y="20" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mSec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRh-Rv-zst" userLabel="Attack mSec">
+                                <rect key="frame" x="335" y="20" width="44" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Decay:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0md-hV-4Gl">
+                                <rect key="frame" x="22" y="52" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-DV-aow" userLabel="Decay Slider">
+                                <rect key="frame" x="86" y="49" width="176" height="31"/>
+                                <connections>
+                                    <action selector="decaySliderChanged:" destination="DXq-BM-2V2" eventType="valueChanged" id="Rf6-va-JQn"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMS-WV-hnR" userLabel="Decay Value">
+                                <rect key="frame" x="283" y="52" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mSec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypL-0e-C0C" userLabel="Decay mSec">
+                                <rect key="frame" x="335" y="52" width="44" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sustain:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8Q-6a-DoF">
+                                <rect key="frame" x="13" y="83" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="75" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="MPT-Ap-yHQ" userLabel="Sustain Slider">
+                                <rect key="frame" x="86" y="81" width="176" height="31"/>
+                                <connections>
+                                    <action selector="sustainSliderChanged:" destination="DXq-BM-2V2" eventType="valueChanged" id="EzO-U3-fwh"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fof-4s-V1n" userLabel="Sustain Value">
+                                <rect key="frame" x="283" y="83" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Release:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmq-xp-WJ6">
+                                <rect key="frame" x="10" y="114" width="65" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="y9b-oT-BOv" userLabel="Release Slider">
+                                <rect key="frame" x="86" y="112" width="176" height="31"/>
+                                <connections>
+                                    <action selector="releaseSliderChanged:" destination="DXq-BM-2V2" eventType="valueChanged" id="YGZ-dK-cfg"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TA6-Ui-tGX" userLabel="Release Value">
+                                <rect key="frame" x="283" y="114" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mSec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJy-45-Fbw" userLabel="Release mSec">
+                                <rect key="frame" x="335" y="114" width="44" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92471313479999995" green="0.70407873389999998" blue="0.2813110352" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="attackSlider" destination="rjU-dn-wFb" id="Ous-qB-5gC"/>
+                        <outlet property="attackValue" destination="5kN-xQ-jbu" id="Njr-y0-SaE"/>
+                        <outlet property="decaySlider" destination="e5H-DV-aow" id="vCa-cc-Jac"/>
+                        <outlet property="decayValue" destination="WMS-WV-hnR" id="g4Y-76-Rdb"/>
+                        <outlet property="releaseSlider" destination="y9b-oT-BOv" id="taH-rv-q4N"/>
+                        <outlet property="releaseValue" destination="TA6-Ui-tGX" id="DoJ-Jn-QhO"/>
+                        <outlet property="sustainSlider" destination="MPT-Ap-yHQ" id="pwL-ci-Zjw"/>
+                        <outlet property="sustainValue" destination="Fof-4s-V1n" id="ogZ-6I-cPh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v99-zI-pTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020.5" y="572.5"/>
         </scene>
     </scenes>
 </document>

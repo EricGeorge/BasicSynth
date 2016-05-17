@@ -66,17 +66,17 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
             dca.pan = value;
             break;
             
-        // envelope generator
-        case InstrumentParamAttack:
+        // amp env
+        case InstrumentParamAmpEnvAttack:
             ampEnv.attackTime = value;
             break;
-        case InstrumentParamDecay:
+        case InstrumentParamAmpEnvDecay:
             ampEnv.decayTime = value;
             break;
-        case InstrumentParamSustain:
+        case InstrumentParamAmpEnvSustain:
             ampEnv.sustainLevel= value;
             break;
-        case InstrumentParamRelease:
+        case InstrumentParamAmpEnvRelease:
             ampEnv.releaseTime = value;
             break;
             
@@ -87,6 +87,21 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
         case InstrumentParamResonance:
             filter.resonance = value;
             break;
+            
+            // filter env
+        case InstrumentParamFilterEnvAttack:
+            filterEnv.attackTime = value;
+            break;
+        case InstrumentParamFilterEnvDecay:
+            filterEnv.decayTime = value;
+            break;
+        case InstrumentParamFilterEnvSustain:
+            filterEnv.sustainLevel= value;
+            break;
+        case InstrumentParamFilterEnvRelease:
+            filterEnv.releaseTime = value;
+            break;
+            
     }
 }
 
@@ -109,17 +124,17 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
             value = dca.pan;
             break;
             
-        // envelope generator
-        case InstrumentParamAttack:
+        // amp env
+        case InstrumentParamAmpEnvAttack:
             value = ampEnv.attackTime;
             break;
-        case InstrumentParamDecay:
+        case InstrumentParamAmpEnvDecay:
             value = ampEnv.decayTime;
             break;
-        case InstrumentParamSustain:
+        case InstrumentParamAmpEnvSustain:
             value = ampEnv.sustainLevel;
             break;
-        case InstrumentParamRelease:
+        case InstrumentParamAmpEnvRelease:
             value = ampEnv.releaseTime;
             break;
             
@@ -130,6 +145,22 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
         case InstrumentParamResonance:
             value = filter.resonance;
             break;
+            
+        // amp env
+        case InstrumentParamFilterEnvAttack:
+            value = filterEnv.attackTime;
+            break;
+        case InstrumentParamFilterEnvDecay:
+            value = filterEnv.decayTime;
+            break;
+        case InstrumentParamFilterEnvSustain:
+            value = filterEnv.sustainLevel;
+            break;
+        case InstrumentParamFilterEnvRelease:
+            value = filterEnv.releaseTime;
+            break;
+            
+            
     }
     
     return value;

@@ -9,6 +9,14 @@
 
 #import "SynthAUViewController.h"
 
-@interface EnvelopeGeneratorViewController : UIViewController<SynthComponentDelegate>
+@interface EnvelopeGeneratorViewController : UIViewController
+
+@property (nonatomic, strong) AUParameter *attackParameter;
+@property (nonatomic, strong) AUParameter *decayParameter;
+@property (nonatomic, strong) AUParameter *sustainParameter;
+@property (nonatomic, strong) AUParameter *releaseParameter;
+
+- (void) updateParameter:(AUParameterAddress)address andValue:(AUValue)value;
+- (void) updateAllParameters;
 
 @end

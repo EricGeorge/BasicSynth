@@ -63,8 +63,8 @@
 
 - (void) calculate
 {
-    _feedback = _resonance + _resonance/(1.0 - _cutoff);
-    _modulatedCutoff = fmax(fmin(_cutoff + _envGain, 0.99), 0.01);
+    _modulatedCutoff = fmax(fmin(_cutoff * _envGain, 0.99), 0.01);
+    _feedback = _resonance + _resonance/(1.0 - _modulatedCutoff);
 }
 
 - (double) process:(double) input;

@@ -14,8 +14,9 @@
 
 #import "OscillatorViewController.h"
 #import "DCAViewController.h"
-#import "EnvelopeGeneratorViewController.h"
+#import "AmpEnvelopeViewController.h"
 #import "FilterViewController.h"
+#import "FilterEnvelopeViewController.h"
 
 @interface SynthAUViewController ()
 {
@@ -24,8 +25,9 @@
 
 @property (nonatomic, strong) DCAViewController *dcaVC;
 @property (nonatomic, strong) OscillatorViewController *oscVC;
-@property (nonatomic, strong) EnvelopeGeneratorViewController *envVC;
+@property (nonatomic, strong) AmpEnvelopeViewController *ampEnvVC;
 @property (nonatomic, strong) FilterViewController *filterVC;
+@property (nonatomic, strong) FilterEnvelopeViewController *filterEnvVC;
 
 @end
 
@@ -54,24 +56,27 @@
     {
         [self.oscVC registerParameters:parameterTree];
         [self.dcaVC registerParameters:parameterTree];
-        [self.envVC registerParameters:parameterTree];
+        [self.ampEnvVC registerParameters:parameterTree];
         [self.filterVC registerParameters:parameterTree];
+        [self.filterEnvVC registerParameters:parameterTree];
         
         _parameterObserverToken = [parameterTree tokenByAddingParameterObserver:^(AUParameterAddress address, AUValue value) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
                 [self.dcaVC updateParameter:address andValue:value];
                 [self.oscVC updateParameter:address andValue:value];
-                [self.envVC updateParameter:address andValue:value];
+                [self.ampEnvVC updateParameter:address andValue:value];
                 [self.filterVC updateParameter:address andValue:value];
+                [self.filterEnvVC updateParameter:address andValue:value];
                 
             });
         }];
         
         [self.oscVC updateAllParameters];
         [self.dcaVC updateAllParameters];
-        [self.envVC updateAllParameters];
+        [self.ampEnvVC updateAllParameters];
         [self.filterVC updateAllParameters];
+        [self.filterEnvVC updateAllParameters];
     }
 }
 
@@ -88,9 +93,13 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"envVC"])
+    if ([segue.identifier isEqualToString:@"filterEnvVC"])
     {
-        self.envVC = (EnvelopeGeneratorViewController *)segue.destinationViewController;
+        self.filterEnvVC = (FilterEnvelopeViewController *)segue.destinationViewController;
+    }
+    if ([segue.identifier isEqualToString:@"ampEnvVC"])
+    {
+        self.ampEnvVC = (AmpEnvelopeViewController *)segue.destinationViewController;
     }
     else if ([segue.identifier isEqualToString:@"dcaVC"])
     {

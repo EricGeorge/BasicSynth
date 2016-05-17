@@ -11,12 +11,6 @@
 #import "SynthConstants.h"
 
 @interface EnvelopeGeneratorViewController ()
-{
-    AUParameter *_attackParameter;
-    AUParameter *_decayParameter;
-    AUParameter *_sustainParameter;
-    AUParameter *_releaseParameter;
-}
 
 @property (strong, nonatomic) IBOutlet UISlider *attackSlider;
 @property (strong, nonatomic) IBOutlet UILabel *attackValue;
@@ -100,14 +94,6 @@
 {
     _releaseSlider.value = log10(value);
     _releaseValue.text = [NSString stringWithFormat:@"%d", (uint16_t)value];
-}
-
-- (void) registerParameters:(AUParameterTree *)parameterTree
-{
-    _attackParameter = [parameterTree valueForKey:attackParamKey];
-    _decayParameter = [parameterTree valueForKey:decayParamKey];
-    _sustainParameter = [parameterTree valueForKey:sustainParamKey];
-    _releaseParameter = [parameterTree valueForKey:releaseParamKey];
 }
 
 - (void) updateParameter:(AUParameterAddress)address andValue:(AUValue)value
