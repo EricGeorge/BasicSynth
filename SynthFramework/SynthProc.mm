@@ -31,13 +31,17 @@ void SynthProc::init(int channelCount, double inSampleRate)
     // dca
     dca = [[DCA alloc] init];
     
-    // env
-    env = [[EnvelopeGenerator alloc] init];
-    env.sampleRate = sampleRate;
+    // amp env
+    ampEnv = [[EnvelopeGenerator alloc] init];
+    ampEnv.sampleRate = sampleRate;
     
     // filter
     filter = [[Filter alloc] init];
     filter.sampleRate = sampleRate;
+    
+    // filter env
+    filterEnv = [[EnvelopeGenerator alloc] init];
+    filterEnv.sampleRate = sampleRate;
 }
 
 void SynthProc::reset()
@@ -64,16 +68,16 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
             
         // envelope generator
         case InstrumentParamAttack:
-            env.attackTime = value;
+            ampEnv.attackTime = value;
             break;
         case InstrumentParamDecay:
-            env.decayTime = value;
+            ampEnv.decayTime = value;
             break;
         case InstrumentParamSustain:
-            env.sustainLevel= value;
+            ampEnv.sustainLevel= value;
             break;
         case InstrumentParamRelease:
-            env.releaseTime = value;
+            ampEnv.releaseTime = value;
             break;
             
         // filter
@@ -107,16 +111,16 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
             
         // envelope generator
         case InstrumentParamAttack:
-            value = env.attackTime;
+            value = ampEnv.attackTime;
             break;
         case InstrumentParamDecay:
-            value = env.decayTime;
+            value = ampEnv.decayTime;
             break;
         case InstrumentParamSustain:
-            value = env.sustainLevel;
+            value = ampEnv.sustainLevel;
             break;
         case InstrumentParamRelease:
-            value = env.releaseTime;
+            value = ampEnv.releaseTime;
             break;
             
         // filter
@@ -151,12 +155,14 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 //            NSLog(@"Instrument received unhandled MIDI event");
             break;
         case MIDIMessageType_NoteOff:
-            [env stop];
+            [ampEnv stop];
+            [filterEnv stop];
             break;
         case MIDIMessageType_NoteOn:
             osc.frequency = noteToHz(event.data1);
             dca.midiVelocity = event.data2;
-            [env start];
+            [ampEnv start];
+            [filterEnv start];
             break;
     }
 }
@@ -181,8 +187,11 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
         // oscillator + filter
         inL = inR = [filter process:[osc nextSample]];
         
-        // env
-        [dca setEnvGain: [env nextSample]];
+        // amp env
+        [dca setEnvGain: [ampEnv nextSample]];
+        
+        // filter env
+        [filter setEnvGain: [filterEnv nextSample]];
         
         // dca
         [dca process:inL rightInput:inR leftOutput:&outL rightOutput:&outR];

@@ -12,6 +12,7 @@
     double _buf0;
     double _buf1;
     double _feedback;
+    double _modulatedCutoff;
 }
 
 @end
@@ -25,6 +26,7 @@
         _buf0 = 0.0;
         _buf1 = 0.0;
         _feedback = 0.0;
+        _modulatedCutoff = 0.0;
         
         self.cutoff = 0.99;
         self.resonance = 0.0;
@@ -52,15 +54,23 @@
     [self calculate];
 }
 
+- (void) setEnvGain:(double)envGain
+{
+    _envGain = envGain;
+    
+    [self calculate];
+}
+
 - (void) calculate
 {
     _feedback = _resonance + _resonance/(1.0 - _cutoff);
+    _modulatedCutoff = fmax(fmin(_cutoff + _envGain, 0.99), 0.01);
 }
 
 - (double) process:(double) input;
 {
-    _buf0 += _cutoff * (input - _buf0 + _feedback * (_buf0 - _buf1));
-    _buf1 += _cutoff * (_buf0 - _buf1);
+    _buf0 += _modulatedCutoff * (input - _buf0 + _feedback * (_buf0 - _buf1));
+    _buf1 += _modulatedCutoff * (_buf0 - _buf1);
         
     // hard code LP for now
     return _buf1;

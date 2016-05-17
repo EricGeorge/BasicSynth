@@ -38,7 +38,8 @@ private:
     
     Oscillator *osc;
     DCA *dca;
-    EnvelopeGenerator *env;
+    EnvelopeGenerator *ampEnv;
+    EnvelopeGenerator *filterEnv;
     Filter *filter;
 };
 
