@@ -34,6 +34,10 @@ void SynthProc::init(int channelCount, double inSampleRate)
     // env
     env = [[EnvelopeGenerator alloc] init];
     env.sampleRate = sampleRate;
+    
+    // filter
+    filter = [[Filter alloc] init];
+    filter.sampleRate = sampleRate;
 }
 
 void SynthProc::reset()
@@ -71,6 +75,14 @@ void SynthProc::setParameter(AUParameterAddress address, AUValue value)
         case InstrumentParamRelease:
             env.releaseTime = value;
             break;
+            
+        // filter
+        case InstrumentParamCutoff:
+            filter.cutoff = value;
+            break;
+        case InstrumentParamResonance:
+            filter.resonance = value;
+            break;
     }
 }
 
@@ -105,6 +117,14 @@ AUValue SynthProc::getParameter(AUParameterAddress address)
             break;
         case InstrumentParamRelease:
             value = env.releaseTime;
+            break;
+            
+        // filter
+        case InstrumentParamCutoff:
+            value = filter.cutoff;
+            break;
+        case InstrumentParamResonance:
+            value = filter.resonance;
             break;
     }
     
@@ -158,9 +178,6 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
         outL = 0.0;
         outR = 0.0;
         
-//        // oscillator
-//        inL = inR = [osc nextSample];
-//        
         // oscillator + filter
         inL = inR = [filter process:[osc nextSample]];
         

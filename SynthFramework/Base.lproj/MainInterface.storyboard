@@ -38,7 +38,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CXo-UX-Ef4">
                                 <rect key="frame" x="20" y="366" width="395" height="103"/>
                                 <connections>
-                                    <segue destination="WxK-xs-7j9" kind="embed" id="mga-vM-hEm"/>
+                                    <segue destination="WxK-xs-7j9" kind="embed" identifier="filterVC" id="mga-vM-hEm"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -270,18 +270,22 @@
             </objects>
             <point key="canvasLocation" x="1018.5" y="85"/>
         </scene>
-        <!--View Controller-->
+        <!--Filter View Controller-->
         <scene sceneID="fKr-cj-ggN">
             <objects>
-                <viewController id="WxK-xs-7j9" sceneMemberID="viewController">
+                <viewController id="WxK-xs-7j9" customClass="FilterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HNd-bL-JYU"/>
+                        <viewControllerLayoutGuide type="bottom" id="IZO-fV-IvA"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uHw-bQ-TVT">
                         <rect key="frame" x="0.0" y="0.0" width="395" height="103"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hib-Ok-MdC">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.98999999999999999" minValue="0.0" maxValue="0.98999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="hib-Ok-MdC">
                                 <rect key="frame" x="89" y="16" width="176" height="31"/>
                                 <connections>
-                                    <action selector="volumeChanged:" destination="aWm-7K-TG4" eventType="valueChanged" id="DBS-Mr-3w2"/>
+                                    <action selector="cutoffChanged:" destination="WxK-xs-7j9" eventType="valueChanged" id="pCE-sT-zge"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cutoff:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eva-dg-Jmb">
@@ -290,12 +294,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5MY-lX-Uwc" userLabel="Pan Slider">
-                                <rect key="frame" x="89" y="56" width="176" height="31"/>
-                                <connections>
-                                    <action selector="panChanged:" destination="aWm-7K-TG4" eventType="valueChanged" id="deB-9X-Txh"/>
-                                </connections>
-                            </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Q:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h9-wP-jUE">
                                 <rect key="frame" x="49" y="59" width="18" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -303,24 +301,36 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtd-eC-4DF" userLabel="Pan Value">
-                                <rect key="frame" x="283" y="61" width="42" height="21"/>
+                                <rect key="frame" x="283" y="61" width="64" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100%" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXi-kl-ZRk" userLabel="Volume Value">
-                                <rect key="frame" x="283" y="20" width="42" height="21"/>
+                                <rect key="frame" x="283" y="20" width="64" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5MY-lX-Uwc" userLabel="Pan Slider">
+                                <rect key="frame" x="89" y="57" width="176" height="31"/>
+                                <connections>
+                                    <action selector="resonanceChanged:" destination="WxK-xs-7j9" eventType="valueChanged" id="KuQ-lG-0JS"/>
+                                </connections>
+                            </slider>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.58005560580000004" blue="0.27396684659999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="cutoffSlider" destination="hib-Ok-MdC" id="Bd8-TW-Avm"/>
+                        <outlet property="cutoffValue" destination="NXi-kl-ZRk" id="U7r-qc-QBW"/>
+                        <outlet property="resonanceSlider" destination="5MY-lX-Uwc" id="tdk-N5-5gp"/>
+                        <outlet property="resonanceValue" destination="qtd-eC-4DF" id="qbq-pq-1hi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xyj-ZH-cX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1018.5" y="573"/>
+            <point key="canvasLocation" x="1018.5" y="572.5"/>
         </scene>
     </scenes>
 </document>

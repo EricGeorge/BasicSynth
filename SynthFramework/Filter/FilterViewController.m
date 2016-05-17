@@ -16,6 +16,11 @@
     AUParameter *_resonanceParameter;
 }
 
+@property (strong, nonatomic) IBOutlet UISlider *cutoffSlider;
+@property (strong, nonatomic) IBOutlet UILabel *cutoffValue;
+@property (strong, nonatomic) IBOutlet UISlider *resonanceSlider;
+@property (strong, nonatomic) IBOutlet UILabel *resonanceValue;
+
 @end
 
 @implementation FilterViewController
@@ -34,20 +39,32 @@
 
 - (void) updateCutoff:(double)value
 {
-    
+    _cutoffSlider.value = value;
+    _cutoffValue.text = [NSString stringWithFormat:@"%.3f", _cutoffSlider.value];
 }
 
+- (IBAction)cutoffChanged:(UISlider *)sender
+{
+    _cutoffParameter.value =  sender.value;
+    _cutoffValue.text = [NSString stringWithFormat:@"%.3f", _cutoffSlider.value];
+}
 
 - (void) updateResonance:(double)value
 {
-    
+    _resonanceSlider.value = value;
+    _resonanceValue.text = [NSString stringWithFormat:@"%.3f", _resonanceSlider.value];
 }
 
+- (IBAction)resonanceChanged:(UISlider *)sender
+{
+    _resonanceParameter.value =  sender.value;
+    _resonanceValue.text = [NSString stringWithFormat:@"%.3f", _resonanceSlider.value];
+}
 
 - (void) registerParameters:(AUParameterTree *)parameterTree
 {
-    _cutoffParameter = [parameterTree valueForKey:volumeParamKey];
-    _resonanceParameter = [parameterTree valueForKey:panParamKey];
+    _cutoffParameter = [parameterTree valueForKey:cutoffParamKey];
+    _resonanceParameter = [parameterTree valueForKey:resonanceParamKey];
 }
 
 - (void) updateParameter:(AUParameterAddress)address andValue:(AUValue)value
