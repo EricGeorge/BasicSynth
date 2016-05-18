@@ -27,6 +27,8 @@
 		072B81E71CEBB6380071159D /* AmpEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072B81E51CEBB6380071159D /* AmpEnvelopeViewController.m */; };
 		072B81EA1CEBBC800071159D /* FilterEnvelopeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 072B81E81CEBBC800071159D /* FilterEnvelopeViewController.h */; };
 		072B81EB1CEBBC800071159D /* FilterEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072B81E91CEBBC800071159D /* FilterEnvelopeViewController.m */; };
+		072B81EE1CEBFE790071159D /* Voice.h in Headers */ = {isa = PBXBuildFile; fileRef = 072B81EC1CEBFE790071159D /* Voice.h */; };
+		072B81EF1CEBFE790071159D /* Voice.m in Sources */ = {isa = PBXBuildFile; fileRef = 072B81ED1CEBFE790071159D /* Voice.m */; };
 		07407EE71CD5A1D800BBE231 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EE61CD5A1D800BBE231 /* AudioEngine.m */; };
 		07407EED1CD5A1ED00BBE231 /* MIDILogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEA1CD5A1ED00BBE231 /* MIDILogs.m */; };
 		07407EEE1CD5A1ED00BBE231 /* MIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07407EEC1CD5A1ED00BBE231 /* MIDIManager.m */; };
@@ -130,6 +132,8 @@
 		072B81E51CEBB6380071159D /* AmpEnvelopeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AmpEnvelopeViewController.m; path = SynthFramework/EnvelopeGenerator/AmpEnvelopeViewController.m; sourceTree = SOURCE_ROOT; };
 		072B81E81CEBBC800071159D /* FilterEnvelopeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterEnvelopeViewController.h; path = SynthFramework/EnvelopeGenerator/FilterEnvelopeViewController.h; sourceTree = SOURCE_ROOT; };
 		072B81E91CEBBC800071159D /* FilterEnvelopeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterEnvelopeViewController.m; path = SynthFramework/EnvelopeGenerator/FilterEnvelopeViewController.m; sourceTree = SOURCE_ROOT; };
+		072B81EC1CEBFE790071159D /* Voice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Voice.h; path = SynthFramework/Voice/Voice.h; sourceTree = SOURCE_ROOT; };
+		072B81ED1CEBFE790071159D /* Voice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Voice.m; path = SynthFramework/Voice/Voice.m; sourceTree = SOURCE_ROOT; };
 		07407EE51CD5A1D800BBE231 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioEngine.h; path = "BasicSynth/Audio Engine/AudioEngine.h"; sourceTree = SOURCE_ROOT; };
 		07407EE61CD5A1D800BBE231 /* AudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioEngine.m; path = "BasicSynth/Audio Engine/AudioEngine.m"; sourceTree = SOURCE_ROOT; };
 		07407EE81CD5A1ED00BBE231 /* MIDIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIConstants.h; path = BasicSynth/MIDI/MIDIConstants.h; sourceTree = SOURCE_ROOT; };
@@ -237,6 +241,15 @@
 			name = Filter;
 			sourceTree = "<group>";
 		};
+		072B81F01CEBFE7E0071159D /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				072B81EC1CEBFE790071159D /* Voice.h */,
+				072B81ED1CEBFE790071159D /* Voice.m */,
+			);
+			name = Voice;
+			sourceTree = "<group>";
+		};
 		075D4F001CCB232D001D95E4 /* SynthExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +312,7 @@
 				071D1BFF1CE276D200A762CC /* Filter */,
 				075F69C11CCD904400C7E651 /* MIDIEvent */,
 				07DBB1521CC83B0E00D68648 /* Oscillator */,
+				072B81F01CEBFE7E0071159D /* Voice */,
 				07FFA42E1CD7DC7100F03350 /* SynthAU.h */,
 				07FFA42F1CD7DC7100F03350 /* SynthAU.mm */,
 				07FFA4341CD7DC7100F03350 /* SynthProc.hpp */,
@@ -395,6 +409,7 @@
 				071D1BFD1CE276CD00A762CC /* Filter.h in Headers */,
 				07FFA44E1CD7DD3200F03350 /* SynthAU.h in Headers */,
 				07FFA44F1CD7DD3200F03350 /* SynthAUViewController.h in Headers */,
+				072B81EE1CEBFE790071159D /* Voice.h in Headers */,
 				071D1C021CE2865900A762CC /* FilterViewController.h in Headers */,
 				071D1BF51CE1785200A762CC /* DCAViewController.h in Headers */,
 				07FFA44A1CD7DD3200F03350 /* BufferedAudioBus.hpp in Headers */,
@@ -564,6 +579,7 @@
 				071D1C031CE2865900A762CC /* FilterViewController.m in Sources */,
 				07FFA4451CD7DD1B00F03350 /* MIDIEvent.m in Sources */,
 				071D1BED1CD9931E00A762CC /* EnvelopeGenerator.m in Sources */,
+				072B81EF1CEBFE790071159D /* Voice.m in Sources */,
 				071D1BE31CD83DFF00A762CC /* DCA.m in Sources */,
 				071D1BF61CE1785200A762CC /* DCAViewController.m in Sources */,
 				071D1BFA1CE185CB00A762CC /* OscillatorViewController.m in Sources */,
