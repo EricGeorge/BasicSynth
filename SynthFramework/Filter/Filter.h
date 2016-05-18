@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign) double cutoff;
 @property (nonatomic, assign) double resonance;
+@property (nonatomic, assign) double envGain;
 
 - (double) process:(double)input;
 

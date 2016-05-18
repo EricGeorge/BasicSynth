@@ -66,24 +66,24 @@
                                                                        min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Pan unitName:nil
                                                                      flags: flags valueStrings:nil dependentParameters:nil];
     
-    // envelope generator
-    AUParameter *attackParam = [AUParameterTree createParameterWithIdentifier:attackParamKey name:@"Attack"
-                                                                      address:InstrumentParamAttack
+    // amp env
+    AUParameter *ampEnvAttackParam = [AUParameterTree createParameterWithIdentifier:ampEnvAttackParamKey name:@"AmpEnvAttack"
+                                                                      address:InstrumentParamAmpEnvAttack
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
-    AUParameter *decayParam = [AUParameterTree createParameterWithIdentifier:decayParamKey name:@"Decay"
-                                                                      address:InstrumentParamDecay
+    AUParameter *ampEnvDecayParam = [AUParameterTree createParameterWithIdentifier:ampEnvDecayParamKey name:@"AmpEnvDecay"
+                                                                      address:InstrumentParamAmpEnvDecay
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
-    AUParameter *sustainParam = [AUParameterTree createParameterWithIdentifier:sustainParamKey name:@"Sustain"
-                                                                      address:InstrumentParamSustain
+    AUParameter *ampEnvSustainParam = [AUParameterTree createParameterWithIdentifier:ampEnvSustainParamKey name:@"AmpEnvSustain"
+                                                                      address:InstrumentParamAmpEnvSustain
                                                                           min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
-    AUParameter *releaseParam = [AUParameterTree createParameterWithIdentifier:releaseParamKey name:@"Release"
-                                                                      address:InstrumentParamRelease
+    AUParameter *ampEnvReleaseParam = [AUParameterTree createParameterWithIdentifier:ampEnvReleaseParamKey name:@"AmpEnvRelease"
+                                                                      address:InstrumentParamAmpEnvRelease
                                                                           min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
                                                                         flags: flags valueStrings:nil dependentParameters:nil];
     
@@ -98,8 +98,27 @@
                                                                        min:-1.0 max:1.0 unit:kAudioUnitParameterUnit_Generic unitName:nil
                                                                      flags: flags valueStrings:nil dependentParameters:nil];
     
-
+    // filter env
+    AUParameter *filterEnvAttackParam = [AUParameterTree createParameterWithIdentifier:filterEnvAttackParamKey name:@"FilterEnvAttack"
+                                                                            address:InstrumentParamFilterEnvAttack
+                                                                                min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                              flags: flags valueStrings:nil dependentParameters:nil];
     
+    AUParameter *filterEnvDecayParam = [AUParameterTree createParameterWithIdentifier:filterEnvDecayParamKey name:@"FilterAmpEnvDecay"
+                                                                           address:InstrumentParamFilterEnvDecay
+                                                                               min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                             flags: flags valueStrings:nil dependentParameters:nil];
+    
+    AUParameter *filterEnvSustainParam = [AUParameterTree createParameterWithIdentifier:filterEnvSustainParamKey name:@"FilterEnvSustain"
+                                                                             address:InstrumentParamFilterEnvSustain
+                                                                                 min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil
+                                                                               flags: flags valueStrings:nil dependentParameters:nil];
+    
+    AUParameter *filterEnvReleaseParam = [AUParameterTree createParameterWithIdentifier:filterEnvReleaseParamKey name:@"FilterEnvRelease"
+                                                                             address:InstrumentParamFilterEnvRelease
+                                                                                 min:0 max:10000 unit:kAudioUnitParameterUnit_Milliseconds unitName:nil
+                                                                               flags: flags valueStrings:nil dependentParameters:nil];
+
     // oscillator
     waveformParam.value = 0;
     _kernel.setParameter(InstrumentParamWaveform, waveformParam.value);
@@ -111,18 +130,18 @@
     panParam.value = 0;
     _kernel.setParameter(InstrumentParamPan, panParam.value);
     
-    // envelope generator
-    attackParam.value = 100;
-    _kernel.setParameter(InstrumentParamAttack, attackParam.value);
+    // amp env
+    ampEnvAttackParam.value = 100;
+    _kernel.setParameter(InstrumentParamAmpEnvAttack, ampEnvAttackParam.value);
     
-    decayParam.value = 100;
-    _kernel.setParameter(InstrumentParamDecay, decayParam.value);
+    ampEnvDecayParam.value = 100;
+    _kernel.setParameter(InstrumentParamAmpEnvDecay, ampEnvDecayParam.value);
     
-    sustainParam.value = 70;
-    _kernel.setParameter(InstrumentParamSustain, sustainParam.value);
+    ampEnvSustainParam.value = 70;
+    _kernel.setParameter(InstrumentParamAmpEnvSustain, ampEnvSustainParam.value);
     
-    releaseParam.value = 1000;
-    _kernel.setParameter(InstrumentParamRelease, releaseParam.value);
+    ampEnvReleaseParam.value = 1000;
+    _kernel.setParameter(InstrumentParamAmpEnvRelease, ampEnvReleaseParam.value);
     
     // filter
     cutoffParam.value = 0.99;
@@ -130,6 +149,19 @@
     
     resonanceParam.value = 0.0;
     _kernel.setParameter(InstrumentParamResonance, resonanceParam.value);
+    
+    // filter env
+    filterEnvAttackParam.value = 100;
+    _kernel.setParameter(InstrumentParamFilterEnvAttack, filterEnvAttackParam.value);
+    
+    filterEnvDecayParam.value = 100;
+    _kernel.setParameter(InstrumentParamFilterEnvDecay, filterEnvDecayParam.value);
+    
+    filterEnvSustainParam.value = 70;
+    _kernel.setParameter(InstrumentParamFilterEnvSustain, filterEnvSustainParam.value);
+    
+    filterEnvReleaseParam.value = 1000;
+    _kernel.setParameter(InstrumentParamFilterEnvRelease, filterEnvReleaseParam.value);
     
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[
@@ -140,15 +172,21 @@
                                                                volumeParam,
                                                                panParam,
                                                                
-                                                               // envelope generator
-                                                               attackParam,
-                                                               decayParam,
-                                                               sustainParam,
-                                                               releaseParam,
+                                                               // amp env
+                                                               ampEnvAttackParam,
+                                                               ampEnvDecayParam,
+                                                               ampEnvSustainParam,
+                                                               ampEnvReleaseParam,
                                                                
                                                                // filter
                                                                cutoffParam,
-                                                               resonanceParam
+                                                               resonanceParam,
+                                                               
+                                                               // filter env
+                                                               filterEnvAttackParam,
+                                                               filterEnvDecayParam,
+                                                               filterEnvSustainParam,
+                                                               filterEnvReleaseParam
                                                                ]];
 
     // Create the output bus.
@@ -185,10 +223,14 @@
                 return [NSString stringWithFormat:@"%.3f", value];
             }
             case InstrumentParamWaveform:
-            case InstrumentParamAttack:
-            case InstrumentParamDecay:
-            case InstrumentParamSustain:
-            case InstrumentParamRelease:
+            case InstrumentParamAmpEnvAttack:
+            case InstrumentParamAmpEnvDecay:
+            case InstrumentParamAmpEnvSustain:
+            case InstrumentParamAmpEnvRelease:
+            case InstrumentParamFilterEnvAttack:
+            case InstrumentParamFilterEnvDecay:
+            case InstrumentParamFilterEnvSustain:
+            case InstrumentParamFilterEnvRelease:
             {
                 return [NSString stringWithFormat:@"%d", (uint8_t)value];
             }
