@@ -26,7 +26,7 @@
 {
     if (self = [super init])
     {
-        self.volume = 100.0;
+        self.volume = 70.0;
         self.midiVelocity = 0;
         self.pan = 0;
     }
