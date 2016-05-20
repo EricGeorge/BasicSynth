@@ -39,6 +39,16 @@
     return self;
 }
 
+- (void) setSampleRate:(double)sampleRate
+{
+    _sampleRate = sampleRate;
+    
+    for (Voice *voice in self.voices)
+    {
+        voice.sampleRate = _sampleRate;
+    }
+}
+
 - (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value
 {
     for (Voice *voice in self.voices)
