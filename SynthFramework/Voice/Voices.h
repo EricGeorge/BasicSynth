@@ -1,7 +1,7 @@
 //
-//  Voice.h
+//  Voices.h
 //
-//  Created by Eric on 5/17/16.
+//  Created by Eric on 5/18/16.
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
@@ -9,17 +9,15 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface Voice : NSObject
+@interface Voices : NSObject
 
 @property (nonatomic, assign) double sampleRate;
-@property (nonatomic, readonly) BOOL isActive;
-@property (nonatomic, assign) uint8_t note;
 
 - (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value;
 - (AUValue) getParameter:(AUParameterAddress)address;
 
 - (void) start:(uint8_t)note withVelocity:(uint8_t)velocity;
-- (void) stop;
+- (void) stop:(uint8_t)note;
 
 - (void) nextSample:(double *)outL andRight:(double *)outR;
 

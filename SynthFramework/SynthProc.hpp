@@ -10,7 +10,7 @@
 
 #import "DSPKernel.hpp"
 
-@class Voice;
+@class Voices;
 
 class SynthProc : public DSPKernel
 {
@@ -32,7 +32,7 @@ private:
     float sampleRate;
     
     AudioBufferList* outBufferListPtr;
-    Voice *voice;
+    Voices *voices;
 };
 
 #endif /* SynthProc_hpp */

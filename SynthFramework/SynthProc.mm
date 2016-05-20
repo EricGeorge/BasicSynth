@@ -10,7 +10,7 @@
 #import "MIDIEvent.h"
 #import "SynthConstants.h"
 #import "Utility.hpp"
-#import "Voice.h"
+#import "Voices.h"
 
 SynthProc::SynthProc()
 {
@@ -22,8 +22,8 @@ void SynthProc::init(int channelCount, double inSampleRate)
 {
     sampleRate = float(inSampleRate);
     
-    voice = [[Voice alloc] init];
-    voice.sampleRate = sampleRate;
+    voices = [[Voices alloc] init];
+    voices.sampleRate = sampleRate;
 }
 
 void SynthProc::reset()
@@ -33,12 +33,12 @@ void SynthProc::reset()
 
 void SynthProc::setParameter(AUParameterAddress address, AUValue value)
 {
-    [voice setParameter:address withValue:value];
+    [voices setParameter:address withValue:value];
 }
 
 AUValue SynthProc::getParameter(AUParameterAddress address)
 {
-    return [voice getParameter:address];
+    return [voices getParameter:address];
 }
 
 void SynthProc::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration)
@@ -61,10 +61,10 @@ void SynthProc::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 //            NSLog(@"Instrument received unhandled MIDI event");
             break;
         case MIDIMessageType_NoteOff:
-            [voice stop];
+            [voices stop:event.data1];
             break;
         case MIDIMessageType_NoteOn:
-             [voice start:event.data1 withVelocity:event.data2];
+             [voices start:event.data1 withVelocity:event.data2];
             break;
     }
 }
@@ -82,7 +82,7 @@ void SynthProc::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOf
         outL = 0.0;
         outR = 0.0;
 
-        [voice nextSample:&outL andRight:&outR];
+        [voices nextSample:&outL andRight:&outR];
         
         // update the buffer
         left[i] = outL;

@@ -16,6 +16,8 @@
 @property (nonatomic, assign) double releaseTime;   // msec
 @property (nonatomic, assign) double sustainLevel;  // percent
 
+@property (nonatomic, readonly) BOOL isIdle;
+
 - (void) start;
 - (void) stop;
 
