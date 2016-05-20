@@ -48,6 +48,8 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 {
     if (self = [super init])
     {
+        _currentStage = EnvelopeStageIdle;
+        
         // analog time constants
         _attackTCO = exp(-0.5);  // fast attack
         _decayTCO = exp(-5.0);
@@ -130,6 +132,11 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
     
     _releaseCoeff = exp(-log((1.0 + _releaseTCO)/_releaseTCO)/stageSampleCount);
     _releaseOffset = -_releaseTCO * (1.0 - _releaseCoeff);
+}
+
+- (BOOL) isIdle
+{
+    return _currentStage == EnvelopeStageIdle;
 }
 
 - (void) start

@@ -10,10 +10,7 @@
 
 #import "DSPKernel.hpp"
 
-@class Oscillator;
-@class DCA;
-@class EnvelopeGenerator;
-@class Filter;
+@class Voices;
 
 class SynthProc : public DSPKernel
 {
@@ -35,12 +32,7 @@ private:
     float sampleRate;
     
     AudioBufferList* outBufferListPtr;
-    
-    Oscillator *osc;
-    DCA *dca;
-    EnvelopeGenerator *ampEnv;
-    EnvelopeGenerator *filterEnv;
-    Filter *filter;
+    Voices *voices;
 };
 
 #endif /* SynthProc_hpp */

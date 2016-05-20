@@ -124,7 +124,7 @@
     _kernel.setParameter(InstrumentParamWaveform, waveformParam.value);
     
     // dca
-    volumeParam.value = 100.0;
+    volumeParam.value = 70.0;
     _kernel.setParameter(InstrumentParamVolume, volumeParam.value);
     
     panParam.value = 0;
