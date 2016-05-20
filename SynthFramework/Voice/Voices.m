@@ -103,8 +103,6 @@
         }
     }
     
-    NSLog(@"Stole voice is %d", stolenVoice.note);
-    
     [stolenVoice steal];
     return stolenVoice;
 }
@@ -118,7 +116,6 @@
         voice = [self stealVoice];
     }
     
-    NSLog(@"Started voice %d", note);
     [voice start:note withVelocity:velocity];
 }
 
@@ -140,7 +137,7 @@
     {
         double leftOutput = 0.0;
         double rightOutput = 0.0;
-        
+    
         [voice nextSample:&leftOutput andRight:&rightOutput];
         
         ++voice.age;

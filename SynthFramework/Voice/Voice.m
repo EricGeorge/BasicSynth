@@ -211,17 +211,20 @@
 
 - (void) nextSample:(double *)outL andRight:(double *)outR
 {
-    // amp env
-    [_dca setEnvGain: [_ampEnv nextSample]];
-    
-    // filter env
-    [_filter setEnvGain: [_filterEnv nextSample]];
+    if (self.isActive)
+    {
+        // amp env
+        [_dca setEnvGain: [_ampEnv nextSample]];
+        
+        // filter env
+        [_filter setEnvGain: [_filterEnv nextSample]];
 
-    // oscillator + filter
-    double oscSample = [_filter process:[_osc nextSample]];
-    
-    // dca
-    [_dca process:oscSample rightInput:oscSample leftOutput:outL rightOutput:outR];
+        // oscillator + filter
+        double oscSample = [_filter process:[_osc nextSample]];
+        
+        // dca
+        [_dca process:oscSample rightInput:oscSample leftOutput:outL rightOutput:outR];
+    }
 }
 
 @end
