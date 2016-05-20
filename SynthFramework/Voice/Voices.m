@@ -27,7 +27,7 @@
     {
         self.sampleRate = 0;
         
-        _voiceCount = 16;
+        _voiceCount = 32;
         
         self.voices = [NSArray array];
         for (int i = 0; i < self.voiceCount; i++)
@@ -88,18 +88,38 @@
     return freeVoice;
 }
 
+- (Voice *) stealVoice
+{
+    Voice *stolenVoice = nil;
+    
+    uint64_t age = 0;
+    
+    for (Voice *voice in self.voices)
+    {
+        if(voice.age > age)
+        {
+            stolenVoice = voice;
+            age = voice.age;
+        }
+    }
+    
+    NSLog(@"Stole voice is %d", stolenVoice.note);
+    
+    [stolenVoice steal];
+    return stolenVoice;
+}
+
 - (void) start:(uint8_t)note withVelocity:(uint8_t)velocity
 {
     Voice *voice = [self getFreeVoice];
     
-    if (voice != nil)
+    if (voice == nil)
     {
-        [voice start:note withVelocity:velocity];
+        voice = [self stealVoice];
     }
-    else
-    {
-        // steal voice logic here
-    }
+    
+    NSLog(@"Started voice %d", note);
+    [voice start:note withVelocity:velocity];
 }
 
 - (void) stop:(uint8_t)note
@@ -122,6 +142,8 @@
         double rightOutput = 0.0;
         
         [voice nextSample:&leftOutput andRight:&rightOutput];
+        
+        ++voice.age;
         
         *outL += leftOutput;
         *outR += rightOutput;

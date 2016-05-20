@@ -200,6 +200,15 @@
     [_filterEnv stop];
 }
 
+- (void) steal
+{
+    // do something better here than just cutting off
+    [_ampEnv stop];
+    
+    self.note = 0;
+    self.age = 0;
+}
+
 - (void) nextSample:(double *)outL andRight:(double *)outR
 {
     // amp env

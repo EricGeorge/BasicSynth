@@ -14,10 +14,12 @@
 @property (nonatomic, assign) double sampleRate;
 @property (nonatomic, readonly) BOOL isActive;
 @property (nonatomic, assign) uint8_t note;
+@property (nonatomic, assign) uint64_t age;
 
 - (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value;
 - (AUValue) getParameter:(AUParameterAddress)address;
 
+- (void) steal;
 - (void) start:(uint8_t)note withVelocity:(uint8_t)velocity;
 - (void) stop;
 
