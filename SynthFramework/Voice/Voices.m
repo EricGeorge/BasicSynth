@@ -12,7 +12,6 @@
 
 @interface Voices()
 {
-    
 }
 
 @property (nonatomic, strong) NSArray *voices;
@@ -44,6 +43,19 @@
         [parameters registerForOscillatorUpdates:^(void){
             [self updateOscillator];
         }];
+        
+        [parameters registerForAmpEnvUpdates:^(void){
+            [self updateAmpEnv];
+        }];
+
+        [parameters registerForFilterUpdates:^(void){
+            [self updateFilter];
+        }];
+
+        [parameters registerForFilterEnvUpdates:^(void){
+            [self updateFilterEnv];
+        }];
+
     }
     
     return self;
@@ -75,6 +87,45 @@
     }
 }
 
+ - (void) updateAmpEnv
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateAmpEnv];
+        }
+    }
+}
+ 
+ - (void) updateFilter
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateFilter];
+        }
+    }
+}
+ 
+ - (void) updateFilterEnv
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateFilterEnv];
+        }
+    }
+}
+ 
 - (void) setSampleRate:(double)sampleRate
 {
     _sampleRate = sampleRate;
@@ -83,29 +134,6 @@
     {
         voice.sampleRate = _sampleRate;
     }
-}
-
-- (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value
-{
-    for (Voice *voice in self.voices)
-    {
-        [voice setParameter:address withValue:value];
-    }
-}
-
-- (AUValue) getParameter:(AUParameterAddress)address
-{
-    AUValue result = 0.0;
-    
-    // for now just get the first voice's parameter.  But
-    // TODO - refactor params out into their own class with KVO
-    
-    if(self.voices.count > 0)
-    {
-        result = [self.voices[0] getParameter:address];
-    }
-    
-    return result;
 }
 
 - (Voice *) getFreeVoice
@@ -155,6 +183,9 @@
     // initialize
     [voice updateDca];
     [voice updateOscillator];
+    [voice updateAmpEnv];
+    [voice updateFilter];
+    [voice updateFilterEnv];
 
     [voice start:note withVelocity:velocity];
 }

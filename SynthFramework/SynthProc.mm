@@ -8,6 +8,7 @@
 #import "SynthProc.hpp"
 
 #import "MIDIEvent.h"
+#import "Parameters.h"
 #import "SynthConstants.h"
 #import "Utility.hpp"
 #import "Voices.h"
@@ -31,19 +32,9 @@ void SynthProc::reset()
     // this currently does nothing
 }
 
-void SynthProc::setParameter(AUParameterAddress address, AUValue value)
-{
-    [voices setParameter:address withValue:value];
-}
-
-AUValue SynthProc::getParameter(AUParameterAddress address)
-{
-    return [voices getParameter:address];
-}
-
 void SynthProc::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration)
 {
-    setParameter(address, value);
+    [[Parameters sharedParameters] setParameter:address withValue:value];
 }
 
 void SynthProc::setBuffers(AudioBufferList* outBufferList)

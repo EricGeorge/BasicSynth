@@ -8,6 +8,8 @@
 #import "Parameters.h"
 
 #import "DCA.h"
+#import "EnvelopeGenerator.h"
+#import "Filter.h"
 #import "Oscillator.h"
 #import "SynthConstants.h"
 
@@ -19,6 +21,9 @@ static Parameters *sharedParameters;
 
 @property (nonatomic, copy) updateDca dcaBlock;
 @property (nonatomic, copy) updateOscillator oscillatorBlock;
+@property (nonatomic, copy) updateAmpEnv ampEnvBlock;
+@property (nonatomic, copy) updateFilter filterBlock;
+@property (nonatomic, copy) updateFilterEnv filterEnvBlock;
 
 @end
 
@@ -68,41 +73,41 @@ static Parameters *sharedParameters;
             self.panParam = value;
             break;
             
-//            // amp env
-//        case InstrumentParamAmpEnvAttack:
-//            _ampEnv.attackTime = value;
-//            break;
-//        case InstrumentParamAmpEnvDecay:
-//            _ampEnv.decayTime = value;
-//            break;
-//        case InstrumentParamAmpEnvSustain:
-//            _ampEnv.sustainLevel= value;
-//            break;
-//        case InstrumentParamAmpEnvRelease:
-//            _ampEnv.releaseTime = value;
-//            break;
-//            
-//            // filter
-//        case InstrumentParamCutoff:
-//            _filter.cutoff = value;
-//            break;
-//        case InstrumentParamResonance:
-//            _filter.resonance = value;
-//            break;
-//            
-//            // filter env
-//        case InstrumentParamFilterEnvAttack:
-//            _filterEnv.attackTime = value;
-//            break;
-//        case InstrumentParamFilterEnvDecay:
-//            _filterEnv.decayTime = value;
-//            break;
-//        case InstrumentParamFilterEnvSustain:
-//            _filterEnv.sustainLevel= value;
-//            break;
-//        case InstrumentParamFilterEnvRelease:
-//            _filterEnv.releaseTime = value;
-//            break;
+            // amp env
+        case InstrumentParamAmpEnvAttack:
+            self.ampEnvAttackParam = value;
+            break;
+        case InstrumentParamAmpEnvDecay:
+            self.ampEnvDecayParam = value;
+            break;
+        case InstrumentParamAmpEnvSustain:
+            self.ampEnvSustainParam = value;
+            break;
+        case InstrumentParamAmpEnvRelease:
+            self.ampEnvReleaseParam = value;
+            break;
+            
+            // filter
+        case InstrumentParamCutoff:
+            self.cutoffParam = value;
+            break;
+        case InstrumentParamResonance:
+            self.resonanceParam = value;
+            break;
+            
+            // filter env
+        case InstrumentParamFilterEnvAttack:
+            self.filterEnvAttackParam = value;
+            break;
+        case InstrumentParamFilterEnvDecay:
+            self.filterEnvDecayParam = value;
+            break;
+        case InstrumentParamFilterEnvSustain:
+            self.filterEnvSustainParam = value;
+            break;
+        case InstrumentParamFilterEnvRelease:
+            self.filterEnvReleaseParam = value;
+            break;
             
     }
 }
@@ -126,41 +131,41 @@ static Parameters *sharedParameters;
             value = self.panParam;
             break;
             
-//            // amp env
-//        case InstrumentParamAmpEnvAttack:
-//            value = _ampEnv.attackTime;
-//            break;
-//        case InstrumentParamAmpEnvDecay:
-//            value = _ampEnv.decayTime;
-//            break;
-//        case InstrumentParamAmpEnvSustain:
-//            value = _ampEnv.sustainLevel;
-//            break;
-//        case InstrumentParamAmpEnvRelease:
-//            value = _ampEnv.releaseTime;
-//            break;
-//            
-//            // filter
-//        case InstrumentParamCutoff:
-//            value = _filter.cutoff;
-//            break;
-//        case InstrumentParamResonance:
-//            value = _filter.resonance;
-//            break;
-//            
-//            // amp env
-//        case InstrumentParamFilterEnvAttack:
-//            value = _filterEnv.attackTime;
-//            break;
-//        case InstrumentParamFilterEnvDecay:
-//            value = _filterEnv.decayTime;
-//            break;
-//        case InstrumentParamFilterEnvSustain:
-//            value = _filterEnv.sustainLevel;
-//            break;
-//        case InstrumentParamFilterEnvRelease:
-//            value = _filterEnv.releaseTime;
-//            break;
+            // amp env
+        case InstrumentParamAmpEnvAttack:
+            value = self.ampEnvAttackParam;
+            break;
+        case InstrumentParamAmpEnvDecay:
+            value = self.ampEnvDecayParam;
+            break;
+        case InstrumentParamAmpEnvSustain:
+            value = self.ampEnvSustainParam;
+            break;
+        case InstrumentParamAmpEnvRelease:
+            value = self.ampEnvReleaseParam;
+            break;
+            
+            // filter
+        case InstrumentParamCutoff:
+            value = self.cutoffParam;
+            break;
+        case InstrumentParamResonance:
+            value = self.resonanceParam;
+            break;
+            
+            // amp env
+        case InstrumentParamFilterEnvAttack:
+            value = self.filterEnvAttackParam;
+            break;
+        case InstrumentParamFilterEnvDecay:
+            value = self.filterEnvDecayParam;
+            break;
+        case InstrumentParamFilterEnvSustain:
+            value = self.filterEnvSustainParam;
+            break;
+        case InstrumentParamFilterEnvRelease:
+            value = self.filterEnvReleaseParam;
+            break;
     }
     
     return value;
@@ -176,12 +181,29 @@ static Parameters *sharedParameters;
     self.oscillatorBlock = oscillatorBlock;
 }
 
+- (void) registerForAmpEnvUpdates:(updateAmpEnv)ampEnvBlock
+{
+    self.ampEnvBlock = ampEnvBlock;
+}
+
+- (void) registerForFilterUpdates:(updateFilter)filterBlock
+{
+    self.filterBlock = filterBlock;
+}
+
+- (void) registerForFilterEnvUpdates:(updateFilterEnv)filterEnvBlock
+{
+    self.filterEnvBlock = filterEnvBlock;
+}
+
+// oscillator
 - (void) setWaveformParam:(uint8_t)waveformParam
 {
     _waveformParam = waveformParam;
     self.oscillatorBlock();
 }
 
+// dca
 - (void) setVolumeParam:(double)volumeParam
 {
     _volumeParam = volumeParam;
@@ -193,4 +215,69 @@ static Parameters *sharedParameters;
     _panParam = panParam;
     self.dcaBlock();
 }
+
+// ampEnv
+- (void) setAmpEnvAttackParam:(double)ampEnvAttackParam
+{
+    _ampEnvAttackParam = ampEnvAttackParam;
+    self.ampEnvBlock();
+}
+
+- (void) setAmpEnvDecayParam:(double)ampEnvDecayParam
+{
+    _ampEnvDecayParam = ampEnvDecayParam;
+    self.ampEnvBlock();
+}
+
+- (void) setAmpEnvSustainParam:(double)ampEnvSustainParam
+{
+    _ampEnvSustainParam = ampEnvSustainParam;
+    self.ampEnvBlock();
+}
+
+- (void) setAmpEnvReleaseParam:(double)ampEnvReleaseParam
+{
+    _ampEnvReleaseParam = ampEnvReleaseParam;
+    self.ampEnvBlock();
+}
+
+// filter
+- (void) setCutoffParam:(double)cutoffParam
+{
+    _cutoffParam = cutoffParam;
+    self.filterBlock();
+}
+
+- (void) setResonanceParam:(double)resonanceParam
+{
+    _resonanceParam = resonanceParam;
+    self.filterBlock();
+}
+
+// filterEnv
+- (void) setFilterEnvAttackParam:(double)filterEnvAttackParam
+{
+    _filterEnvAttackParam = filterEnvAttackParam;
+    self.filterEnvBlock();
+}
+
+- (void) setFilterEnvDecayParam:(double)filterEnvDecayParam
+{
+    _filterEnvDecayParam = filterEnvDecayParam;
+    self.filterEnvBlock();
+}
+
+- (void) setFilterEnvSustainParam:(double)filterEnvSustainParam
+{
+    _filterEnvSustainParam = filterEnvSustainParam;
+    self.filterEnvBlock();
+}
+
+- (void) setFilterEnvReleaseParam:(double)filterEnvReleaseParam
+{
+    _filterEnvReleaseParam = filterEnvReleaseParam;
+    self.filterEnvBlock();
+}
+
+
 @end

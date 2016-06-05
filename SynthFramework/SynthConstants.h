@@ -50,3 +50,57 @@ static const uint8_t volumeParamDefault = 70;
 static const uint8_t panParamMin = -1;
 static const uint8_t panParamMax = 1;
 static const uint8_t panParamDefault = 0;
+
+// ampEnvAttack
+static const uint16_t ampEnvAttackParamMin = 0;
+static const uint16_t ampEnvAttackParamMax = 10000;
+static const uint16_t ampEnvAttackParamDefault = 100;
+
+// ampEnvDecay
+static const uint16_t ampEnvDecayParamMin = 0;
+static const uint16_t ampEnvDecayParamMax = 10000;
+static const uint16_t ampEnvDecayParamDefault = 100;
+
+// ampEnvSustain
+static const uint16_t ampEnvSustainParamMin = 0;
+static const uint16_t ampEnvSustainParamMax = 100;
+static const uint16_t ampEnvSustainParamDefault = 70;
+
+// ampEnvRelease
+static const uint16_t ampEnvReleaseParamMin = 0;
+static const uint16_t ampEnvReleaseParamMax = 10000;
+static const uint16_t ampEnvReleaseParamDefault = 1000;
+
+// cutoff
+static const double cutoffParamMin = 0;
+static const double cutoffParamMax = 0.99;
+static const double cutoffParamDefault = 0.99;
+
+// resonance
+static const double resonanceParamMin = -1;
+static const double resonanceParamMax = 1;
+static const double resonanceParamDefault = 0;
+
+// filterEnvAttack
+static const uint16_t filterEnvAttackParamMin = 0;
+static const uint16_t filterEnvAttackParamMax = 10000;
+static const uint16_t filterEnvAttackParamDefault = 100;
+
+// filterEnvDecay
+static const uint16_t filterEnvDecayParamMin = 0;
+static const uint16_t filterEnvDecayParamMax = 10000;
+static const uint16_t filterEnvDecayParamDefault = 100;
+
+// filterEnvSustain
+static const uint16_t filterEnvSustainParamMin = 0;
+static const uint16_t filterEnvSustainParamMax = 100;
+static const uint16_t filterEnvSustainParamDefault = 70;
+
+// filterEnvRelease
+static const uint16_t filterEnvReleaseParamMin = 0;
+static const uint16_t filterEnvReleaseParamMax = 10000;
+static const uint16_t filterEnvReleaseParamDefault = 1000;
+
+
+
+

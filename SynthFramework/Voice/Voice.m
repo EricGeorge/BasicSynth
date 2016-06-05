@@ -65,6 +65,21 @@
     [_osc update];
 }
 
+- (void) updateAmpEnv
+{
+    [_ampEnv update];
+}
+
+- (void) updateFilter
+{
+    [_filter update];
+}
+
+- (void) updateFilterEnv
+{
+    [_filterEnv update];
+}
+
 - (void) setSampleRate:(double)sampleRate
 {
     _sampleRate = sampleRate;
@@ -74,94 +89,6 @@
     _filterEnv.sampleRate = self.sampleRate;
 }
 
-- (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value
-{
-    switch (address)
-    {
-            // amp env
-        case InstrumentParamAmpEnvAttack:
-            _ampEnv.attackTime = value;
-            break;
-        case InstrumentParamAmpEnvDecay:
-            _ampEnv.decayTime = value;
-            break;
-        case InstrumentParamAmpEnvSustain:
-            _ampEnv.sustainLevel= value;
-            break;
-        case InstrumentParamAmpEnvRelease:
-            _ampEnv.releaseTime = value;
-            break;
-            
-            // filter
-        case InstrumentParamCutoff:
-            _filter.cutoff = value;
-            break;
-        case InstrumentParamResonance:
-            _filter.resonance = value;
-            break;
-            
-            // filter env
-        case InstrumentParamFilterEnvAttack:
-            _filterEnv.attackTime = value;
-            break;
-        case InstrumentParamFilterEnvDecay:
-            _filterEnv.decayTime = value;
-            break;
-        case InstrumentParamFilterEnvSustain:
-            _filterEnv.sustainLevel= value;
-            break;
-        case InstrumentParamFilterEnvRelease:
-            _filterEnv.releaseTime = value;
-            break;
-            
-    }
-}
-
-- (AUValue) getParameter:(AUParameterAddress)address
-{
-    AUValue value = 0.0f;
-    
-    switch (address)
-    {
-            // amp env
-        case InstrumentParamAmpEnvAttack:
-            value = _ampEnv.attackTime;
-            break;
-        case InstrumentParamAmpEnvDecay:
-            value = _ampEnv.decayTime;
-            break;
-        case InstrumentParamAmpEnvSustain:
-            value = _ampEnv.sustainLevel;
-            break;
-        case InstrumentParamAmpEnvRelease:
-            value = _ampEnv.releaseTime;
-            break;
-            
-            // filter
-        case InstrumentParamCutoff:
-            value = _filter.cutoff;
-            break;
-        case InstrumentParamResonance:
-            value = _filter.resonance;
-            break;
-            
-            // amp env
-        case InstrumentParamFilterEnvAttack:
-            value = _filterEnv.attackTime;
-            break;
-        case InstrumentParamFilterEnvDecay:
-            value = _filterEnv.decayTime;
-            break;
-        case InstrumentParamFilterEnvSustain:
-            value = _filterEnv.sustainLevel;
-            break;
-        case InstrumentParamFilterEnvRelease:
-            value = _filterEnv.releaseTime;
-            break;
-    }
-    
-    return value;
-}
 
 - (BOOL) isActive
 {

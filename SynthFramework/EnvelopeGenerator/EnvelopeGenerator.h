@@ -22,5 +22,6 @@
 - (void) stop;
 
 - (double) nextSample;
+- (void) update;
 
 @end

@@ -78,6 +78,11 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
     [self calculateReleaseTime];
 }
 
+- (void) update
+{
+    
+}
+
 - (void) setAttackTime:(double)attackTime
 {
     _attackTime = attackTime;

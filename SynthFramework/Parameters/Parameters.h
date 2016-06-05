@@ -9,6 +9,9 @@
 
 typedef void (^updateDca)(void);
 typedef void (^updateOscillator)(void);
+typedef void (^updateAmpEnv)(void);
+typedef void (^updateFilter)(void);
+typedef void (^updateFilterEnv)(void);
 
 @interface Parameters : NSObject
 
@@ -19,6 +22,22 @@ typedef void (^updateOscillator)(void);
 @property (nonatomic, assign) double volumeParam;
 @property (nonatomic, assign) double panParam;
 
+// ampEnv
+@property (nonatomic, assign) double ampEnvAttackParam;
+@property (nonatomic, assign) double ampEnvDecayParam;
+@property (nonatomic, assign) double ampEnvSustainParam;
+@property (nonatomic, assign) double ampEnvReleaseParam;
+
+// filter
+@property (nonatomic, assign) double cutoffParam;
+@property (nonatomic, assign) double resonanceParam;
+
+// filterEnv
+@property (nonatomic, assign) double filterEnvAttackParam;
+@property (nonatomic, assign) double filterEnvDecayParam;
+@property (nonatomic, assign) double filterEnvSustainParam;
+@property (nonatomic, assign) double filterEnvReleaseParam;
+
 
 + (instancetype)sharedParameters;
 
@@ -27,5 +46,8 @@ typedef void (^updateOscillator)(void);
 
 - (void) registerForDcaUpdates:(updateDca)dcaBlock;
 - (void) registerForOscillatorUpdates:(updateOscillator)oscillatorBlock;
+- (void) registerForAmpEnvUpdates:(updateAmpEnv)ampEnvBlock;
+- (void) registerForFilterUpdates:(updateFilter)filterBlock;
+- (void) registerForFilterEnvUpdates:(updateFilterEnv)filterEnvBlock;
 
 @end
