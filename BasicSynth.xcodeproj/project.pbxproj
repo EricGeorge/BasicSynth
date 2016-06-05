@@ -44,6 +44,10 @@
 		075D4F111CCB234A001D95E4 /* SynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */; };
 		079790FD1D03E9D5005C4CB8 /* Parameters.h in Headers */ = {isa = PBXBuildFile; fileRef = 079790FB1D03E9D5005C4CB8 /* Parameters.h */; };
 		079790FE1D03E9D5005C4CB8 /* Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 079790FC1D03E9D5005C4CB8 /* Parameters.m */; };
+		079791021D04C5EB005C4CB8 /* AmpEnvelopeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 079791001D04C5EB005C4CB8 /* AmpEnvelopeGenerator.h */; };
+		079791031D04C5EB005C4CB8 /* AmpEnvelopeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 079791011D04C5EB005C4CB8 /* AmpEnvelopeGenerator.m */; };
+		079791061D04C9BB005C4CB8 /* FilterEnvelopeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 079791041D04C9BB005C4CB8 /* FilterEnvelopeGenerator.h */; };
+		079791071D04C9BB005C4CB8 /* FilterEnvelopeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 079791051D04C9BB005C4CB8 /* FilterEnvelopeGenerator.m */; };
 		07DBB1BC1CCB00F900D68648 /* SynthFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */; };
 		07DBB1BD1CCB00F900D68648 /* SynthFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07DBB1B51CCB00F900D68648 /* SynthFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07FFA4371CD7DC7100F03350 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07FFA42D1CD7DC7100F03350 /* Info.plist */; };
@@ -160,6 +164,10 @@
 		075D4EFF1CCB232D001D95E4 /* SynthExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SynthExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		079790FB1D03E9D5005C4CB8 /* Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parameters.h; path = SynthFramework/Parameters/Parameters.h; sourceTree = SOURCE_ROOT; };
 		079790FC1D03E9D5005C4CB8 /* Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Parameters.m; path = SynthFramework/Parameters/Parameters.m; sourceTree = SOURCE_ROOT; };
+		079791001D04C5EB005C4CB8 /* AmpEnvelopeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmpEnvelopeGenerator.h; path = SynthFramework/EnvelopeGenerator/AmpEnvelopeGenerator.h; sourceTree = SOURCE_ROOT; };
+		079791011D04C5EB005C4CB8 /* AmpEnvelopeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AmpEnvelopeGenerator.m; path = SynthFramework/EnvelopeGenerator/AmpEnvelopeGenerator.m; sourceTree = SOURCE_ROOT; };
+		079791041D04C9BB005C4CB8 /* FilterEnvelopeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterEnvelopeGenerator.h; path = SynthFramework/EnvelopeGenerator/FilterEnvelopeGenerator.h; sourceTree = SOURCE_ROOT; };
+		079791051D04C9BB005C4CB8 /* FilterEnvelopeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterEnvelopeGenerator.m; path = SynthFramework/EnvelopeGenerator/FilterEnvelopeGenerator.m; sourceTree = SOURCE_ROOT; };
 		07DBB1B51CCB00F900D68648 /* SynthFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SynthFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FC1E851CC09D2D00C4AD6B /* BasicSynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicSynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FFA4231CD7DC3800F03350 /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BufferedAudioBus.hpp; path = SynthFramework/DSPKernel/BufferedAudioBus.hpp; sourceTree = SOURCE_ROOT; };
@@ -228,6 +236,10 @@
 			children = (
 				071D1BEA1CD9931E00A762CC /* EnvelopeGenerator.h */,
 				071D1BEB1CD9931E00A762CC /* EnvelopeGenerator.m */,
+				079791001D04C5EB005C4CB8 /* AmpEnvelopeGenerator.h */,
+				079791011D04C5EB005C4CB8 /* AmpEnvelopeGenerator.m */,
+				079791041D04C9BB005C4CB8 /* FilterEnvelopeGenerator.h */,
+				079791051D04C9BB005C4CB8 /* FilterEnvelopeGenerator.m */,
 				071D1BEF1CDD6D2000A762CC /* EnvelopeGeneratorViewController.h */,
 				071D1BF01CDD6D2000A762CC /* EnvelopeGeneratorViewController.m */,
 				072B81E41CEBB6380071159D /* AmpEnvelopeViewController.h */,
@@ -432,9 +444,11 @@
 				07FFA44F1CD7DD3200F03350 /* SynthAUViewController.h in Headers */,
 				072B81EE1CEBFE790071159D /* Voice.h in Headers */,
 				071D1C021CE2865900A762CC /* FilterViewController.h in Headers */,
+				079791061D04C9BB005C4CB8 /* FilterEnvelopeGenerator.h in Headers */,
 				071D1BF51CE1785200A762CC /* DCAViewController.h in Headers */,
 				07FFA44A1CD7DD3200F03350 /* BufferedAudioBus.hpp in Headers */,
 				079790FD1D03E9D5005C4CB8 /* Parameters.h in Headers */,
+				079791021D04C5EB005C4CB8 /* AmpEnvelopeGenerator.h in Headers */,
 				07FFA44B1CD7DD3200F03350 /* DSPKernel.hpp in Headers */,
 				072B81EA1CEBBC800071159D /* FilterEnvelopeViewController.h in Headers */,
 				07FFA44C1CD7DD3200F03350 /* MIDIEvent.h in Headers */,
@@ -599,10 +613,12 @@
 				071D1BFE1CE276CD00A762CC /* Filter.m in Sources */,
 				07FFA4441CD7DD1B00F03350 /* DSPKernel.mm in Sources */,
 				071D1C031CE2865900A762CC /* FilterViewController.m in Sources */,
+				079791031D04C5EB005C4CB8 /* AmpEnvelopeGenerator.m in Sources */,
 				07FFA4451CD7DD1B00F03350 /* MIDIEvent.m in Sources */,
 				071D1BED1CD9931E00A762CC /* EnvelopeGenerator.m in Sources */,
 				072B81F41CECCC7E0071159D /* Voices.m in Sources */,
 				072B81EF1CEBFE790071159D /* Voice.m in Sources */,
+				079791071D04C9BB005C4CB8 /* FilterEnvelopeGenerator.m in Sources */,
 				071D1BE31CD83DFF00A762CC /* DCA.m in Sources */,
 				071D1BF61CE1785200A762CC /* DCAViewController.m in Sources */,
 				071D1BFA1CE185CB00A762CC /* OscillatorViewController.m in Sources */,

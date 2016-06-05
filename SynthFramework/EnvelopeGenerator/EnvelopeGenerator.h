@@ -11,10 +11,10 @@
 
 @property (nonatomic, assign) double sampleRate;
 
-@property (nonatomic, assign) double attackTime;    // msec
-@property (nonatomic, assign) double decayTime;     // msec
-@property (nonatomic, assign) double releaseTime;   // msec
-@property (nonatomic, assign) double sustainLevel;  // percent
+@property (nonatomic, assign) double normalizedAttackTime;
+@property (nonatomic, assign) double normalizedDecayTime;
+@property (nonatomic, assign) double normalizedSustainLevel;
+@property (nonatomic, assign) double normalizedReleaseTime;
 
 @property (nonatomic, readonly) BOOL isIdle;
 
@@ -22,6 +22,7 @@
 - (void) stop;
 
 - (double) nextSample;
+- (void) calculate;
 - (void) update;
 
 @end

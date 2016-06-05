@@ -8,8 +8,9 @@
 #import "Voice.h"
 
 #import "DCA.h"
-#import "EnvelopeGenerator.h"
+#import "AmpEnvelopeGenerator.h"
 #import "Filter.h"
+#import "FilterEnvelopeGenerator.h"
 #import "Oscillator.h"
 
 #import "SynthConstants.h"
@@ -19,8 +20,8 @@
 {
     Oscillator *_osc;
     DCA *_dca;
-    EnvelopeGenerator *_ampEnv;
-    EnvelopeGenerator *_filterEnv;
+    AmpEnvelopeGenerator *_ampEnv;
+    FilterEnvelopeGenerator *_filterEnv;
     Filter *_filter;
 }
 
@@ -43,13 +44,13 @@
         _dca = [[DCA alloc] init];
         
         // amp env
-        _ampEnv = [[EnvelopeGenerator alloc] init];
+        _ampEnv = [[AmpEnvelopeGenerator alloc] init];
         
         // filter
         _filter = [[Filter alloc] init];
         
         // filter env
-        _filterEnv = [[EnvelopeGenerator alloc] init];
+        _filterEnv = [[FilterEnvelopeGenerator alloc] init];
     }
     
     return self;
@@ -128,7 +129,7 @@
         [_dca setEnvGain: [_ampEnv nextSample]];
         
         // filter env
-        [_filter setEnvGain: [_filterEnv nextSample]];
+        [_filter setEnvGain:[_filterEnv nextSample]];
 
         // oscillator + filter
         double oscSample = [_filter process:[_osc nextSample]];

@@ -30,11 +30,6 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
     double _releaseOffset;
     double _releaseTCO;
     
-    double _normalizedAttackTime;
-    double _normalizedDecayTime;
-    double _normalizedSustainLevel;
-    double _normalizedReleaseTime;
-    
     EnvelopeStage _currentStage;
     
     double _envelopeOutput;
@@ -59,60 +54,28 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 //        _attackTCO = pow(10.0, -96.0/20.0);
 //        _decayTCO = _attackTCO;
 //        _releaseTCO = _decayTCO;
-    
-        self.attackTime = 100;  // msec
-        self.decayTime = 500;   // msec
-        self.releaseTime = 1000;// msec
-        self.sustainLevel = 70; // percent
-    }
+}
     
     return self;
+}
+
+- (void) update
+{
+    NSAssert(NO, @"Subclasses need to overwrite this method");
 }
 
 - (void) setSampleRate:(double)sampleRate
 {
     _sampleRate = sampleRate;
     
+    [self calculate];
+}
+
+- (void) calculate
+{
     [self calculateAttackTime];
     [self calculateDecayTime];
     [self calculateReleaseTime];
-}
-
-- (void) update
-{
-    
-}
-
-- (void) setAttackTime:(double)attackTime
-{
-    _attackTime = attackTime;
-    _normalizedAttackTime = _attackTime/1000.0;
-    
-    [self calculateAttackTime];
-}
-
-- (void) setDecayTime:(double)decayTime
-{
-    _decayTime = decayTime;
-    _normalizedDecayTime = _decayTime/1000.0;
-    
-    [self calculateDecayTime];
-}
-
-- (void) setReleaseTime:(double)releaseTime
-{
-    _releaseTime = releaseTime;
-    _normalizedReleaseTime = _releaseTime/1000.0;
-    
-    [self calculateReleaseTime];
-}
-
-- (void) setSustainLevel:(double)sustainLevel
-{
-    _sustainLevel = sustainLevel;
-    _normalizedSustainLevel = _sustainLevel/100.0;
-    
-    [self calculateDecayTime];
 }
 
 - (void) calculateAttackTime
