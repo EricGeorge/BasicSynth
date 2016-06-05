@@ -25,4 +25,6 @@
 
 - (void) nextSample:(double *)outL andRight:(double *)outR;
 
+- (void) updateDca;
+
 @end

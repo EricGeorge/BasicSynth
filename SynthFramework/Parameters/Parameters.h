@@ -7,16 +7,20 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+typedef void (^updateDca)(void);
+
 @interface Parameters : NSObject
 
 // dca
-@property (nonatomic, assign) double volume;
-@property (nonatomic, assign) double panL;
-@property (nonatomic, assign) double panR;
+@property (nonatomic, assign) double volumeParam;
+@property (nonatomic, assign) double panParam;
+
 
 + (instancetype)sharedParameters;
 
 - (void) setParameter:(AUParameterAddress) address withValue:(AUValue) value;
 - (AUValue) getParameter:(AUParameterAddress) address;
+
+- (void) registerForDcaUpdates:(updateDca)dcaBlock;
 
 @end

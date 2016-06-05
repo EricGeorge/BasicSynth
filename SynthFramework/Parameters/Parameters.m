@@ -16,8 +16,7 @@ static Parameters *sharedParameters;
 {
 }
 
-@property (nonatomic, assign) double volumeParam;
-@property (nonatomic, assign) double panParam;
+@property (nonatomic, copy) updateDca dcaBlock;
 
 @end
 
@@ -165,19 +164,20 @@ static Parameters *sharedParameters;
     return value;
 }
 
+- (void) registerForDcaUpdates:(updateDca)dcaBlock
+{
+    self.dcaBlock = dcaBlock;
+}
+
 - (void) setVolumeParam:(double)volumeParam
 {
     _volumeParam = volumeParam;
-    self.volume = [DCA calculateRawVolume:volumeParam];
+    self.dcaBlock();
 }
 
 - (void) setPanParam:(double)panParam
 {
     _panParam = panParam;
-    
-    double panL, panR;
-    [DCA calculateRawPans:panParam withOutL:&panL andOutR:&panR];
-    self.panR = panR;
-    self.panL = panL;
+    self.dcaBlock();
 }
 @end

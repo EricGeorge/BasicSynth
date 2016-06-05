@@ -55,6 +55,12 @@
     return self;
 }
 
+- (void) updateDca
+{
+    [_dca update];
+}
+
+
 - (void) setSampleRate:(double)sampleRate
 {
     _sampleRate = sampleRate;

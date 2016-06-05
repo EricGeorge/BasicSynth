@@ -7,6 +7,7 @@
 
 #import "Voices.h"
 
+#import "Parameters.h"
 #import "Voice.h"
 
 @interface Voices()
@@ -34,9 +35,27 @@
         {
             self.voices = [self.voices arrayByAddingObject:[[Voice alloc] init]];
         }
+        
+        Parameters *parameters = [Parameters sharedParameters];
+        [parameters registerForDcaUpdates:^(void){
+            [self updateDca];
+        }];
     }
     
     return self;
+}
+
+- (void) updateDca
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateDca];
+        }
+    }
 }
 
 - (void) setSampleRate:(double)sampleRate
@@ -116,6 +135,9 @@
         voice = [self stealVoice];
     }
     
+    // initialize
+    [voice updateDca];
+
     [voice start:note withVelocity:velocity];
 }
 

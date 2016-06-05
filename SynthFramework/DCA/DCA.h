@@ -13,12 +13,11 @@
 @property(nonatomic, assign) uint8_t midiVelocity;
 @property(nonatomic, assign) double envGain;
 
-+ (double) calculateRawVolume:(double)volume;
-+ (void) calculateRawPans:(double)inPan withOutL:(double *)outPanL andOutR:(double *)outPanR;
-
 - (void) process:(double)leftInput
       rightInput:(double)rightInput
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput;
+
+- (void) update;
 
 @end

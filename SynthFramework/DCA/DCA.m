@@ -14,6 +14,9 @@
 @interface DCA()
 {
     double _midiVelocityGain;
+    double _panL;
+    double _panR;
+    double _rawVolume;
 }
 
 @end;
@@ -36,10 +39,16 @@
     _midiVelocity = _midiVelocityGain = gainFromMidiVelocity(midiVelocity);
 }
 
-+ (double) calculateRawVolume:(double)volume
+- (void) update
 {
+    Parameters * parameters = [Parameters sharedParameters];
+
     // put an exponential curve on the volume input (and normalize to 0-1)
-    return pow2(volume/100.0);
+    _rawVolume = pow2(parameters.volumeParam/100.0);
+    
+    // use equal power crossfades to get the left and right channels from the bipolar pan value
+    _panL = getEqualPowerLeft(parameters.panParam);
+    _panR = getEqualPowerRight(parameters.panParam);
 }
 
 + (void) calculateRawPans:(double)inPan withOutL:(double *)outPanL andOutR:(double *)outPanR
@@ -54,11 +63,9 @@
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput
 {
-    Parameters * parameters = [Parameters sharedParameters];
-
     // form left and right outputs
-    *leftOutput = leftInput * _envGain * parameters.volume * _midiVelocityGain * parameters.panL;
-    *rightOutput = rightInput * _envGain * parameters.volume * _midiVelocityGain * parameters.panR;
+    *leftOutput = leftInput * _envGain * _rawVolume * _midiVelocityGain * _panL;
+    *rightOutput = rightInput * _envGain * _rawVolume * _midiVelocityGain * _panR;
 }
 
 @end
