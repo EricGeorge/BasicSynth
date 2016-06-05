@@ -41,7 +41,7 @@
             [self updateDca];
         }];
         
-        [parameters registerForOscillatorUpdtaes:^(void){
+        [parameters registerForOscillatorUpdates:^(void){
             [self updateOscillator];
         }];
     }

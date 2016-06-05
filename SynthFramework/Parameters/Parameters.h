@@ -26,6 +26,6 @@ typedef void (^updateOscillator)(void);
 - (AUValue) getParameter:(AUParameterAddress) address;
 
 - (void) registerForDcaUpdates:(updateDca)dcaBlock;
-- (void) registerForOscillatorUpdtaes:(updateOscillator)oscillatorBlock;
+- (void) registerForOscillatorUpdates:(updateOscillator)oscillatorBlock;
 
 @end

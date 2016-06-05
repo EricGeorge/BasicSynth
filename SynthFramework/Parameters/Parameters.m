@@ -171,7 +171,7 @@ static Parameters *sharedParameters;
     self.dcaBlock = dcaBlock;
 }
 
-- (void) registerForOscillatorUpdtaes:(updateOscillator)oscillatorBlock
+- (void) registerForOscillatorUpdates:(updateOscillator)oscillatorBlock
 {
     self.oscillatorBlock = oscillatorBlock;
 }
