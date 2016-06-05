@@ -34,11 +34,6 @@
     return self;
 }
 
-- (void) setSampleRate:(double)sampleRate
-{
-    _sampleRate = sampleRate;
-}
-
 - (void) setEnvGain:(double)envGain
 {
     _envGain = envGain;

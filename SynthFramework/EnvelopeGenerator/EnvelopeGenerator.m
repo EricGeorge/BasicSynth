@@ -7,6 +7,8 @@
 
 #import "EnvelopeGenerator.h"
 
+#import "Parameters.h"
+
 typedef NS_ENUM(NSUInteger, EnvelopeStage)
 {
     EnvelopeStageIdle = 0,
@@ -70,13 +72,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]
-                                 userInfo:nil];}
-
-- (void) setSampleRate:(double)sampleRate
-{
-    _sampleRate = sampleRate;
-    
-    [self calculate];
+                                 userInfo:nil];
 }
 
 - (void) calculate
@@ -88,7 +84,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) calculateAttackTime
 {
-    double stageSampleCount = _normalizedAttackTime * _sampleRate;
+    double stageSampleCount = _normalizedAttackTime * [Parameters sharedParameters].sampleRate;
     
     _attackCoeff = exp(-log((1.0 + _attackTCO)/_attackTCO)/stageSampleCount);
     _attackOffset = (1.0 + _attackTCO) * (1.0 - _attackCoeff);
@@ -96,7 +92,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) calculateDecayTime
 {
-    double stageSampleCount = _normalizedDecayTime * _sampleRate;
+    double stageSampleCount = _normalizedDecayTime * [Parameters sharedParameters].sampleRate;
     
     _decayCoeff = exp(-log((1.0 + _decayTCO)/_decayTCO)/stageSampleCount);
     _decayOffset = (_normalizedSustainLevel - _decayTCO) * (1.0 - _decayCoeff);
@@ -104,7 +100,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) calculateReleaseTime
 {
-    double stageSampleCount = _normalizedReleaseTime * _sampleRate;
+    double stageSampleCount = _normalizedReleaseTime * [Parameters sharedParameters].sampleRate;
     
     _releaseCoeff = exp(-log((1.0 + _releaseTCO)/_releaseTCO)/stageSampleCount);
     _releaseOffset = -_releaseTCO * (1.0 - _releaseCoeff);

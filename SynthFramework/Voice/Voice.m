@@ -35,7 +35,6 @@
     if (self = [super init])
     {
         self.note = 0;
-        self.sampleRate = 0;
         
         // osc
         _osc = [[Oscillator alloc] init];
@@ -54,6 +53,15 @@
     }
     
     return self;
+}
+
+- (void) updateGlobalParams
+{
+    [_dca update];
+    [_osc update];
+    [_ampEnv update];
+    [_filter update];
+    [_filterEnv update];
 }
 
 - (void) updateDca
@@ -80,16 +88,6 @@
 {
     [_filterEnv update];
 }
-
-- (void) setSampleRate:(double)sampleRate
-{
-    _sampleRate = sampleRate;
-    
-    _ampEnv.sampleRate = self.sampleRate;
-    _filter.sampleRate = self.sampleRate;
-    _filterEnv.sampleRate = self.sampleRate;
-}
-
 
 - (BOOL) isActive
 {

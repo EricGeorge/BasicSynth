@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, OscillatorWave)
 @interface Oscillator : NSObject
 
 @property (nonatomic, assign) double frequency;
-@property (nonatomic, assign) double sampleRate;
 
 - (double) nextSample;
 - (void) update;

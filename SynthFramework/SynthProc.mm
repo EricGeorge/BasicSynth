@@ -15,16 +15,14 @@
 
 SynthProc::SynthProc()
 {
-    sampleRate = 44100.0;
     outBufferListPtr = nullptr;
 }
 
 void SynthProc::init(int channelCount, double inSampleRate)
 {
-    sampleRate = float(inSampleRate);
+    [Parameters sharedParameters].sampleRate = inSampleRate;
     
     voices = [[Voices alloc] init];
-    voices.sampleRate = sampleRate;
 }
 
 void SynthProc::reset()

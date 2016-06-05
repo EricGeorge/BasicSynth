@@ -36,6 +36,9 @@ static NSString *filterEnvDecayParamKey = @"filterEnvDecay";
 static NSString *filterEnvSustainParamKey = @"filterEnvSustain";
 static NSString *filterEnvReleaseParamKey = @"filterEnvRelease";
 
+// global
+static const uint16_t sampleRateDefault = 44100;
+
 // waveform
 static const uint8_t waveformParamMin = 0;
 static const uint8_t waveformParamMax = 4;

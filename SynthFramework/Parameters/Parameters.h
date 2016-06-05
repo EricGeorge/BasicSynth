@@ -7,6 +7,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+typedef void (^updateGlobalParams)(void);
 typedef void (^updateDca)(void);
 typedef void (^updateOscillator)(void);
 typedef void (^updateAmpEnv)(void);
@@ -14,6 +15,9 @@ typedef void (^updateFilter)(void);
 typedef void (^updateFilterEnv)(void);
 
 @interface Parameters : NSObject
+
+// global
+@property (nonatomic, assign) uint16_t sampleRate;
 
 // oscillator
 @property (nonatomic, assign) uint8_t waveformParam;
@@ -44,6 +48,7 @@ typedef void (^updateFilterEnv)(void);
 - (void) setParameter:(AUParameterAddress) address withValue:(AUValue) value;
 - (AUValue) getParameter:(AUParameterAddress) address;
 
+- (void) registerForGlobalParamUpdates:(updateGlobalParams)globalParamsBlock;
 - (void) registerForDcaUpdates:(updateDca)dcaBlock;
 - (void) registerForOscillatorUpdates:(updateOscillator)oscillatorBlock;
 - (void) registerForAmpEnvUpdates:(updateAmpEnv)ampEnvBlock;

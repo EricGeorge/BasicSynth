@@ -11,7 +11,6 @@
 
 @interface Voice : NSObject
 
-@property (nonatomic, assign) double sampleRate;
 @property (nonatomic, readonly) BOOL isActive;
 @property (nonatomic, assign) uint8_t note;
 @property (nonatomic, assign) uint64_t age;
@@ -22,6 +21,7 @@
 
 - (void) nextSample:(double *)outL andRight:(double *)outR;
 
+- (void) updateGlobalParams;
 - (void) updateDca;
 - (void) updateOscillator;
 - (void) updateAmpEnv;

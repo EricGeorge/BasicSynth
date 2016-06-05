@@ -19,6 +19,7 @@ static Parameters *sharedParameters;
 {
 }
 
+@property (nonatomic, copy) updateGlobalParams globalParamsBlock;
 @property (nonatomic, copy) updateDca dcaBlock;
 @property (nonatomic, copy) updateOscillator oscillatorBlock;
 @property (nonatomic, copy) updateAmpEnv ampEnvBlock;
@@ -50,7 +51,8 @@ static Parameters *sharedParameters;
     self = [super init];
     if (self)
     {
-
+        // set defaults for global parameteres
+        _sampleRate = sampleRateDefault;
     }
     
     return self;
@@ -171,6 +173,11 @@ static Parameters *sharedParameters;
     return value;
 }
 
+- (void) registerForGlobalParamUpdates:(updateGlobalParams)globalParamsBlock
+{
+    self.globalParamsBlock = globalParamsBlock;
+}
+
 - (void) registerForDcaUpdates:(updateDca)dcaBlock
 {
     self.dcaBlock = dcaBlock;
@@ -194,6 +201,18 @@ static Parameters *sharedParameters;
 - (void) registerForFilterEnvUpdates:(updateFilterEnv)filterEnvBlock
 {
     self.filterEnvBlock = filterEnvBlock;
+}
+
+// globalParams
+- (void) setSampleRate:(uint16_t)sampleRate
+{
+    _sampleRate = sampleRate;
+    
+    // early initialization means that there could be no blocks set up yet.
+    if (self.globalParamsBlock)
+    {
+        self.globalParamsBlock();
+    }
 }
 
 // oscillator

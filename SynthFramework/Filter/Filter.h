@@ -9,7 +9,6 @@
 
 @interface Filter : NSObject
 
-@property (nonatomic, assign) double sampleRate;
 @property (nonatomic, assign) double envGain;
 
 - (double) process:(double)input;

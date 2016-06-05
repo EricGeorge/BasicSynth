@@ -9,8 +9,6 @@
 
 @interface EnvelopeGenerator : NSObject
 
-@property (nonatomic, assign) double sampleRate;
-
 @property (nonatomic, assign) double normalizedAttackTime;
 @property (nonatomic, assign) double normalizedDecayTime;
 @property (nonatomic, assign) double normalizedSustainLevel;

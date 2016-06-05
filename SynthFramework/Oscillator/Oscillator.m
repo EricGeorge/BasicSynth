@@ -30,19 +30,12 @@ const double twoPI = 2 * M_PI;
     if (self = [super init])
     {
         self.frequency = 440.0;
-        self.sampleRate = 44100;
         _phase = 0.0;
         
         [self updateIncrement];
     }
     
     return self;
-}
-
-- (void) setSampleRate:(double)sampleRate
-{
-    _sampleRate = sampleRate;
-    [self updateIncrement];
 }
 
 - (void) setFrequency:(double)frequency
@@ -56,11 +49,13 @@ const double twoPI = 2 * M_PI;
     Parameters * parameters = [Parameters sharedParameters];
 
     _wave = parameters.waveformParam;
+    
+    [self updateIncrement];
 }
 
 - (void) updateIncrement
 {
-    _phaseIncrement = _frequency * twoPI / _sampleRate;
+    _phaseIncrement = _frequency * twoPI / [Parameters sharedParameters].sampleRate;
 }
 
 - (double) nextSample

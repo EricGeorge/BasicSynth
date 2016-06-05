@@ -25,8 +25,6 @@
 {
     if (self = [super init])
     {
-        self.sampleRate = 0;
-        
         _voiceCount = 32;
         
         self.voices = [NSArray array];
@@ -34,8 +32,13 @@
         {
             self.voices = [self.voices arrayByAddingObject:[[Voice alloc] init]];
         }
-        
+
         Parameters *parameters = [Parameters sharedParameters];
+
+        [parameters registerForGlobalParamUpdates:^(void){
+            [self updateGlobalParams];
+        }];
+        
         [parameters registerForDcaUpdates:^(void){
             [self updateDca];
         }];
@@ -59,6 +62,18 @@
     }
     
     return self;
+}
+- (void) updateGlobalParams
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateGlobalParams];
+        }
+    }
 }
 
 - (void) updateDca
@@ -126,16 +141,6 @@
     }
 }
  
-- (void) setSampleRate:(double)sampleRate
-{
-    _sampleRate = sampleRate;
-    
-    for (Voice *voice in self.voices)
-    {
-        voice.sampleRate = _sampleRate;
-    }
-}
-
 - (Voice *) getFreeVoice
 {
     Voice *freeVoice = nil;
