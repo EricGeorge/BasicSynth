@@ -41,6 +41,12 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (instancetype)init
 {
+    // don't allow direct instantiation because we don't know which parameters would be associated with this class.
+    if ([self class] == [EnvelopeGenerator class]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
+    }
+    
     if (self = [super init])
     {
         _currentStage = EnvelopeStageIdle;
@@ -61,8 +67,10 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) update
 {
-    NSAssert(NO, @"Subclasses need to overwrite this method");
-}
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];}
 
 - (void) setSampleRate:(double)sampleRate
 {
