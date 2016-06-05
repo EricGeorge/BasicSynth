@@ -47,8 +47,6 @@
     // Create a DSP kernel to handle the signal processing.
     _kernel.init(defaultFormat.channelCount, defaultFormat.sampleRate);
     
-    [self createParameterTree];
-
     // Create the output bus.
     _outputBusBuffer.init(defaultFormat, 2);
     _outputBus = _outputBusBuffer.bus;
@@ -58,6 +56,8 @@
     
     // Make a local pointer to the kernel to avoid capturing self.
     __block SynthProc *instrumentKernel = &_kernel;
+    
+    [self createParameterTree];
     
     Parameters *parameters = [Parameters sharedParameters];
     
