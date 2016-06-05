@@ -73,14 +73,6 @@
             _osc.wave = (OscillatorWave)value;
             break;
             
-            // dca
-        case InstrumentParamVolume:
-            _dca.volume = value;
-            break;
-        case InstrumentParamPan:
-            _dca.pan = value;
-            break;
-            
             // amp env
         case InstrumentParamAmpEnvAttack:
             _ampEnv.attackTime = value;
@@ -129,14 +121,6 @@
             // oscillator
         case InstrumentParamWaveform:
             value = _osc.wave;
-            break;
-            
-            // dca
-        case InstrumentParamVolume:
-            value = _dca.volume;
-            break;
-        case InstrumentParamPan:
-            value = _dca.pan;
             break;
             
             // amp env

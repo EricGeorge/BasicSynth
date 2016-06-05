@@ -35,3 +35,13 @@ static NSString *filterEnvAttackParamKey = @"filterEnvAttack";
 static NSString *filterEnvDecayParamKey = @"filterEnvDecay";
 static NSString *filterEnvSustainParamKey = @"filterEnvSustain";
 static NSString *filterEnvReleaseParamKey = @"filterEnvRelease";
+
+// volume
+static const uint8_t volumeParamMin = 0;
+static const uint8_t volumeParamMax = 100;
+static const uint8_t volumeParamDefault = 70;
+
+// pan
+static const uint8_t panParamMin = -1;
+static const uint8_t panParamMax = 1;
+static const uint8_t panParamDefault = 0;
