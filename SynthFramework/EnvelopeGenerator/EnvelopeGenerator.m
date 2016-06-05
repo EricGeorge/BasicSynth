@@ -7,6 +7,8 @@
 
 #import "EnvelopeGenerator.h"
 
+#import "Parameters.h"
+
 typedef NS_ENUM(NSUInteger, EnvelopeStage)
 {
     EnvelopeStageIdle = 0,
@@ -30,11 +32,6 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
     double _releaseOffset;
     double _releaseTCO;
     
-    double _normalizedAttackTime;
-    double _normalizedDecayTime;
-    double _normalizedSustainLevel;
-    double _normalizedReleaseTime;
-    
     EnvelopeStage _currentStage;
     
     double _envelopeOutput;
@@ -46,6 +43,12 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (instancetype)init
 {
+    // don't allow direct instantiation because we don't know which parameters would be associated with this class.
+    if ([self class] == [EnvelopeGenerator class]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
+    }
+    
     if (self = [super init])
     {
         _currentStage = EnvelopeStageIdle;
@@ -59,60 +62,29 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 //        _attackTCO = pow(10.0, -96.0/20.0);
 //        _decayTCO = _attackTCO;
 //        _releaseTCO = _decayTCO;
-    
-        self.attackTime = 100;  // msec
-        self.decayTime = 500;   // msec
-        self.releaseTime = 1000;// msec
-        self.sustainLevel = 70; // percent
-    }
+}
     
     return self;
 }
 
-- (void) setSampleRate:(double)sampleRate
+- (void) update
 {
-    _sampleRate = sampleRate;
-    
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
+- (void) calculate
+{
     [self calculateAttackTime];
     [self calculateDecayTime];
     [self calculateReleaseTime];
-}
-
-- (void) setAttackTime:(double)attackTime
-{
-    _attackTime = attackTime;
-    _normalizedAttackTime = _attackTime/1000.0;
-    
-    [self calculateAttackTime];
-}
-
-- (void) setDecayTime:(double)decayTime
-{
-    _decayTime = decayTime;
-    _normalizedDecayTime = _decayTime/1000.0;
-    
-    [self calculateDecayTime];
-}
-
-- (void) setReleaseTime:(double)releaseTime
-{
-    _releaseTime = releaseTime;
-    _normalizedReleaseTime = _releaseTime/1000.0;
-    
-    [self calculateReleaseTime];
-}
-
-- (void) setSustainLevel:(double)sustainLevel
-{
-    _sustainLevel = sustainLevel;
-    _normalizedSustainLevel = _sustainLevel/100.0;
-    
-    [self calculateDecayTime];
 }
 
 - (void) calculateAttackTime
 {
-    double stageSampleCount = _normalizedAttackTime * _sampleRate;
+    double stageSampleCount = _normalizedAttackTime * [Parameters sharedParameters].sampleRate;
     
     _attackCoeff = exp(-log((1.0 + _attackTCO)/_attackTCO)/stageSampleCount);
     _attackOffset = (1.0 + _attackTCO) * (1.0 - _attackCoeff);
@@ -120,7 +92,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) calculateDecayTime
 {
-    double stageSampleCount = _normalizedDecayTime * _sampleRate;
+    double stageSampleCount = _normalizedDecayTime * [Parameters sharedParameters].sampleRate;
     
     _decayCoeff = exp(-log((1.0 + _decayTCO)/_decayTCO)/stageSampleCount);
     _decayOffset = (_normalizedSustainLevel - _decayTCO) * (1.0 - _decayCoeff);
@@ -128,7 +100,7 @@ typedef NS_ENUM(NSUInteger, EnvelopeStage)
 
 - (void) calculateReleaseTime
 {
-    double stageSampleCount = _normalizedReleaseTime * _sampleRate;
+    double stageSampleCount = _normalizedReleaseTime * [Parameters sharedParameters].sampleRate;
     
     _releaseCoeff = exp(-log((1.0 + _releaseTCO)/_releaseTCO)/stageSampleCount);
     _releaseOffset = -_releaseTCO * (1.0 - _releaseCoeff);

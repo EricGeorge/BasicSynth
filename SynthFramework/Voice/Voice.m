@@ -8,8 +8,9 @@
 #import "Voice.h"
 
 #import "DCA.h"
-#import "EnvelopeGenerator.h"
+#import "AmpEnvelopeGenerator.h"
 #import "Filter.h"
+#import "FilterEnvelopeGenerator.h"
 #import "Oscillator.h"
 
 #import "SynthConstants.h"
@@ -19,8 +20,8 @@
 {
     Oscillator *_osc;
     DCA *_dca;
-    EnvelopeGenerator *_ampEnv;
-    EnvelopeGenerator *_filterEnv;
+    AmpEnvelopeGenerator *_ampEnv;
+    FilterEnvelopeGenerator *_filterEnv;
     Filter *_filter;
 }
 
@@ -34,7 +35,6 @@
     if (self = [super init])
     {
         self.note = 0;
-        self.sampleRate = 0;
         
         // osc
         _osc = [[Oscillator alloc] init];
@@ -43,140 +43,50 @@
         _dca = [[DCA alloc] init];
         
         // amp env
-        _ampEnv = [[EnvelopeGenerator alloc] init];
+        _ampEnv = [[AmpEnvelopeGenerator alloc] init];
         
         // filter
         _filter = [[Filter alloc] init];
         
         // filter env
-        _filterEnv = [[EnvelopeGenerator alloc] init];
+        _filterEnv = [[FilterEnvelopeGenerator alloc] init];
     }
     
     return self;
 }
 
-- (void) setSampleRate:(double)sampleRate
+- (void) updateGlobalParams
 {
-    _sampleRate = sampleRate;
-    
-    _ampEnv.sampleRate = self.sampleRate;
-    _filter.sampleRate = self.sampleRate;
-    _filterEnv.sampleRate = self.sampleRate;
+    [_dca update];
+    [_osc update];
+    [_ampEnv update];
+    [_filter update];
+    [_filterEnv update];
 }
 
-- (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value
+- (void) updateDca
 {
-    switch (address)
-    {
-            // oscillator
-        case InstrumentParamWaveform:
-            _osc.wave = (OscillatorWave)value;
-            break;
-            
-            // dca
-        case InstrumentParamVolume:
-            _dca.volume = value;
-            break;
-        case InstrumentParamPan:
-            _dca.pan = value;
-            break;
-            
-            // amp env
-        case InstrumentParamAmpEnvAttack:
-            _ampEnv.attackTime = value;
-            break;
-        case InstrumentParamAmpEnvDecay:
-            _ampEnv.decayTime = value;
-            break;
-        case InstrumentParamAmpEnvSustain:
-            _ampEnv.sustainLevel= value;
-            break;
-        case InstrumentParamAmpEnvRelease:
-            _ampEnv.releaseTime = value;
-            break;
-            
-            // filter
-        case InstrumentParamCutoff:
-            _filter.cutoff = value;
-            break;
-        case InstrumentParamResonance:
-            _filter.resonance = value;
-            break;
-            
-            // filter env
-        case InstrumentParamFilterEnvAttack:
-            _filterEnv.attackTime = value;
-            break;
-        case InstrumentParamFilterEnvDecay:
-            _filterEnv.decayTime = value;
-            break;
-        case InstrumentParamFilterEnvSustain:
-            _filterEnv.sustainLevel= value;
-            break;
-        case InstrumentParamFilterEnvRelease:
-            _filterEnv.releaseTime = value;
-            break;
-            
-    }
+    [_dca update];
 }
 
-- (AUValue) getParameter:(AUParameterAddress)address
+- (void) updateOscillator
 {
-    AUValue value = 0.0f;
-    
-    switch (address)
-    {
-            // oscillator
-        case InstrumentParamWaveform:
-            value = _osc.wave;
-            break;
-            
-            // dca
-        case InstrumentParamVolume:
-            value = _dca.volume;
-            break;
-        case InstrumentParamPan:
-            value = _dca.pan;
-            break;
-            
-            // amp env
-        case InstrumentParamAmpEnvAttack:
-            value = _ampEnv.attackTime;
-            break;
-        case InstrumentParamAmpEnvDecay:
-            value = _ampEnv.decayTime;
-            break;
-        case InstrumentParamAmpEnvSustain:
-            value = _ampEnv.sustainLevel;
-            break;
-        case InstrumentParamAmpEnvRelease:
-            value = _ampEnv.releaseTime;
-            break;
-            
-            // filter
-        case InstrumentParamCutoff:
-            value = _filter.cutoff;
-            break;
-        case InstrumentParamResonance:
-            value = _filter.resonance;
-            break;
-            
-            // amp env
-        case InstrumentParamFilterEnvAttack:
-            value = _filterEnv.attackTime;
-            break;
-        case InstrumentParamFilterEnvDecay:
-            value = _filterEnv.decayTime;
-            break;
-        case InstrumentParamFilterEnvSustain:
-            value = _filterEnv.sustainLevel;
-            break;
-        case InstrumentParamFilterEnvRelease:
-            value = _filterEnv.releaseTime;
-            break;
-    }
-    
-    return value;
+    [_osc update];
+}
+
+- (void) updateAmpEnv
+{
+    [_ampEnv update];
+}
+
+- (void) updateFilter
+{
+    [_filter update];
+}
+
+- (void) updateFilterEnv
+{
+    [_filterEnv update];
 }
 
 - (BOOL) isActive
@@ -217,7 +127,7 @@
         [_dca setEnvGain: [_ampEnv nextSample]];
         
         // filter env
-        [_filter setEnvGain: [_filterEnv nextSample]];
+        [_filter setEnvGain:[_filterEnv nextSample]];
 
         // oscillator + filter
         double oscSample = [_filter process:[_osc nextSample]];

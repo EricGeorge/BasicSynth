@@ -8,22 +8,21 @@
 #import "SynthProc.hpp"
 
 #import "MIDIEvent.h"
+#import "Parameters.h"
 #import "SynthConstants.h"
 #import "Utility.hpp"
 #import "Voices.h"
 
 SynthProc::SynthProc()
 {
-    sampleRate = 44100.0;
     outBufferListPtr = nullptr;
 }
 
 void SynthProc::init(int channelCount, double inSampleRate)
 {
-    sampleRate = float(inSampleRate);
+    [Parameters sharedParameters].sampleRate = inSampleRate;
     
     voices = [[Voices alloc] init];
-    voices.sampleRate = sampleRate;
 }
 
 void SynthProc::reset()
@@ -31,19 +30,9 @@ void SynthProc::reset()
     // this currently does nothing
 }
 
-void SynthProc::setParameter(AUParameterAddress address, AUValue value)
-{
-    [voices setParameter:address withValue:value];
-}
-
-AUValue SynthProc::getParameter(AUParameterAddress address)
-{
-    return [voices getParameter:address];
-}
-
 void SynthProc::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration)
 {
-    setParameter(address, value);
+    [[Parameters sharedParameters] setParameter:address withValue:value];
 }
 
 void SynthProc::setBuffers(AudioBufferList* outBufferList)

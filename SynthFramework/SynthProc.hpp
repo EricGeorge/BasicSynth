@@ -25,9 +25,6 @@ public:
     void handleMIDIEvent(AUMIDIEvent const& midiEvent)  override;
     void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) override;
 
-    void setParameter(AUParameterAddress address, AUValue value);
-    AUValue getParameter(AUParameterAddress address);
-    
 private:
     float sampleRate;
     

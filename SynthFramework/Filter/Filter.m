@@ -7,6 +7,8 @@
 
 #import "Filter.h"
 
+#import "Parameters.h"
+
 @interface Filter()
 {
     double _buf0;
@@ -27,44 +29,24 @@
         _buf1 = 0.0;
         _feedback = 0.0;
         _modulatedCutoff = 0.0;
-        
-        self.cutoff = 0.99;
-        self.resonance = 0.0;
     }
     
     return self;
-}
-
-- (void) setSampleRate:(double)sampleRate
-{
-    _sampleRate = sampleRate;
-}
-
-- (void) setCutoff:(double)cutoff
-{
-    _cutoff = cutoff;
-    
-    [self calculate];
-}
-
-- (void) setResonance:(double)resonance
-{
-    _resonance = resonance;
-    
-    [self calculate];
 }
 
 - (void) setEnvGain:(double)envGain
 {
     _envGain = envGain;
     
-    [self calculate];
+    [self update];
 }
 
-- (void) calculate
+- (void) update
 {
-    _modulatedCutoff = fmax(fmin(_cutoff * _envGain, 0.99), 0.01);
-    _feedback = _resonance + _resonance/(1.0 - _modulatedCutoff);
+    Parameters * parameters = [Parameters sharedParameters];
+
+    _modulatedCutoff = fmax(fmin(parameters.cutoffParam * _envGain, 0.99), 0.01);
+    _feedback = parameters.resonanceParam + parameters.resonanceParam/(1.0 - _modulatedCutoff);
 }
 
 - (double) process:(double) input;

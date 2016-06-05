@@ -8,14 +8,15 @@
 
 #import "DCA.h"
 
+#import "Parameters.h"
 #import "Utility.hpp"
 
 @interface DCA()
 {
-    double _normalizedVolume;
+    double _midiVelocityGain;
     double _panL;
     double _panR;
-    double _midiVelocityGain;
+    double _rawVolume;
 }
 
 @end;
@@ -26,20 +27,10 @@
 {
     if (self = [super init])
     {
-        self.volume = 70.0;
         self.midiVelocity = 0;
-        self.pan = 0;
     }
     
     return self;
-}
-
-- (void) setVolume:(double)volume
-{
-    _volume = volume;
-    
-    // put an exponential curve on the volume input (and normalize to 0-1)
-    _normalizedVolume = pow2(_volume/100.0);
 }
 
 - (void) setMidiVelocity:(uint8_t)midiVelocity
@@ -48,13 +39,23 @@
     _midiVelocity = _midiVelocityGain = gainFromMidiVelocity(midiVelocity);
 }
 
-- (void) setPan:(double)pan
+- (void) update
 {
-    _pan = pan;
+    Parameters * parameters = [Parameters sharedParameters];
+
+    // put an exponential curve on the volume input (and normalize to 0-1)
+    _rawVolume = pow2(parameters.volumeParam/100.0);
     
     // use equal power crossfades to get the left and right channels from the bipolar pan value
-    _panL = getEqualPowerLeft(_pan);
-    _panR = getEqualPowerRight(_pan);
+    _panL = getEqualPowerLeft(parameters.panParam);
+    _panR = getEqualPowerRight(parameters.panParam);
+}
+
++ (void) calculateRawPans:(double)inPan withOutL:(double *)outPanL andOutR:(double *)outPanR
+{
+    // use equal power crossfades to get the left and right channels from the bipolar pan value
+    *outPanL = getEqualPowerLeft(inPan);
+    *outPanR = getEqualPowerRight(inPan);
 }
 
 - (void) process:(double)leftInput
@@ -63,8 +64,8 @@
      rightOutput:(double *)rightOutput
 {
     // form left and right outputs
-    *leftOutput = leftInput * _envGain * _normalizedVolume * _midiVelocityGain * _panL;
-    *rightOutput = rightInput * _envGain * _normalizedVolume * _midiVelocityGain * _panR;
+    *leftOutput = leftInput * _envGain * _rawVolume * _midiVelocityGain * _panL;
+    *rightOutput = rightInput * _envGain * _rawVolume * _midiVelocityGain * _panR;
 }
 
 @end

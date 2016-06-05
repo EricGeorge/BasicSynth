@@ -10,14 +10,14 @@
 
 @interface DCA : NSObject
 
-@property(nonatomic, assign) double volume;
 @property(nonatomic, assign) uint8_t midiVelocity;
-@property(nonatomic, assign) double pan;
 @property(nonatomic, assign) double envGain;
 
 - (void) process:(double)leftInput
       rightInput:(double)rightInput
       leftOutput:(double *)leftOutput
      rightOutput:(double *)rightOutput;
+
+- (void) update;
 
 @end

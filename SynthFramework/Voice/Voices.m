@@ -7,11 +7,11 @@
 
 #import "Voices.h"
 
+#import "Parameters.h"
 #import "Voice.h"
 
 @interface Voices()
 {
-    
 }
 
 @property (nonatomic, strong) NSArray *voices;
@@ -25,8 +25,6 @@
 {
     if (self = [super init])
     {
-        self.sampleRate = 0;
-        
         _voiceCount = 32;
         
         self.voices = [NSArray array];
@@ -34,44 +32,115 @@
         {
             self.voices = [self.voices arrayByAddingObject:[[Voice alloc] init]];
         }
+
+        Parameters *parameters = [Parameters sharedParameters];
+
+        [parameters registerForGlobalParamUpdates:^(void){
+            [self updateGlobalParams];
+        }];
+        
+        [parameters registerForDcaUpdates:^(void){
+            [self updateDca];
+        }];
+        
+        [parameters registerForOscillatorUpdates:^(void){
+            [self updateOscillator];
+        }];
+        
+        [parameters registerForAmpEnvUpdates:^(void){
+            [self updateAmpEnv];
+        }];
+
+        [parameters registerForFilterUpdates:^(void){
+            [self updateFilter];
+        }];
+
+        [parameters registerForFilterEnvUpdates:^(void){
+            [self updateFilterEnv];
+        }];
+
     }
     
     return self;
 }
-
-- (void) setSampleRate:(double)sampleRate
+- (void) updateGlobalParams
 {
-    _sampleRate = sampleRate;
-    
-    for (Voice *voice in self.voices)
+    for (int i = 0; i < self.voiceCount; i++)
     {
-        voice.sampleRate = _sampleRate;
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateGlobalParams];
+        }
     }
 }
 
-- (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value
+- (void) updateDca
 {
-    for (Voice *voice in self.voices)
+    for (int i = 0; i < self.voiceCount; i++)
     {
-        [voice setParameter:address withValue:value];
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateDca];
+        }
     }
 }
 
-- (AUValue) getParameter:(AUParameterAddress)address
+- (void) updateOscillator
 {
-    AUValue result = 0.0;
-    
-    // for now just get the first voice's parameter.  But
-    // TODO - refactor params out into their own class with KVO
-    
-    if(self.voices.count > 0)
+    for (int i = 0; i < self.voiceCount; i++)
     {
-        result = [self.voices[0] getParameter:address];
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateOscillator];
+        }
     }
-    
-    return result;
 }
 
+ - (void) updateAmpEnv
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateAmpEnv];
+        }
+    }
+}
+ 
+ - (void) updateFilter
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateFilter];
+        }
+    }
+}
+ 
+ - (void) updateFilterEnv
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateFilterEnv];
+        }
+    }
+}
+ 
 - (Voice *) getFreeVoice
 {
     Voice *freeVoice = nil;
@@ -116,6 +185,13 @@
         voice = [self stealVoice];
     }
     
+    // initialize
+    [voice updateDca];
+    [voice updateOscillator];
+    [voice updateAmpEnv];
+    [voice updateFilter];
+    [voice updateFilterEnv];
+
     [voice start:note withVelocity:velocity];
 }
 

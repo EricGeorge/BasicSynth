@@ -11,11 +11,6 @@
 
 @interface Voices : NSObject
 
-@property (nonatomic, assign) double sampleRate;
-
-- (void) setParameter:(AUParameterAddress)address withValue:(AUValue)value;
-- (AUValue) getParameter:(AUParameterAddress)address;
-
 - (void) start:(uint8_t)note withVelocity:(uint8_t)velocity;
 - (void) stop:(uint8_t)note;
 
