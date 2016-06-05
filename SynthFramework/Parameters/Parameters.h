@@ -8,8 +8,12 @@
 #import <AVFoundation/AVFoundation.h>
 
 typedef void (^updateDca)(void);
+typedef void (^updateOscillator)(void);
 
 @interface Parameters : NSObject
+
+// oscillator
+@property (nonatomic, assign) uint8_t waveformParam;
 
 // dca
 @property (nonatomic, assign) double volumeParam;
@@ -22,5 +26,6 @@ typedef void (^updateDca)(void);
 - (AUValue) getParameter:(AUParameterAddress) address;
 
 - (void) registerForDcaUpdates:(updateDca)dcaBlock;
+- (void) registerForOscillatorUpdtaes:(updateOscillator)oscillatorBlock;
 
 @end

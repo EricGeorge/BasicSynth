@@ -60,6 +60,10 @@
     [_dca update];
 }
 
+- (void) updateOscillator
+{
+    [_osc update];
+}
 
 - (void) setSampleRate:(double)sampleRate
 {
@@ -74,11 +78,6 @@
 {
     switch (address)
     {
-            // oscillator
-        case InstrumentParamWaveform:
-            _osc.wave = (OscillatorWave)value;
-            break;
-            
             // amp env
         case InstrumentParamAmpEnvAttack:
             _ampEnv.attackTime = value;
@@ -124,11 +123,6 @@
     
     switch (address)
     {
-            // oscillator
-        case InstrumentParamWaveform:
-            value = _osc.wave;
-            break;
-            
             // amp env
         case InstrumentParamAmpEnvAttack:
             value = _ampEnv.attackTime;

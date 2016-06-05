@@ -7,12 +7,15 @@
 
 #import "Oscillator.h"
 
+#import "Parameters.h"
+
 const double twoPI = 2 * M_PI;
 
 @interface Oscillator ()
 {
     double _phase;
     double _phaseIncrement;
+    OscillatorWave _wave;
 }
 
 - (void) updateIncrement;
@@ -26,7 +29,6 @@ const double twoPI = 2 * M_PI;
 {
     if (self = [super init])
     {
-        self.wave = OscillatorWaveSine;
         self.frequency = 440.0;
         self.sampleRate = 44100;
         _phase = 0.0;
@@ -49,6 +51,13 @@ const double twoPI = 2 * M_PI;
     [self updateIncrement];
 }
 
+- (void) update
+{
+    Parameters * parameters = [Parameters sharedParameters];
+
+    _wave = parameters.waveformParam;
+}
+
 - (void) updateIncrement
 {
     _phaseIncrement = _frequency * twoPI / _sampleRate;
@@ -58,7 +67,7 @@ const double twoPI = 2 * M_PI;
 {
     double sample = 0.0;
     
-    switch (self.wave)
+    switch (_wave)
     {
         case OscillatorWaveSine:
             sample = sin(_phase);

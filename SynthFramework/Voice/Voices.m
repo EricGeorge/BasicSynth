@@ -40,6 +40,10 @@
         [parameters registerForDcaUpdates:^(void){
             [self updateDca];
         }];
+        
+        [parameters registerForOscillatorUpdtaes:^(void){
+            [self updateOscillator];
+        }];
     }
     
     return self;
@@ -54,6 +58,19 @@
         if ([voice isActive])
         {
             [voice updateDca];
+        }
+    }
+}
+
+- (void) updateOscillator
+{
+    for (int i = 0; i < self.voiceCount; i++)
+    {
+        Voice *voice = self.voices[i];
+        
+        if ([voice isActive])
+        {
+            [voice updateOscillator];
         }
     }
 }
@@ -137,6 +154,7 @@
     
     // initialize
     [voice updateDca];
+    [voice updateOscillator];
 
     [voice start:note withVelocity:velocity];
 }

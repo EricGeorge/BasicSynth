@@ -36,6 +36,11 @@ static NSString *filterEnvDecayParamKey = @"filterEnvDecay";
 static NSString *filterEnvSustainParamKey = @"filterEnvSustain";
 static NSString *filterEnvReleaseParamKey = @"filterEnvRelease";
 
+// waveform
+static const uint8_t waveformParamMin = 0;
+static const uint8_t waveformParamMax = 4;
+static const uint8_t waveformParamDefault = 1;
+
 // volume
 static const uint8_t volumeParamMin = 0;
 static const uint8_t volumeParamMax = 100;

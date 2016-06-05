@@ -8,6 +8,7 @@
 #import "Parameters.h"
 
 #import "DCA.h"
+#import "Oscillator.h"
 #import "SynthConstants.h"
 
 static Parameters *sharedParameters;
@@ -17,6 +18,7 @@ static Parameters *sharedParameters;
 }
 
 @property (nonatomic, copy) updateDca dcaBlock;
+@property (nonatomic, copy) updateOscillator oscillatorBlock;
 
 @end
 
@@ -53,11 +55,11 @@ static Parameters *sharedParameters;
 {
     switch (address)
     {
-//            // oscillator
-//        case InstrumentParamWaveform:
-//            _osc.wave = (OscillatorWave)value;
-//            break;
-//            
+            // oscillator
+        case InstrumentParamWaveform:
+            self.waveformParam = (OscillatorWave)value;
+            break;
+            
             // dca
         case InstrumentParamVolume:
             self.volumeParam = value;
@@ -111,11 +113,11 @@ static Parameters *sharedParameters;
     
     switch (address)
     {
-//            // oscillator
-//        case InstrumentParamWaveform:
-//            value = _osc.wave;
-//            break;
-//            
+            // oscillator
+        case InstrumentParamWaveform:
+            value = self.waveformParam;
+            break;
+            
             // dca
         case InstrumentParamVolume:
             value = self.volumeParam;
@@ -167,6 +169,17 @@ static Parameters *sharedParameters;
 - (void) registerForDcaUpdates:(updateDca)dcaBlock
 {
     self.dcaBlock = dcaBlock;
+}
+
+- (void) registerForOscillatorUpdtaes:(updateOscillator)oscillatorBlock
+{
+    self.oscillatorBlock = oscillatorBlock;
+}
+
+- (void) setWaveformParam:(uint8_t)waveformParam
+{
+    _waveformParam = waveformParam;
+    self.oscillatorBlock();
 }
 
 - (void) setVolumeParam:(double)volumeParam

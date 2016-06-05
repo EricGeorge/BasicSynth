@@ -63,7 +63,7 @@
     
     // implementorValueObserver is called when a parameter changes value.
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
-        if (param.address == InstrumentParamVolume || param.address == InstrumentParamPan)
+        if (param.address == InstrumentParamVolume || param.address == InstrumentParamPan || param.address == InstrumentParamWaveform)
             [parameters setParameter:param.address withValue:value];
         else
             instrumentKernel->setParameter(param.address, value);
@@ -71,7 +71,7 @@
     
     // implementorValueProvider is called when the value needs to be refreshed.
     _parameterTree.implementorValueProvider = ^(AUParameter *param) {
-        if (param.address == InstrumentParamVolume || param.address == InstrumentParamPan)
+        if (param.address == InstrumentParamVolume || param.address == InstrumentParamPan || param.address == InstrumentParamWaveform)
             return [parameters getParameter:param.address];
         else
             return instrumentKernel->getParameter(param.address);
@@ -171,12 +171,6 @@
 {
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable;
     
-    // oscillator
-    AUParameter *waveformParam = [AUParameterTree createParameterWithIdentifier:waveformParamKey name:@"Waveform"
-                                                                        address:InstrumentParamWaveform
-                                                                            min:0 max:4 unit:kAudioUnitParameterUnit_Indexed unitName:nil
-                                                                          flags: flags valueStrings:nil dependentParameters:nil];
-    
     // amp env
     AUParameter *ampEnvAttackParam = [AUParameterTree createParameterWithIdentifier:ampEnvAttackParamKey name:@"AmpEnvAttack"
                                                                             address:InstrumentParamAmpEnvAttack
@@ -232,9 +226,21 @@
     
 
     // Create the parameter tree.
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[
+_parameterTree = [AUParameterTree createTreeWithChildren:@[
+                                                           
                            // oscillator
-                           waveformParam,
+                           [AUParameterTree createParameterWithIdentifier:waveformParamKey
+                                                                     name:@"Waveform"
+                                                                  address:InstrumentParamWaveform
+                                                                      min:waveformParamMin
+                                                                      max:waveformParamMax
+                                                                     unit:kAudioUnitParameterUnit_Indexed
+                                                                 unitName:nil
+                                                                    flags:flags
+                                                             valueStrings:nil
+                                                       dependentParameters:nil],
+                           
+
                            
                            // dca
                            [AUParameterTree createParameterWithIdentifier:volumeParamKey
@@ -281,7 +287,7 @@
 - (void) initializeParameters
 {
     // oscillator
-    _kernel.setParameter(InstrumentParamWaveform, 0);
+    [_parameterTree parameterWithAddress:InstrumentParamWaveform].value = waveformParamDefault;
     
     // dca
     [_parameterTree parameterWithAddress:InstrumentParamVolume].value = volumeParamDefault;

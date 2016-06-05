@@ -22,9 +22,9 @@ typedef NS_ENUM(NSInteger, OscillatorWave)
 
 @property (nonatomic, assign) double frequency;
 @property (nonatomic, assign) double sampleRate;
-@property (nonatomic, assign) OscillatorWave wave;
 
 - (double) nextSample;
+- (void) update;
 
 @end
 
