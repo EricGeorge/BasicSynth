@@ -17,6 +17,8 @@
 @property (nonatomic, strong) AUAudioUnitBus *outputBus;
 @property (nonatomic, strong) AUAudioUnitBusArray *outputBusArray;
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
+@property(readonly, copy, nonatomic) NSArray <AUAudioUnitPreset *> *factoryPresets;
+
 
 @end
 
@@ -29,6 +31,7 @@
 }
 
 @synthesize parameterTree = _parameterTree;
+@synthesize factoryPresets = _factoryPresets;
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription
                                      options:(AudioComponentInstantiationOptions)options
@@ -100,9 +103,11 @@
     };
 
     [self initializeParameters];
+    [self initializeFactoryPresets];
     
     self.maximumFramesToRender = 512;
     
+
     return self;
 }
 
@@ -342,6 +347,46 @@
     [_parameterTree parameterWithAddress:InstrumentParamFilterEnvDecay].value = filterEnvDecayParamDefault;
     [_parameterTree parameterWithAddress:InstrumentParamFilterEnvSustain].value = filterEnvSustainParamDefault;
     [_parameterTree parameterWithAddress:InstrumentParamFilterEnvRelease].value = filterEnvReleaseParamDefault;
+}
+
+- (void) initializeFactoryPresets
+{
+    _factoryPresets = [[NSArray alloc] init];
+    for (int i = 0; i < kNumFactoryPresets; i++)
+    {
+        _factoryPresets = [_factoryPresets arrayByAddingObject:[[AUAudioUnitPreset alloc] init]];
+    }
+    
+    AUAudioUnitPreset *preset = _factoryPresets[FactoryPreset1];
+    preset.name = @"Preset 1";
+    preset.number = FactoryPreset1;
+    
+    preset = _factoryPresets[FactoryPreset2];
+    preset.name = @"Preset 2";
+    preset.number = FactoryPreset2;
+    
+    preset = _factoryPresets[FactoryPreset3];
+    preset.name = @"Preset 3";
+    preset.number = FactoryPreset3;
+    
+    preset = _factoryPresets[FactoryPreset4];
+    preset.name = @"Preset 4";
+    preset.number = FactoryPreset4;
+    
+    preset = _factoryPresets[FactoryPreset5];
+    preset.name = @"Preset 5";
+    preset.number = FactoryPreset5;
+    
+}
+
+- (void) setCurrentPreset:(AUAudioUnitPreset *)currentPreset
+{
+    [self loadFactoryPreset:currentPreset];
+}
+
+- (void) loadFactoryPreset:(AUAudioUnitPreset *)preset
+{
+    NSLog(@"Current preset is %@", preset.name);
 }
 @end
 

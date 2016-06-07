@@ -5,6 +5,16 @@
 //  Copyright © 2016 Eric George. All rights reserved.
 //
 
+typedef NS_ENUM(NSInteger, FactoryPreset)
+{
+    FactoryPreset1,
+    FactoryPreset2,
+    FactoryPreset3,
+    FactoryPreset4,
+    FactoryPreset5,
+    kNumFactoryPresets,
+};
+
 typedef NS_ENUM(NSInteger, InstrumentParam)
 {
     InstrumentParamVolume = 0,
